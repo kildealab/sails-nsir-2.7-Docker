@@ -1,0 +1,126 @@
+#statistics-form-panel {
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 14px;
+    border-color: #333;
+    padding: 1%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.chart-control-panel {
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 14px;
+    border-color: #333;
+    padding: 1%;
+/*    height: 700px;
+*/    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.chart-panel {
+    height: 650px;
+    border-bottom: solid;
+    border-width: 3px;
+    border-color: #333;
+}
+
+.table-panel {
+    border-top: solid;
+    border-width: 3px;
+    border-color: #333;
+/*    padding-bottom: 35px;
+*/}
+
+.close-header {
+    height: 35px;
+    text-align: right;
+    padding-top: 7px;
+/*    border-bottom-style: solid;
+    border-bottom-width: 2px;*/
+}
+
+.square-close-button {
+    background-image: none; 
+    background-color: #df382c;
+}
+
+.square-close-button:hover {
+    background-image: none; 
+    background-color: #a92319;
+}
+
+.circle-close-button {
+    width: 1.5%;
+    margin: auto 0 auto auto;
+}
+
+.inner-close-button {
+    width: 100%;
+    height:0;
+    padding-bottom: 100%;
+    border-radius: 50%;
+/*    border-radius: 5%;
+*/    border:1px solid #D02C2E;
+    overflow:hidden;
+    
+    background: #F54745; 
+    background-color:#F54745;
+}
+.inner-close-button:hover {
+    background:#D02C2E;
+    cursor: default;
+}
+.circle-close-button a {
+    display:block;
+    float:left;
+    width:100%;
+    padding-top:50%;
+    padding-bottom:50%;
+    line-height:1em;
+    margin-top:-0.5em;
+    
+    text-align:center;
+    color:#fff;
+    font-family:Verdana;
+    font-size:70%;
+    font-weight: bold;
+    text-decoration:none;
+}
+
+.mycolumn {
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+    border-color: #333;
+    padding: 1%;
+    text-align: center;
+}
+
+h3 {
+    margin-top: -50px;
+}
+
+.table-title {
+    padding-top: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.inv_color_complete {
+    background-color: #33cc47;
+}
+
+.inv_color_incomplete {
+    background-color: #FFA500;
+}
+
+.chosen-error {
+    color: #df382c;
+}
+.chosen-error .chosen-single {
+    border: 1px solid #df382c !important;
+}

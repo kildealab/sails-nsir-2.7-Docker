@@ -1,0 +1,34 @@
+{% extends BASE_TEMPLATE %}
+{%comment%}
+    List of all actions in the DB, displayed in a jQuery datatable which is handled by the listable template tag.
+{%endcomment%}
+{% load staticfiles %}
+{% load listable %}
+
+{% block title %}All Actions{% endblock title %}
+
+{% block page_title %}<h3>All Actions</h3>{% endblock page_title %}
+
+{% block extra_css %}
+    {% listable_css %}
+{% endblock extra_css %}
+
+{% block extra_js %}
+    {% block listable %}
+        {% listable 'incidents_nsir:all-actions' save_state=True css_table_class='table-striped table-condensed' css_input_class='input-mini' %}
+    {% endblock listable %}
+
+    <script src="{% static 'incidents_nsir/js/list_nsir.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% block page_description %}
+        <p>All actions in the system</p>
+    {% endblock page_description %}
+
+    <div class="row">
+        <div class="span12">
+            {{listable_table}}
+        </div>
+    </div>
+{% endblock content %}

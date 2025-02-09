@@ -1,0 +1,26 @@
+You are subscribed to receive update notifications for incident #{{incident.incident_id}}.
+
+The investigation for incident #{{incident.incident_id}}, which had previously been closed
+as the incident was flagged as invalid for trending, has been re-opened. The investigation
+may be viewed at the following URL:
+{{url}}
+
+=== Details for Incident #{{incident.incident_id}} ===
+
+Incident Detected Date: {{incident.date_incident_detected}}
+
+Submitted By: {{incident.submitted_by}}
+Date Submitted: {{incident.submitted}}
+Investigator: {{incident.investigator}}
+Date Investigation Re-Opened: {{incident.valid_status_date}}
+Investigation Re-Opened By: {{incident.valid_status_by}}
+
+=== Incident Descriptor  ===
+
+{{incident.descriptor}}
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

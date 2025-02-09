@@ -1,0 +1,23 @@
+You are subscribed to receive update notifications for incident #{{incident.incident_id}}.
+
+The fields required for NSIR-RT sharing have been completed for this incident. Fundamental details of the incident and investigation are provided below. For more details, please login and visit the following URL to view the investigation page associated with this incident:
+{{url}}
+
+=== Details for Incident #{{incident.incident_id}} ===
+
+Incident Detected Date: {{incident.date_incident_detected}}
+
+Submitted By: {{incident.submitted_by}}
+Date Submitted: {{incident.submitted}}
+Investigator: {{incident.investigator}}
+Date Investigation Completed: {{incident.investigation_completed_date}}
+
+=== Incident Descriptor  ===
+
+{{incident.descriptor}}
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

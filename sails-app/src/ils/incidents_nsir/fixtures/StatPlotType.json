@@ -1,0 +1,35 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.statplottype", 
+  "fields": {
+    "type_name": "column", 
+    "description": "", 
+    "order": null, 
+    "name": "Stacked Column Chart", 
+    "slug": "stacked-column-chart"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.statplottype", 
+  "fields": {
+    "type_name": "pie", 
+    "description": "", 
+    "order": null, 
+    "name": "Pie Chart", 
+    "slug": "pie-chart"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.statplottype", 
+  "fields": {
+    "type_name": "unstacked", 
+    "description": "", 
+    "order": null, 
+    "name": "Column Chart", 
+    "slug": "column-chart"
+  }
+}
+]

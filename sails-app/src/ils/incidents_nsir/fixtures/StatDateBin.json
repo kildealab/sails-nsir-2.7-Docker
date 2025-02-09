@@ -1,0 +1,35 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.statdatebin", 
+  "fields": {
+    "bin_name": "monthly_last_year", 
+    "description": "", 
+    "order": 1, 
+    "name": "Monthly - Last Year", 
+    "slug": "monthly-last-year"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.statdatebin", 
+  "fields": {
+    "bin_name": "monthly_choose_range", 
+    "description": "", 
+    "order": 2, 
+    "name": "Monthly - Choose Range", 
+    "slug": "monthly-choose-range"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.statdatebin", 
+  "fields": {
+    "bin_name": "yearly_choose_range", 
+    "description": "", 
+    "order": 3, 
+    "name": "Yearly - Choose Range", 
+    "slug": "yearly-choose-range"
+  }
+}
+]

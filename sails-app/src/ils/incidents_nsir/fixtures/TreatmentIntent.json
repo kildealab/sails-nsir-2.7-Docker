@@ -1,0 +1,32 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.treatmentintent", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "Curative (Radical)", 
+    "slug": "curative-radical"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.treatmentintent", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "Palliative", 
+    "slug": "palliative"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.treatmentintent", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "Unknown", 
+    "slug": "unknown"
+  }
+}
+]

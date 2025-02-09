@@ -1,0 +1,82 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.processstepoccurred", 
+  "fields": {
+    "description": "Includes patient education and scheduling", 
+    "order": 1, 
+    "name": "Patient assessment or consultation", 
+    "slug": "patient-assessmentconsultation"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.processstepoccurred", 
+  "fields": {
+    "description": "Includes setup instructions, tattooing and contouring of normal structures", 
+    "order": 2, 
+    "name": "Imaging for radiotherapy planning", 
+    "slug": "imaging-radiotherapy-planning"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.processstepoccurred", 
+  "fields": {
+    "description": "Includes contouring of OAR and target structures, generation of the dose distribution and plan approval", 
+    "order": 3, 
+    "name": "Treatment planning", 
+    "slug": "treatment-planning"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.processstepoccurred", 
+  "fields": {
+    "description": "Includes physics plan check and patient specific quality control and peer review", 
+    "order": 4, 
+    "name": "Pre-treatment review and verification", 
+    "slug": "pre-treatment-review-and-verification"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.processstepoccurred", 
+  "fields": {
+    "description": "Includes all treatment delivery steps as well as image guided radiation therapy", 
+    "order": 5, 
+    "name": "Treatment delivery", 
+    "slug": "treatment-delivery"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.processstepoccurred", 
+  "fields": {
+    "description": "Includes routine chart checks, audits and peer review", 
+    "order": 6, 
+    "name": "On-treatment quality management", 
+    "slug": "on-treatment-quality-management"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.processstepoccurred", 
+  "fields": {
+    "description": "Includes final chart check, patient discharge and follow-up visits", 
+    "order": 7, 
+    "name": "Post-treatment completion", 
+    "slug": "post-treatment-completion"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.processstepoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 8, 
+    "name": "Other", 
+    "slug": "other"
+  }
+}
+]

@@ -1,0 +1,512 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 22, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "hardwaresoftware", 
+    "lft": 1, 
+    "tree_id": 1, 
+    "order": 1, 
+    "name": "Hardware/Software"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 3, 
+    "description": "The software used to document and validate the accurate delivery of monitor units for a delivered fraction", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "use-record-and-verifying-system", 
+    "lft": 2, 
+    "tree_id": 1, 
+    "order": 2, 
+    "name": "Use of record and verifying system"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 5, 
+    "description": "The process of image guidance (megavoltage, kilovoltage, planar or volumetric) confirmation of the accurate patient positioning at the time of treatment delivery", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "image-based-patient-position-verification", 
+    "lft": 4, 
+    "tree_id": 1, 
+    "order": 3, 
+    "name": "Image-based patient position verification"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 7, 
+    "description": "The process of image guidance (megavoltage, kilovoltage, planar or volumetric) confirmation of the accurate accessory placement at the time of treatment delivery (MLC, shielding, etc.)", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "image-based-accessory-verification", 
+    "lft": 6, 
+    "tree_id": 1, 
+    "order": 4, 
+    "name": "Image-based accessory verification"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 9, 
+    "description": "The process of image guidance (megavoltage, kilovoltage, planar or volumetric) confirmation of the accurate field placement at the time of treatment delivery", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "image-based-target-or-oar-verification", 
+    "lft": 8, 
+    "tree_id": 1, 
+    "order": 5, 
+    "name": "Image-based target or OAR verification"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 11, 
+    "description": "The linear accelerator, CT simulator and other equipment safety features used to prevent patient harm; for example motion stop detection devices", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "equipment-protection-system-collision-detection-devices", 
+    "lft": 10, 
+    "tree_id": 1, 
+    "order": 6, 
+    "name": "Equipment protection system (collision detection devices)"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 13, 
+    "description": "Failsafe devices put in place in the event of emergencies", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "emergency-shutdown", 
+    "lft": 12, 
+    "tree_id": 1, 
+    "order": 7, 
+    "name": "Emergency shutdown"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 15, 
+    "description": "A device used to prevent an undesired state. An interlock is used to prevent equipment and or software from performing an unwanted function by stopping the action when tripped", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "interlocks", 
+    "lft": 14, 
+    "tree_id": 1, 
+    "order": 8, 
+    "name": "Interlocks"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 17, 
+    "description": "", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "independent-review-commissioning", 
+    "lft": 16, 
+    "tree_id": 1, 
+    "order": 9, 
+    "name": "Independent review of commissioning"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 19, 
+    "description": "", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "regular-equipment-performance-verification", 
+    "lft": 18, 
+    "tree_id": 1, 
+    "order": 10, 
+    "name": "Regular equipment performance verification"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 21, 
+    "description": "", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "regular-external-dosimetry-and-performance-audit", 
+    "lft": 20, 
+    "tree_id": 1, 
+    "order": 11, 
+    "name": "Regular external dosimetry and performance audit"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 42, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "process", 
+    "lft": 1, 
+    "tree_id": 2, 
+    "order": 12, 
+    "name": "Process"
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 3, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "verification-patient-id", 
+    "lft": 2, 
+    "tree_id": 2, 
+    "order": 13, 
+    "name": "Verification of patient ID"
+  }
+},
+{
+  "pk": 14, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 5, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "informed-consent-body-region-and-laterality", 
+    "lft": 4, 
+    "tree_id": 2, 
+    "order": 14, 
+    "name": "Informed consent for body region and laterality"
+  }
+},
+{
+  "pk": 15, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 7, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "pregnancy-check", 
+    "lft": 6, 
+    "tree_id": 2, 
+    "order": 15, 
+    "name": "Pregnancy check"
+  }
+},
+{
+  "pk": 16, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 9, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "pacemaker-or-other-implantable-device-check", 
+    "lft": 8, 
+    "tree_id": 2, 
+    "order": 16, 
+    "name": "Pacemaker or other implantable device check"
+  }
+},
+{
+  "pk": 17, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 11, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "verification-laterality", 
+    "lft": 10, 
+    "tree_id": 2, 
+    "order": 17, 
+    "name": "Verification of laterality"
+  }
+},
+{
+  "pk": 18, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 13, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "verification-relevant-clinical-information", 
+    "lft": 12, 
+    "tree_id": 2, 
+    "order": 18, 
+    "name": "Verification of relevant clinical information"
+  }
+},
+{
+  "pk": 19, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 15, 
+    "description": "A review of the appropriate imaging dataset for the site to be planned according to the prescribed treatment", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "verification-imaging-data-planning", 
+    "lft": 14, 
+    "tree_id": 2, 
+    "order": 19, 
+    "name": "Verification of imaging data for planning"
+  }
+},
+{
+  "pk": 20, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 17, 
+    "description": "The evaluation of creative work or performance by other people in the same field to enhance the quality of work, or the performance", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "oncologist-peer-review", 
+    "lft": 16, 
+    "tree_id": 2, 
+    "order": 20, 
+    "name": "Oncologist peer review"
+  }
+},
+{
+  "pk": 21, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 19, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "radiation-therapist-review-treatment-plan", 
+    "lft": 18, 
+    "tree_id": 2, 
+    "order": 21, 
+    "name": "Radiation therapist review of treatment plan"
+  }
+},
+{
+  "pk": 22, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 21, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "physicist-review-treatment-plan", 
+    "lft": 20, 
+    "tree_id": 2, 
+    "order": 22, 
+    "name": "Physicist review of treatment plan"
+  }
+},
+{
+  "pk": 23, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 23, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "oncologist-review-treatment-plan", 
+    "lft": 22, 
+    "tree_id": 2, 
+    "order": 23, 
+    "name": "Oncologist review of treatment plan"
+  }
+},
+{
+  "pk": 24, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 25, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "independent-confirmation-dose", 
+    "lft": 24, 
+    "tree_id": 2, 
+    "order": 24, 
+    "name": "Independent confirmation of dose"
+  }
+},
+{
+  "pk": 25, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 27, 
+    "description": "The process confirmation of the next process step accomplished either through second check or a pause", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "time-outverbalizationcall-back", 
+    "lft": 26, 
+    "tree_id": 2, 
+    "order": 25, 
+    "name": "Time out/verbalization/call-back"
+  }
+},
+{
+  "pk": 26, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 29, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "verification-treatment-accessories", 
+    "lft": 28, 
+    "tree_id": 2, 
+    "order": 25, 
+    "name": "Verification of treatment accessories"
+  }
+},
+{
+  "pk": 27, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 31, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "verification-reference-points", 
+    "lft": 30, 
+    "tree_id": 2, 
+    "order": 26, 
+    "name": "Verification of reference points"
+  }
+},
+{
+  "pk": 28, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 33, 
+    "description": "The process of image guidance (megavoltage, kilovoltage, planar or volumetric, motion tracking, audio) confirmation of the accurate field placement throughout the delivery of treatment", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "intra-treatment-monitoring-audiovisual-motion-tracking", 
+    "lft": 32, 
+    "tree_id": 2, 
+    "order": 27, 
+    "name": "Intra-treatment monitoring (audio/visual, motion tracking)"
+  }
+},
+{
+  "pk": 29, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 35, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "review-portal-or-cbct-images", 
+    "lft": 34, 
+    "tree_id": 2, 
+    "order": 28, 
+    "name": "Review of portal or CBCT images"
+  }
+},
+{
+  "pk": 30, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 37, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "regular-treatment-patient-medical-review", 
+    "lft": 36, 
+    "tree_id": 2, 
+    "order": 29, 
+    "name": "Regular on-treatment patient medical review"
+  }
+},
+{
+  "pk": 31, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 39, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "regular-chart-check", 
+    "lft": 38, 
+    "tree_id": 2, 
+    "order": 30, 
+    "name": "Regular chart check"
+  }
+},
+{
+  "pk": 32, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 41, 
+    "description": "", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "regular-internal-audit", 
+    "lft": 40, 
+    "tree_id": 2, 
+    "order": 31, 
+    "name": "Regular internal audit"
+  }
+},
+{
+  "pk": 33, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 2, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "other", 
+    "lft": 1, 
+    "tree_id": 3, 
+    "order": 32, 
+    "name": "Other"
+  }
+},
+{
+  "pk": 34, 
+  "model": "incidents_nsir.safetybarrierfailed", 
+  "fields": {
+    "rght": 2, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "none", 
+    "lft": 1, 
+    "tree_id": 4, 
+    "order": 33, 
+    "name": "None"
+  }
+}
+]

@@ -1,0 +1,63 @@
+.popover {
+    position:absolute;
+}
+
+.row .control-label {
+    width: 225px;
+    font-weight: bold;
+}
+
+.row .controls {
+    margin-left: 240px;
+}
+
+.controls input[type="text"] {
+    width: 97%;
+    padding: 0px;
+    padding-left: 2%;
+    border: 1px solid #aaa;
+}
+
+.controls input[type="number"] {
+    width: 97%;
+    padding: 0px;
+    padding-left: 2%;
+    min-height: 30px;
+    border: 1px solid #aaa;
+}
+
+#form-div {
+    margin-top: 5px;
+}
+
+.chosen-error {
+    color: #df382c;
+}
+
+.control-group.error input[type="text"]{
+    border: 1px solid #df382c !important;
+}
+
+.control-group.error input[type="number"]{
+    border: 1px solid #df382c !important;
+}
+
+.chosen-error .chosen-single {
+    border: 1px solid #df382c !important;
+}
+
+.chosen-error .chosen-choices {
+    border: 1px solid #df382c !important;
+}
+
+.cancel-shader{
+    /*background-image: linear-gradient(to bottom, #337AB7, #337AB7);
+    background-image: linear-gradient(to bottom, #337AB7, #337AB7);*/
+    background-image: none;
+    background-color: #FF6B67;
+    font-weight: bold;
+}
+
+.cancel-shader:hover, .cancel-shader:active, .cancel-shader:focus {
+    background-color: #CC3834;
+}

@@ -1,0 +1,42 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.patientgender", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "Male", 
+    "slug": "male"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.patientgender", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "Female", 
+    "slug": "female"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.patientgender", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "Undifferentiated", 
+    "slug": "undifferentiated"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.patientgender", 
+  "fields": {
+    "description": "", 
+    "order": 4, 
+    "name": "Unknown", 
+    "slug": "unknown"
+  }
+}
+]

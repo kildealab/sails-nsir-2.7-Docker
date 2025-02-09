@@ -1,0 +1,1285 @@
+{% extends BASE_TEMPLATE %}
+{%comment%}
+  Webpage to display the NSIR-RT compatible investigation page for an incident.
+{%endcomment%}
+{% load staticfiles %}
+{% load comments %}
+{% load mptt_tags %}
+{% load custom_tags %}
+
+{% block title %}Incident #{{ incident.incident_id}} Investigation{% endblock title %}
+
+{% block page_title %}<h3>Incident #{{ incident.incident_id}} Investigation</h3>{% endblock page_title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'datepicker/css/datepicker.css' %}"/>
+    {%comment%}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
+    {%endcomment%}
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/investigation.css' %}"/>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'fluent_comments/css/ajaxcomments.css' %}"/>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables_stuff/css/jquery.dataTables.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables_stuff/css/jquery.dataTables.bootstrap.css' %}"/>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'chosen/chosen.css'%}"/>
+    
+{% endblock extra_css %}
+
+{% block extra_js %}
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'incidents_nsir/js/investigation.js' %}"></script>
+    <script src="{% static 'datepicker/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'fluent_comments/js/ajaxcomments.js' %}"></script>
+
+    {%comment%}
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script src="{% static 'admin/js/core.js' %}"></script>
+    <script src="{% static 'admin/js/jquery.min.js' %}"></script>
+    <script src="{% static 'admin/js/jquery.init.js' %}"></script>
+    <script src="{% static 'admin/js/SelectFilter2.js' %}"></script>
+    <script src="{% static 'admin/js/SelectBox.js' %}"></script>
+    {%endcomment%}
+
+    <script type="text/javascript">
+        var ANONYMOUS_DISPLAY = "{{ANONYMOUS_DISPLAY}}";
+        if (ANONYMOUS_DISPLAY == "True") {
+            ANONYMOUS_DISPLAY = true;
+        }
+        else {
+            ANONYMOUS_DISPLAY = false;
+        }
+        var thisInc = {{ incident.incident_id }};
+        var inv_complete = "{{incident.investigation_complete}}";
+        var template_fields = {{template_fields | safe}};
+        var local_mandatory_fields_html = {{local_mandatory_fields_html | safe}};
+        var acute_medical_harm_threshold = {{ acute_medical_harm_threshold }};
+        var local_mandatory_dicts = {{ local_mandatory_dicts | safe }};
+        var PHP_DIR = "{{PHP_DIR}}";
+    </script>
+
+    <script src="{% static 'datatables_stuff/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'datatables_stuff/js/moment.min.js' %}"></script>
+    <script src="{% static 'datatables_stuff/js/datetime-moment.js' %}"></script>
+    <script src="{% static 'chosen/chosen.jquery.js' %}"></script>
+    
+    {% block taxonomy_js %}{% endblock taxonomy_js %}
+{% endblock %}
+
+{% block content %}
+<div id="get_field_values_view" style="display:none">{%url 'incidents_nsir:get_field_values' %}</div>
+<div id="save_new_template_view" style="display:none">{%url 'incidents_nsir:save_new_template' %}</div>
+<div id="save_new_image_view" style="display:none">{%url 'incidents_nsir:save_new_image' %}</div>
+<div class="sized-div">
+    <h4>
+        <span class="pull-left">Incident #{{ incident.incident_id }}</span>
+        {% if not incident.valid %}
+            <span class="status_text pull-left label inv_color_invalid" style="margin-left: 10px;"> Invalid for Trending</span>
+        {% elif incident.investigation_complete %}
+            <span class="status_text pull-left label inv_color_complete" style="margin-left: 10px;">Complete</span>
+        {% else %}
+            <span class="status_text pull-left label inv_color_incomplete" style="margin-left: 10px;">Incomplete</span>
+        {% endif %}
+        {% if incident.duplicate %}
+            <span class="status_text pull-left label label-inverse" style="margin-left: 10px;"> Duplicate of Incident {{ incident.duplicate_of.incident_id }}</span>
+        {% endif %}
+
+        <span class="pull-left" style="margin-left: 10px;">
+            <div title="Flag for discussion" class="incident-flag {#{% if incident.flag%}text-error flagged{% endif %}#}" data-incident="{{incident.incident_id}}">
+                <i class="icon-flag{% if not incident.flag %}-alt{%endif%} red_flags"></i>
+            </div>
+        </span>
+        <span class="pull-left" style="margin-left: 10px;">
+            <div title="Discussed" class="incident-discussion {#{% if incident.discussion%}text-error discussed{% endif %}#}" data-incident="{{incident.incident_id}}">
+                <i 
+                    {% if incident.discussion %}
+                        class="icon-comment green_discussion"
+                    {% else %}
+                        class="fa-fw green_discussion"
+                    {% endif %}
+                >
+                </i>
+            </div>
+        </span>
+        &nbsp;
+        {#<a href="#" class="pull-right" title="Export Incident" id="download"><i class="icon-download icon-large"></i>&nbsp;</a>#}
+        {#<a href="#" class="pull-right" title="Print Incident Report" id="print"><i class="icon-print icon-large"></i>&nbsp;</a>#}
+        <span class="pull-right">
+            {%if user == incident.investigator or user.is_superuser %}
+            <button style="margin-right:5px;{% if not incident.valid or not can_edit %}display:none{% endif %}" class="btn btn-primary btn-mini apply-template template-shader">Apply Incident Template</button>
+            <button style="margin-right:5px;{% if not incident.valid or not can_edit %}display:none{% endif %}" class="btn btn-primary btn-mini save-template template-shader">Create Incident Template</button>
+            {%endif%}
+            <button style="margin-right:5px;{% if not incident.valid or not can_edit %}display:none{% endif %}" class="btn btn-primary btn-mini mark-invalid invalid-shader">Mark Invalid for Trending</button>
+            <button style="margin-right:5px;{% if incident.valid or not can_edit %}display:none{% endif %}" class="btn btn-primary btn-mini mark-valid invalid-shader">Re-Open Investigation</button> 
+            {%comment%}
+            <span class="pull-right" >
+                <a class="btn btn-primary btn-mini my-shader" href="{{ request.META.HTTP_REFERER }}" title="Return to previous page">&larr; Previous page</a>
+            </span>
+            {%endcomment%}
+        </span>
+    </h4>
+
+    <div id="template-div" style="display: none">
+        <hr class="tight"/>
+        <div id="template-instructions" align="justify">
+            <b><u><h4>Template Creation Instructions:</h4></u></b>
+            <ul>
+                <li>Field values that will be saved for this template are highlighted below in light blue</li>
+                <li>Please review the inputs of those highlighted fields and ensure their accuracy</li>
+                <li><b>Note:</b> If any highlighted field should not have a particular value saved for this template, <b><u>leave it blank!</u></b></li>
+                <li>Once satisfied, enter a name and description for the template, and click "Confirm Template Creation"</li>
+            </ul>
+        </div>
+        <form id="template-form" class="form form-horizontal iform" method="post">
+            <input type="hidden" name="form_name" value="template_form" />
+            {% csrf_token %}
+            {% for field in template_form %}
+                {% get_label_key field.auto_id %}
+                <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                    data-original-title="<strong>{{field.label}}</strong>"
+                    data-content="{{field.help_text}}"
+                >
+                    <label class="control-label" for="id_{{field.html_name}}">
+                        <strong>{{field.label}}</strong>
+                    </label>
+
+                    <div class="controls" >
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <span class="help-block">{{error}}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="btn-group pull-right">
+                <button id="confirm-template-button" class="btn btn-primary btn-small confirm-template my-shader">Confirm Template Creation</button>
+            </div>
+        </form>
+        <br>
+    </div>
+
+    <div id="invalid-div" style="display: none">
+        <hr class="tight"/>
+        <form id="invalid-form" class="form form-horizontal iform" method="post">
+            <input type="hidden" name="form_name" value="invalid_form" />
+            {% csrf_token %}
+            {% for field in invalid_form %}
+                {% is_foreignkey field %}
+                {% get_label_key field.auto_id %}
+                <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                    {% if isForeignKey %}
+                    data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                    data-content="                  
+                      {% get_help_text help_dictionary label_key %}
+                      {% for inst in myinstances %}
+                        <p>
+                        <b>{{inst}}</b><br>
+                        <b>Email:</b> {{inst.email}}<br>
+                        </p>
+                      {% endfor %}
+                    "
+                    {% else %}
+                    data-original-title="<strong>{{field.label}}</strong>"
+                    data-content="{{field.help_text}}"
+                    {% endif %}
+                >
+                    <label class="control-label" for="id_{{field.html_name}}">
+                        <strong>{{field.label}}</strong>
+                    </label>
+
+                    <div class="controls" >
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <span class="help-block">{{error}}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="btn-group pull-right">
+                <button class="btn btn-primary btn-small confirm-invalid my-shader">Confirm Invalid</button>
+                        {% if request.GET.continue %}
+                            <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                            <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                        {% endif %}
+            </div>
+            {#<input type="submit" value="Submit" />#}
+        </form>
+        <br>
+    </div>
+
+    <div id="valid-div" style="display: none">
+        <form id="valid-form" class="form form-horizontal iform" method="post">
+            <input type="hidden" name="form_name" value="valid_form" />
+            {% csrf_token %}
+            {% for field in valid_form %}
+                    <label class="control-label" for="id_{{field.html_name}}">
+                        <strong>{{field.label}}</strong>
+                    </label>
+
+                    <div class="controls" >
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <span class="help-block">{{error}}</span>
+                        {% endfor %}
+                    </div>
+            {% endfor %}
+        </form>
+        <br>
+    </div>
+
+    <hr>
+    <div id="incident-description-div">
+        <dt><div style="margin-bottom:10px"><u>Incident Description:</u></div></dt>
+        <dd><div>{{ incident.incident_description}}</div></dd>
+        <br>
+        <dd><div class="signature_div"><b>--Descriptor:</b> {{ incident.descriptor }}</div></dd>
+        <dd><div class="signature_div"><b>--Date Incident was Detected:</b> {{ incident.date_incident_detected }}</div></dd>
+        {%if incident.coordinator_comments != None and incident.coordinator_comments != ""%}
+            <br>
+            <dt><div style="margin-bottom:10px"><u>Coordinator Comments:</u></div></dt>
+            <dd><div>{{ incident.coordinator_comments}}</div></dd>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div id="investigation-summary">
+    {% if not incident.valid %}
+         <dt><div class="complete_status">Investigation Completed (Invalid): {{incident.valid_status_date}}</div></dt>
+         <dd><div class="complete_date_missing_fields">{{ incident.invalid_reason}}</div></dd>
+         <dd><div id="complete_status_signature" class="signature_div">--{{ incident.valid_status_by}}</div></dd>
+    {% elif incident.investigation_complete %}
+            {%comment%}
+            <dt><div class="complete_status">Completed:</div></dt>
+            <dd><div class="complete_date_missing_fields">{{ incident.investigation_completed_date|date:"M. d, Y" }}</div></dd>
+            {%endcomment%}
+            <dt><div class="complete_status">Investigation Completed: {{incident.investigation_completed_date}}</div></dt>
+            <dd><div class="complete_date_missing_fields">{{ incident.investigation_narrative}}</div></dd>
+            <dd><div id="complete_status_signature" class="signature_div">--{{ incident.narrative_by}}</div></dd>
+    {% else %}
+        {% if missing_field_verbose_names %}
+                <dt><div class="complete_status">Missing information required to complete the investigation:</div></dt>
+                <dd id="missing_fields" align="justify"><div class="complete_date_missing_fields missing">
+                    {#@@TODO@@ modify this to use field labels instead, once fields used#}
+                    {% for missed in missing_field_verbose_names %}
+                        {% if missed in local_mandatory_field_names %}
+                            <span class="local-mandatory-field">{{missed}}{%if not forloop.last%},{%endif%} </span>
+                        {% else %}
+                            {{missed}}{%if not forloop.last%},{%endif%} 
+                        {% endif %}
+                    {% endfor %}
+                </div></dd>
+                <dd><div id="complete_status_signature" class="signature_div"></div></dd>
+        {% endif %}
+    {% endif %}
+    </div>
+
+    <hr>
+
+    {% if subscription %}
+        <p> <b>Email Notifications: </b>You are currently subscribed for email updates about this incident. <a href="{% url 'notifications_nsir:unsubscribe' incident_id=incident.incident_id %}?next=incident" title="Unsubscribe from this incident"> Click here to Unsubscribe</a>
+    {% else %}
+        <p> <b>Email Notifications: </b>You are not currently subscribed for email updates about this incident:<a href="{% url 'notifications_nsir:subscribe' incident_id=incident.incident_id %}?next=incident" title="Subscribe to this incident"> Click here to Subscribe</a>
+    {% endif %}
+
+ 
+    <hr>
+
+    <div id="instructions">
+    <div id="instructions-editable" align="justify" {%if not can_edit%}style="display:none"{%endif%}>
+        <b>Saving: </b>
+        <ul>
+            <li>Ensure that you have saved all desired changes by clicking one of the blue "Update" buttons on this page.</li>
+            <li>The fields that were saved successfully will be highlighted in green and a message will be displayed to you at the top of the page.</li>
+        </ul>
+    </div>
+    <div id="instructions-blocked" align="justify" {%if can_edit%}style="display:none"{%endif%}>
+        <b>You are not the designated investigator for this investigation</b> and cannot make changes to the investigation form. 
+        <br>Available features:
+        <ul>
+            <li><a href="#investigator">Flag the incident for discussion.</a> Be sure to save your change using the blue "Update" button.</li>
+            <li><a href="#actions">Add a taskable action for this investigation</a></li>
+            <li><a href="#comments-anchor">Add a comment to this investigation</a></li>
+        </ul>
+    </div>
+    {% if TUTORIALS.investigation.show %}
+    <hr>
+    <p>
+        <b>Instructions: </b>Please refer to the <a href="{{TUTORIALS.investigation.url}}" target="_blank">{{TUTORIALS.investigation.text}}</a>
+    </p>
+    {% endif %}
+    {% if TUTORIALS.disclosure.show %}
+    <hr>
+    <p>
+        <b>Patient Disclosure: </b>For instructions on how patient disclosure should be carried out, please refer to the <a href="{{TUTORIALS.disclosure.url}}" target="_blank">{{TUTORIALS.disclosure.text}}</a>
+    </p>
+    {% endif %}
+    {% if TUTORIALS.nsir.show %}
+    <hr {#class="tight"/#}>
+
+    <p>
+        <b>National System for Incident Reporting - Radiation Treatment (NSIR-RT): </b><br>A publication by members of the CPQR detailing the development of NSIR-RT and the taxonomy is <a href="{{TUTORIALS.nsir.url}}" target="_blank">{{TUTORIALS.nsir.text}}</a>
+    </p>
+    {% endif %}
+    </div>
+
+    <hr>
+    <div id="images-div">
+        <div id="image-header" class="row-fluid">Uploaded Images</div>
+        <div id="no-images-div" {%if incident.incidentimage_set.all.count != 0%}style="display:none;" {%endif%}>No images have been uploaded for this investigation.</div>
+        <div id="uploaded-images-panel">
+            <div class="row-fluid uploaded-images">
+            {% for image in incident.incidentimage_set.all %}
+                {% if forloop.counter0|divisibleby:3 and not forloop.first %}
+                    </div>
+                    <div class="row-fluid uploaded-images">
+                {% endif %}
+                <div class="span4 image-block">
+                    <!-- <center>{{image.name}}</center> -->
+                    <a href="{{MEDIA_URL}}{{image.image}}" target="_blank">
+                        <center><div class="image-icon">
+                                <img src="{{MEDIA_URL}}{{image.image}}">
+                        </div></center>
+                    </a>
+                    <p><b>Name:</b> {{image.image_name}}</p>
+                    <p><b>Uploaded by:</b> {{image.uploaded_by}}</p>
+                    <p><b>Date Uploaded:</b> {{image.uploaded_date}}</p>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+<!--         <div id="uploaded-images" class="row-fluid">
+            <div class="span4 image-block"><center>Test</center></div>
+            <div class="span4 image-block"><center>Test</center></div>
+            <div class="span4 image-block"><center>Test</center></div>
+            <div class="span4 image-block"><center>Test</center></div>
+        </div> -->
+        <div id="image-buttons" class="row-fluid" align="right">
+            <button class="btn btn-primary btn-small add-image image-shader" {% if not incident.valid or not can_edit %}style="display:none"{% endif %}>Add New Image</button>
+        </div>
+        <div id="upload-image-div" class="row-fluid" style="display: none">
+            <hr>
+            <div id="image-preview" class="span4">
+                <img id="upload-thumbnail" src=""/>
+            </div>
+            <div id="temp-form" class="span8">
+                <form id="incidentimage-form" class="form form-horizontal iform" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="form_name" value="incidentimage_form" />
+                    {% csrf_token %}
+                    {% for field in incidentimage_form %}
+                        {% if field.label == incidentimage_form.incident.label %}
+                            <input id="id_{{field.html_name}}" value="{{incident.pk}}" type="hidden" name="{{field.name}}"/>
+                        {% else %}
+                            {% get_label_key field.auto_id %}
+                            <div 
+                                class="control-group ils-popover{%if field.errors%}error{% endif %}"
+                                id="hide-{{ label_key }}"
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                            >
+                                <label class="control-label" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}</strong>
+                                </label>
+                                <div class="controls" >
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="btn-group pull-right">
+                        <button id="confirm-image-button" class="btn btn-primary btn-small confirm-image my-shader">Upload Image</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<hr>
+
+    
+        <div class="btn-group pull-right">
+            <button class="btn btn-primary btn-small update-investigation my-shader" {%if not can_edit%} style="display:none"{%endif%}>Update</button>
+                    {% if request.GET.continue %}
+                        <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                        <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                    {% endif %}
+        </div>
+        {% if incident.event_type.pk == 3 and incident.number_patients_involved == 1 or   incident.event_type.pk == 2 and incident.number_patients_involved == 1 %}
+        <div class="btn-group pull-left">
+            <button class="btn btn-primary btn-small get-docs emr-shader">Retrieve patient documents from EMR</button>
+            <button style="margin-left:5px" class="btn btn-primary btn-small get-journal emr-shader">Retrieve journal entries from EMR</button>
+            <button style="margin-left:5px" class="btn btn-primary btn-small get-alerts emr-shader">Retrieve patient alerts from EMR</button>         
+        </div>
+        {% endif %}
+        <br><br>
+    <div id="pt-docs" style="display: none"></div>
+    <div id="pt-journal" style="display: none"></div>
+    <div id="pt-alerts" style="display: none"></div>
+
+    {% for field in investigation_form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+
+    {% for error in investigation_form.non_field_errors %}
+        <div class="control-group error">
+            <span class="help-block error">{{ error }}</span>
+        </div>
+    {% endfor %}
+
+
+    <br>
+
+</div>
+
+<div class="sized-div">
+    <form id="investigation-form" class="form form-horizontal iform" method="post">
+        <input type="hidden" name="form_name" value="investigation_form" />
+        {% csrf_token %}
+
+
+        <!--Investigator ############################################################# -->
+        <a id="investigator"></a>
+        <div id="investigator-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>Local Follow-up</strong></p>
+
+                <span id="investigator-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+                <span id="investigator-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="investigator-form-wrapper" class="row" {#style="display: none;#}" >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.investigator_fields|safe %}
+                            {% if field.label == investigation_form.predefined_type.label %}
+                                {% is_foreignkey field %}
+                            {% endif %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if field.label == investigation_form.discussion.label and not incident.flag and not incident.discussion%}style='display:none'{%endif%}
+                                {% if isForeignKey %}
+                                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                                data-content="                  
+                                  {% get_help_text help_dictionary label_key %}
+                                  {% for inst in myinstances %}
+                                    <b>{{inst.name}} (Created By: {{inst.created_by}})</b>
+                                    {{inst.description|linebreaks}}
+                                  {% endfor %}
+                                "
+                                {% else %}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                                {% endif %}
+                            >
+
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    <span readonly>{{ field }}</span>
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-primary btn-small update-investigation my-shader clickable" >Update</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <!--Local Information ######################################################## -->
+        <a id="local"></a>
+        <div id="local-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>Reported Information</strong></p>
+
+                <span id="local-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+                <span id="local-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="local-form-wrapper" class="row" {#style="display: none;"#} >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.local_fields|safe and field.name not in NA_fields %}
+                            {% is_foreignkey field %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if field.label == investigation_form.reported_to.label and incident.report_type.pk == 2 %}style='display:none'{%endif%}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                            >
+
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>        
+
+        <!--Impact ################################################################### -->
+        <a id="impact"></a>
+        <div id="impact-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>NSIR-RT Section 1: Incident Impact</strong></p>
+
+                <span id="impact-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+                <span id="impact-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="impact-form-wrapper" class="row" {#style="display: none;"#} >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.impact_fields|safe and field.name not in NA_fields %}
+                            {% is_foreignkey field %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if isForeignKey %}
+                                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                                data-content="                  
+                                  {% get_help_text help_dictionary label_key %}
+                                  {% for inst in myinstances %}
+                                    <b>{{inst.name|linebreaks}}</b>
+                                    {{inst.description|linebreaks}}
+                                  {% endfor %}
+                                "
+                                {% else %}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                                {% endif %}
+
+                                {% if field.label == investigation_form.coordinator_comments.label %}
+                                    {%if incident.coordinator_comments == None or incident.coordinator_comments == ""%}
+                                        style="display:none"
+                                    {% endif %}
+                                {% endif %}
+                            >
+
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                                {% if field.label == investigation_form.event_type.label%}
+                                    {%if user == incident.investigator or user.is_superuser %}
+                                        <p style="float: right;">Click 
+                                        <a href="{% url 'incidents_nsir:change-event-type' incident_id=incident.incident_id %}?next=incident" title="ChangeEventType">here </a>
+                                        if you want to change the event type. Currently unsaved changes will be lost.
+                                        </p>
+                                    {%endif%}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% if incident.event_type.pk == 3 %}
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-primary btn-small update-investigation my-shader" {%if not can_edit%} style="display:none"{%endif%}>Update</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!--Discovery ################################################################ -->
+        <a id="discovery"></a>
+        <div id="discovery-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>NSIR-RT Section 2: Incident Discovery</strong></p>
+
+                <span id="discovery-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+                <span id="discovery-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="discovery-form-wrapper" class="row" {#style="display: none;"#} >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.discovery_fields|safe and field.name not in NA_fields %}
+
+                            {% is_foreignkey field %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if isForeignKey %}
+                                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                                data-content="                  
+                                  {% get_help_text help_dictionary label_key %}
+                                  {% for inst in myinstances %}
+                                    <b>{{inst.name|linebreaks}}</b>
+                                    {{inst.description|linebreaks}}
+                                  {% endfor %}
+                                "
+                                {% else %}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                                {% endif %}
+                            >
+
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    {% if field.label == investigation_form.date_incident_occurred.label %}
+                                        <div class="input-append date {%if can_edit%}datepicker{%endif%}" title="Click to change date" id="dp3" >
+                                            {%if can_edit%}
+                                                <input id="id_{{field.html_name}}" name="{{field.html_name}}" class="span2 editable-field" type="text"
+                                                {% if date_occurred %}
+                                                    value="{{ date_occurred|date:'Y-m-d' }}"
+                                                {%endif%}
+                                                />
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            {%else%}
+                                                <input id="id_{{field.html_name}}" name="{{field.html_name}}" class="span2 blocked-field" type="text" readonly="True"
+                                                {% if date_occurred %}
+                                                    value="{{ date_occurred|date:'Y-m-d' }}"
+                                                {%endif%}
+                                                />
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            {%endif%} 
+                                        </div>
+                                    {%else%}
+                                        {{ field }}
+                                    {%endif%}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-primary btn-small update-investigation my-shader" {%if not can_edit%} style="display:none"{%endif%}>Update</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        
+        <!--Patient ################################################################## -->
+        <a id="patient"></a>
+        <div id="patient-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>NSIR-RT Section 3: Patient Characteristics</strong></p>
+
+                <span id="patient-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+                <span id="patient-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="patient-form-wrapper" class="row" {#style="display: none;"#} >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% if incident.event_type.pk == 3 and incident.number_patients_involved == 1 or   incident.event_type.pk == 2 and incident.number_patients_involved == 1 %}
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.patient_fields|safe and field.name not in NA_fields %}
+
+                            {% is_foreignkey field %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if isForeignKey %}
+                                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                                data-content="                  
+                                  {% get_help_text help_dictionary label_key %}
+                                  {% for inst in myinstances %}
+                                    <b>{{inst.name|linebreaks}}</b>
+                                    {{inst.description|linebreaks}}
+                                  {% endfor %}
+                                "
+                                {% else %}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                                {% endif %}
+                            >
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary btn-small get-pat emr-shader"  {%if not can_edit%} style="display:none"{%endif%}>Populate patient info from EMR</button>
+                        <button class="btn btn-primary btn-small update-investigation my-shader" {%if not can_edit%} style="display:none"{%endif%}>Update</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                    {% elif incident.event_type.pk == 1 %}
+                        <p><b>There are no patient-specific fields for reportable circumstances.</b></p>
+                    {% elif incident.event_type.pk == 2 %}
+                        <p><b>Patient-specific fields are not applicable for near-misses involving more than 1 patient.</b></p>
+                    {% elif incident.event_type.pk == 3 %}
+                        <p><b>Patient-specific fields are not applicable for actual incidents involving more than 1 patient.</b></p>
+                    {% endif%}
+                </div>
+            </div>
+        </div>
+
+        <!--Details ################################################################## -->
+        <a id="details"></a>
+        <div id="details-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>NSIR-RT Section 4: Incident Details</strong></p>
+
+                <span id="details-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+                <span id="details-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="details-form-wrapper" class="row" {#style="display: none;"#} >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.details_fields|safe and field.name not in NA_fields %}
+                            {% is_foreignkey field %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if isForeignKey %}
+                                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                                data-content="                  
+                                  {% get_help_text help_dictionary label_key %}
+                                  {% for inst in myinstances %}
+                                    <b>{{inst.name}}</b>
+                                    {{inst.description|linebreaks}}
+                                  {% endfor %}
+                                "
+                                {% else %}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                                {% endif %}
+                            >
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-primary btn-small update-investigation my-shader" {%if not can_edit%} style="display:none"{%endif%}>Update</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Treatment Delivery ####################################################### -->
+        <a id="treatment"></a>
+        <div id="treatment-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>NSIR-RT Section 5: Treatment Delivery</strong></p>
+
+                <span id="treatment-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+                <span id="treatment-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="treatment-form-wrapper" class="row" {#style="display: none;"#} >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.treatment_delivery_fields|safe and field.name not in NA_fields %}
+
+                            {% is_foreignkey field %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if isForeignKey %}
+                                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                                data-content="                  
+                                  {% get_help_text help_dictionary label_key %}
+                                  {% for inst in myinstances %}
+                                    <b>{{inst.name|linebreaks}}</b>
+                                    {{inst.description|linebreaks}}
+                                  {% endfor %}
+                                "
+                                {% else %}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                                {% endif %}
+                            >
+
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="pull-right">
+                        {% if incident.event_type.pk == 3 and incident.number_patients_involved == 1 or   incident.event_type.pk == 2 and incident.number_patients_involved == 1 %}
+                        <button type="button" class="btn btn-primary btn-small get-tmnt emr-shader">Retrieve treatment info from EMR</button>
+                        {% endif %}
+                        <button class="btn btn-primary btn-small update-investigation my-shader" {%if not can_edit%} style="display:none"{%endif%}>Update</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <div id="tmnt-info" style="display: none"></div>
+
+        <!--Investigation ############################################################ -->
+        <a id="investigation"></a>
+        <div id="investigation-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>NSIR-RT Section 6: Incident Investigation</strong></p>
+
+                <span id="investigation-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+                <span id="investigation-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="investigation-form-wrapper" class="row" {#style="display: none;"#} >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.investigation_fields|safe and field.name not in NA_fields %}
+
+                            {% is_foreignkey field %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if isForeignKey %}
+                                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                                data-content="                  
+                                  {% get_help_text help_dictionary label_key %}
+                                  {% for inst in myinstances %}
+                                    <b>{{inst.name|linebreaks}}</b>
+                                    {{inst.description|linebreaks}}
+                                  {% endfor %}
+                                "
+                                {% else %}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                                {% endif %}
+                            >
+
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-primary btn-small update-investigation my-shader" {%if not can_edit%} style="display:none"{%endif%}>Update</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Support Information #######################################################-->
+        <a id="support"></a>
+        <div id="support-head" class="fading-header cat-header">
+
+            <div class="inv-legend">
+
+                <p><strong>Patient and Staff Support</strong></p>
+
+                <span id="support-plus" class="right-expand-btn"><i class="icon-plus-sign"></i></span>
+                <span id="support-minus" class="right-expand-btn" style="display: none"><i class="icon-minus-sign"></i></span>
+            </div>
+        </div>
+        <div id="support-form-wrapper" class="row" style="display: none;" >
+            <div class="span9">
+                <div class="well well-primary">
+                    {% for field in investigation_form %}
+
+                        {# If field belongs in Investigation div, ignore it here #}
+                        {% if field.auto_id in investigation_form.support_fields|safe %}
+
+                            {% is_foreignkey field %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                                {% if isForeignKey %}
+                                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                                data-content="                  
+                                  {% get_help_text help_dictionary label_key %}
+                                  {% for inst in myinstances %}
+                                    <b>{{inst.name|linebreaks}}</b>
+                                    {{inst.description|linebreaks}}
+                                  {% endfor %}
+                                "
+                                {% else %}
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                                {% endif %}
+                            >
+
+                                <label class="control-label {% if field.name in missing_field_ids %}{%if field.name in local_mandatory_field_ids%}local-mandatory-field{%else%}missing{%endif%}{%endif%}" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}{% if field.field.required %}*{% endif %}</strong>
+                                </label>
+
+                                <div class="controls" >
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <span class="help-block">{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-primary btn-small update-investigation my-shader" {%if not can_edit%} style="display:none"{%endif%} >Update</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <!--Actions ###################################################################### -->
+    <a id="actions"></a>
+    <div id="actions-head" class="fading-header cat-header">
+
+        <div class="inv-legend">
+
+            <p><strong>Taskable Actions</strong></p>
+
+            <span id="actions-plus" class="right-expand-btn" style="display: none"><i class="icon-plus-sign"></i></span>
+            <span id="actions-minus" class="right-expand-btn" {#style="display: none"#}><i class="icon-minus-sign"></i></span>
+        </div>
+    </div>
+    <div id="actions-form-wrapper" class="row" >
+        <div class="span9">
+            <!--Create Actions ####################################################### -->
+            <div class="well well-primary new-action-well">
+                <form id="action-create-form" class="form form-horizontal iform" method="post" >
+                <input type="hidden" name="form_name" value="action_create_form" />
+                {% csrf_token %}
+                <span id="new-action-span" style="display: none">
+                {% for field in action_create_form %}
+                        {% is_foreignkey field %}
+                        {% get_label_key field.auto_id %}
+                        <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+                            data-original-title="<strong>{{field.label}}</strong>"
+                            data-content="{{field.help_text}}"
+                        >
+
+                            <label class="control-label" for="id_{{field.html_name}}">
+                                <strong>{{field.label}}</strong>
+                            </label>
+
+                            <div class="controls" >
+                                {{ field }}
+                            </div>
+                        </div>
+                {% endfor %}
+                </span>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary btn-small display-action my-shader">Add New Action</button>
+                    <button type="button" class="btn btn-primary btn-small cancel-action my-shader" style="display:none">Cancel</button>
+                    <button class="btn btn-primary btn-small add-action my-shader" style="display:none">Submit</button>
+                            {% if request.GET.continue %}
+                                <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                            {% endif %}
+                </div>
+                </form>
+                <br>
+            </div>
+
+            <!--Update Actions ####################################################### -->
+            <form id="action-update-formset" class="form form-horizontal iform" method="post" >
+            <input type="hidden" name="form_name" value="action_update_formset" />
+            {% csrf_token %}
+                {{action_update_formset.management_form}}
+                <div id="set_of_forms">
+                {% for action_update_form in action_update_formset %}
+                <a class="action-anchor" id="actions-{{action_update_form.instance.action_id}}"></a>
+                <div class="well well-primary update-action-well">
+                    <h4>
+                        <span id="action-header-{{forloop.counter0}}" class="action-header pull-left">
+                            Incident #{{action_update_form.instance.incident.incident_id}} - Action #{{action_update_form.instance.action_id}}
+                        </span>
+                        {% if action_update_form.instance.complete %}
+                            <span class="act_status-{{forloop.counter0}} pull-left label inv_color_complete" style="margin-left: 10px;">Complete</span>
+                        {% else %}
+                            <span class="act_status-{{forloop.counter0}} pull-left label inv_color_incomplete" style="margin-left: 10px;">Incomplete</span>
+                        {% endif %}
+                    </h4>
+                    <br>
+                        <div id="hide-initial-action-{{forloop.counter0}}">
+                            <b>Date Assigned:</b> {{action_update_form.instance.date_assigned|date:'DATETIME_FORMAT'}}<br>
+                            <b>Assigned By:</b> {{action_update_form.instance.assigned_by}}
+                        </div>
+                        <div id="hide-complete-action-{{forloop.counter0}}" {% if not action_update_form.instance.complete %}style="display:none"{%endif%}>
+                            <br>
+                            <b>Date Completed:</b> {{action_update_form.instance.date_completed|date:'DATETIME_FORMAT'}}<br>
+                            <b>Completed By:</b> {{action_update_form.instance.completed_by}}
+                        </div>
+                    <hr>
+                    {#{{form}}#}
+                    {% for field in action_update_form %}
+                            {% if field.label != action_update_form.id.label and field.label != action_update_form.instance_id.label%}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}" 
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                            >
+
+                                <label class="control-label" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}</strong>
+                                </label>
+
+                                <div class="controls">
+                                    {{ field }}
+                                </div>
+                            </div>
+                            {% else %}
+                            {{field.as_hidden}}
+                            {% endif %}
+                    {% endfor %}
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary btn-small update-actions my-shader">Update Actions</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                </div>
+                {% endfor %}
+                </div>
+            </form>
+
+            <!--Empty Update Form for creating new entries ########################### -->
+            <div id="empty_form" style="display:none">
+                {%comment%}
+                <table class='no error'>
+                    {{action_update_formset.empty_form.as_table}}
+                </table>
+                {%endcomment%}
+
+                <div class="well well-primary update-action-well">
+                    <h4>
+                        <span id="action-header-__prefix__" class="action-header pull-left">
+                            Incident # - Action #
+                        </span>
+                        <span class="act_status-__prefix__ pull-left label inv_color_incomplete" style="margin-left: 10px;">Incomplete</span>
+                    </h4>
+                    <br>
+                        <div id="hide-initial-action-__prefix__">
+                            <b>Date Assigned:</b> <br>
+                            <b>Assigned By:</b> 
+                        </div>
+                        <div id="hide-complete-action-__prefix__" {% if not action_update_form.instance.complete %}style="display:none"{%endif%}>
+                            <br>
+                            <b>Date Completed:</b><br>
+                            <b>Completed By:</b>
+                        </div>
+                    <hr>
+                    {#{{form}}#}
+                    {% for field in action_update_formset.empty_form %}
+                            {% if field.label != action_update_formset.empty_form.id.label and field.label != action_update_formset.empty_form.instance_id.label %}
+                            {% get_label_key field.auto_id %}
+                            <div class="control-group ils-popover{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}" 
+                                data-original-title="<strong>{{field.label}}</strong>"
+                                data-content="{{field.help_text}}"
+                            >
+
+                                <label class="control-label" for="id_{{field.html_name}}">
+                                    <strong>{{field.label}}</strong>
+                                </label>
+
+                                <div class="controls">
+                                    {{ field }}
+                                </div>
+                            </div>
+                            {% else %}
+                            {{field.as_hidden}}
+                            {% endif %}
+                    {% endfor %}
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary btn-small new-update-actions my-shader">Update Actions</button>
+                                {% if request.GET.continue %}
+                                    <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                                    <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                                {% endif %}
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <a id="comments-anchor"></a>
+    <div id="comments-head" class="fading-header cat-header">
+
+        <div class="inv-legend">
+
+            <p><strong>Comments</strong></p>
+
+            <span id="comments-plus" class="right-expand-btn"><i class="icon-plus-sign"></i></span>
+            <span id="comments-minus" class="right-expand-btn" style="display: none"><i class="icon-minus-sign"></i></span>
+        </div>
+    </div>
+    <div id="comments-form-wrapper" class="row" style="display: none;" >
+        <div class="span9">
+            <div class="well well-primary">
+                {% render_comment_list for incident %}
+                {% render_comment_form for incident %}
+                {%comment%}
+                {% get_comment_form for incident as comment_form %}
+                <table>
+                  <form action="{% comment_form_target %}" method="post">
+                    {% csrf_token %}
+                    {{ comment_form }}
+                    <tr>
+                      <td colspan="2">
+                        <input type="submit" name="submit" value="Post" class="btn btn-primary btn-mini my-shader">
+                        <input type="submit" name="preview" value="Preview" class="btn btn-primary btn-mini my-shader">
+                      </td>
+                    </tr>
+                  </form>
+                </table>
+                {%endcomment%}
+            </div>
+        </div>
+    </div>
+
+    {% if incident.valid %}
+        <div class="btn-group pull-right">
+            <button class="btn btn-primary btn-small update-investigation my-shader"{%if not can_edit%} style="display:none"{%endif%}>Update</button>
+                    {% if request.GET.continue %}
+                        <input id="do-save-and-continue" value="0" type="hidden" name="save_and_continue"/>
+                        <button id="save-and-continue" type="submit" class="btn btn-primary btn-small">Update &amp; Go To Next</button>
+                    {% endif %}
+        </div>
+    {% endif %}
+        <br>
+
+    {% for field in investigation_form.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+
+    {% for error in investigation_form.non_field_errors %}
+        <div class="control-group error">
+            <span class="help-block error">{{ error }}</span>
+        </div>
+    {% endfor %}
+
+</div>
+
+<br>
+
+
+{% endblock content %} 

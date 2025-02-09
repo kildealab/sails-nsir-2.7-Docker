@@ -1,0 +1,8 @@
+{# Called within incidents_nsir/views.py: BaseIncidentsList #}
+{# Display correct flag icon (filled/unfilled) depending on flagged status #}
+{%load staticfiles%}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/investigation.css' %}"/>
+</head>
+
+<i class="icon-flag{% if not incident.flag %}-alt{%endif%} red_flags"></i>

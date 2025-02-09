@@ -1,0 +1,22 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.reporttype", 
+  "fields": {
+    "description": "A report originating from a paper report form, with an associated unique ID number.", 
+    "order": 1, 
+    "name": "Paper Report", 
+    "slug": "paper-report"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.reporttype", 
+  "fields": {
+    "description": "A report generated online, and was not transcribed from a paper report.", 
+    "order": 2, 
+    "name": "Online Report", 
+    "slug": "online-report"
+  }
+}
+]

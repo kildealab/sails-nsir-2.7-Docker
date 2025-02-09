@@ -1,0 +1,60 @@
+{% extends BASE_TEMPLATE %}
+{%comment%}
+  Webpage used for searching for an incident in the DB, by its unique ID.
+{%endcomment%}
+{% load staticfiles %}
+{% load custom_tags %}
+
+{% block title %}Search for an Incident{% endblock title %}
+{% block page_title %}<div style="margin-bottom: 25px"><h3><center>News Feed</center></h3></div>{% endblock page_title%}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/news.css' %}"/>
+{% endblock extra_css %}
+
+{% block extra_js %}
+  <script src="{% static 'incidents_nsir/js/news.js' %}"></script>
+{% endblock extra_js %}
+
+{% block content %}
+<div class="row">
+  <div class="span10 offset1 news-item">
+    <div class="news-title">SaILS Incident Learning Newsletter #1</div>
+    <div class="news-subtitle">
+      <span class="sub-author">Author Name</span>
+      <span class="sub-div"> | </span>
+      <span class="sub-date">January 24th, 2017</span>
+    </div>
+<!--     <embed src="{% static 'McGill_Univ_Letter.pdf' %}" width="600px" height="1575px" />
+ -->    
+    <embed src="{% static 'news/newsletter.pdf' %}" width="90%" height="1000px" type='application/pdf' class="news-pdf">
+<!--     <iframe src="{% static 'McGill_Univ_Letter.pdf' %}" style="width: 100%;height: 100%;border: none;"></iframe>
+ -->  </div>
+</div>
+
+<div class="row">
+  <div class="span10 offset1 news-item">
+    <div class="news-title">Admin Update #1</div>
+    <div class="news-subtitle">
+      <span class="sub-author">Author Name</span>
+      <span class="sub-div"> | </span>
+      <span class="sub-date">January 24th, 2017</span>
+    </div>
+    <div class="news-text">
+      Insert recap or summary of incident information or cases here
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span10 offset1 news-item">
+    <div class="news-title">SaILS Incident Learning Newsletter #1</div>
+    <div class="news-subtitle">
+      <span class="sub-author">Author Name</span>
+      <span class="sub-div"> | </span>
+      <span class="sub-date">January 24th, 2017</span>
+    </div>
+    <embed src="{% static 'news/newsletter.pdf' %}" width="90%" height="1000px" type='application/pdf' class="news-pdf">
+ </div>
+</div>
+{% endblock content%}

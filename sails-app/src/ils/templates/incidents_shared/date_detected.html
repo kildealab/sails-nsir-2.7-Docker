@@ -1,0 +1,8 @@
+{# Called within incidents_nsir/views.py: BaseIncidentsList #}
+{# Display date of detection #}
+{%load staticfiles%}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/investigation.css' %}"/>
+</head>
+
+<span>{{incident.date_incident_detected}}</span>

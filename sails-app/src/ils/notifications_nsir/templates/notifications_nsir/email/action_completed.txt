@@ -1,0 +1,20 @@
+You are subscribed to receive update notifications for incident #{{incident.incident_id}}.
+
+Action #{{action.action_id}} for Incident #{{incident.incident_id}} has been completed. 
+
+For more details, please login and visit the following URL to view the investigation page associated with this incident:
+{{url}}#actions
+
+=== Details for Incident #{{incident.incident_id}} - Action #{{action.action_id}} ===
+
+Action Assigned Date: {{action.date_assigned}}
+Assigned By: {{action.assigned_by}}
+
+Date Completed: {{action.date_completed}}
+Completed By: {{action.completed_by}}
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

@@ -1,0 +1,52 @@
+You are subscribed to receive update notifications for incident #{{incident.pk}}.
+
+This incident was marked as "Duplicate of Incident {{duplicate.pk}}" by {{incident.investigation.investigator}}.  Incident details are given below.
+
+
+===== Details for Incident #{{incident.pk}} =====
+
+Date Submitted      : {{incident.submitted}}
+Incident Date       : {{incident.incident_date}}
+PSLS ID             : {% firstof investigation.psls_id "N/A" %}
+Actual/Potential    : {{incident.get_actual_display}}{% if incident.needs_standard_description%}
+Std. Description    : {{incident.standard_description}}{% endif %}
+Location            : {{incident.location}}
+Severity            : {% firstof incident.get_severity_display "" %}
+Treatment Intent    : {{incident.get_intent_display}}
+Treatment Technique : {{incident.technique}}
+# Patients Affected : {{incident.get_num_affected_display}}
+
+ - Incident Description -
+
+{{incident.description}}
+
+
+
+=== Details for Incident #{{duplicate.pk}} ===
+
+Date Submitted      : {{duplicate.submitted}}
+Incident Date       : {{duplicate.incident_date}}
+PSLS ID             : {% firstof dup_inv.psls_id "N/A" %}
+Actual/Potential    : {{duplicate.get_actual_display}}{% if duplicate.needs_standard_description %}
+Std. Description    : {{duplicate.standard_description}}{% endif %}
+Location            : {{duplicate.location}}
+Severity            : {% firstof duplicate.get_severity_display "" %}
+Treatment Intent    : {{duplicate.get_intent_display}}
+Treatment Technique : {{duplicate.technique}}
+# Patients Affected : {{duplicate.get_num_affected_display}}
+
+- Incident Description -
+
+{{duplicate.description}}
+
+
+
+
+Incident {{incident.pk}} is now marked as Invalid.
+
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from incident {{incident.pk}}:
+
+{{unsubscribe}}

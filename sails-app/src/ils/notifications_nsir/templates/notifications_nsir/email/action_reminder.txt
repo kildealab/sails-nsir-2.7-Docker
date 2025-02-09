@@ -1,0 +1,8 @@
+{% firstof action.responsible.first_name action.responsible.username %},
+
+This is a reminder to complete Action #{{action.action_id}} for Incident #{{incident.incident_id}}, which was assigned to you on {{action.date_assigned}}. Please visit the following URL to complete the action:
+{{url}}
+
+=== Action Required  ===
+
+{{action.description_proposed}}

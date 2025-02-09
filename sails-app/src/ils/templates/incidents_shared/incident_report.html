@@ -1,0 +1,273 @@
+{% extends base_template %}
+{%comment%}
+  Webpage used for initial reporting of incidents, for submission into the DB. For NSIR
+  compatible reports, a child template is used to specify appropriate static files.
+{%endcomment%}
+{% load staticfiles %}
+{% load custom_tags %}
+
+{% block title %}Report an Incident{% endblock title %}
+{% block page_title %}<h3>Report an Incident</h3>{% endblock page_title%}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'datepicker/css/datepicker.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'chosen/chosen.css'%}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/report.css'%}"/>
+{% endblock extra_css %}
+
+{% block extra_js %}
+  <script src="{% static 'datepicker/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/moment.min.js' %}"></script>
+  <script src="{% static 'chosen/chosen.jquery.js' %}"></script>
+  {% block taxonomy_js %}{% endblock taxonomy_js %}
+  <script type="text/javascript"></script>
+{% endblock extra_js %}
+
+{% block content %}
+<div class="row">
+  <div class="span12">
+    <div class="row">
+      <div class="span8" style="text-align:justify">
+        <hr class="tight"\>
+        <p><b>Incidents: </b></p>
+        <p>
+          An incident is any unwanted or unexpected change from a normal
+          system behaviour that causes, or has the potential to cause, an
+          adverse effect to persons or equipment.
+        </p>
+        <p>
+          This includes reportable circumstances and {#&lsquo;#}near-misses{#&rsquo;#}.
+        </p>
+        <hr class="tight"\>
+        <p>
+          <b>Instructions: </b>
+        </p>
+        <p>
+          All of the fields on this initial report are <strong>mandatory</strong> for online submission.
+        </p>
+        <p>
+          Please note the ID number provided to you upon successful submission of an online report. You may use this number to follow-up on the incident during the investigation phase.
+        </p>
+        <p>
+        <strong>
+          Please note that an email will be sent to notify the associated physician for near-misses and actual incidents.
+        </strong>
+        </p>
+        {% if TUTORIALS.report.show %}
+        <p>
+          For complete instructions on reporting incidents, please refer to the <a href="{{TUTORIALS.report.url}}" target="_blank">{{TUTORIALS.report.text}}</a>
+        </p>
+        {% endif %}
+        <div id="ajax-text"><div>
+        <hr class="tight"/>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+        <form autocomplete="off" id="report-form" class="form-horizontal" method="post">
+          {% csrf_token %}
+          {# Note the use of custom template tags here to format tooltips as desired #}
+
+          {% for field in form %}
+            {% if field.label == form.oncologist.label %}
+              {% is_foreignkey form.oncologist %}
+              {% get_label_key form.oncologist.auto_id %}
+                <div class="control-group ils-popover {% if form.oncologist.errors %}error{% endif %}"
+                  id="hide-{{ label_key }}"
+                  data-original-title="<strong>{{form.oncologist.label}}</strong><br>{{form.oncologist.help_text}}"
+                  data-content="                  
+                    Please note, an email will be sent to the physician upon submission of this incident report
+                  "
+                  >
+
+                  <label class="control-label" for="{{form.oncologist.html_name}}">{{form.oncologist.label}}</label>
+
+                  <div class="controls" >{{form.oncologist}}</div>
+                </div>
+            {% elif field.label == form.diagnosis.label or field.label == form.number_patients_affected.label or field.label == form.functional_work_area.label or field.label == form.time_period_detected.label or field.label == form.patient_support_required.label or field.label == form.patient_support_given.label %}
+              {% is_foreignkey field %}
+              {% get_label_key field.auto_id %}
+              <div class="control-group ils-popover {% if field.errors %}error{% endif %}"
+                id="hide-{{ label_key }}"
+                {% if isForeignKey %}
+                data-original-title="<strong>{{field.label}}</strong>"
+                data-content="{{field.help_text}}"
+                {% else %}
+                data-original-title="<strong>{{field.label}}</strong>"
+                data-content="{{field.help_text}}"
+                {% endif %}
+                >
+
+                {# The following adds an asterisk to required field labels #}
+                <label class="control-label" for="{{field.html_name}}">{{field.label}}{#{% if field.field.required %}*{% endif %}#}</label>
+
+                <div class="controls" >
+                  {{field}}
+                  {% for error in field.errors %}
+                    <span class="help-block">{{error}}</span>
+                  {% endfor %}
+                </div>
+              </div>
+
+            {% elif field.label != form.submitted_by.label and field.label != form.auth_password.label and field.label != form.investigator.label and field.auto_id not in form.local_fields|safe %}
+            {% is_foreignkey field %}
+            {% get_label_key field.auto_id %}
+              <div class="control-group ils-popover {% if field.errors %}error{% endif %}"
+                id="hide-{{ label_key }}"
+                {% if isForeignKey %}
+                data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                data-content="                  
+                  {% get_help_text help_dictionary label_key %}
+                  {% for inst in myinstances %}
+                    <b>{{inst.name|linebreaks}}</b>
+                    {{inst.description|linebreaks}}
+                  {% endfor %}
+                "
+                {% else %}
+                data-original-title="<strong>{{field.label}}</strong>"
+                data-content="{{field.help_text}}"
+                {% endif %}
+                >
+
+                {# The following adds an asterisk to required field labels #}
+                <label class="control-label" for="{{field.html_name}}">{{field.label}}{#{% if field.field.required %}*{% endif %}#}</label>
+
+                <div class="controls" >
+                  {% if field.label == form.date_incident_occurred.label or field.label == form.date_incident_detected.label %}
+                    <div class="input-append date datepicker" title="Click to change date" id="dp3" >
+                      <input id="id_{{field.html_name}}" name="{{field.html_name}}" class="span2" type="text" value="{% now "Y-m-d" %}"/>
+                      <span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
+                  {% elif field.label == form.time_occurred.label %}
+                    <div class="input-append time clockpicker" title="Click to change time">
+                      <input id="id_{{field.html_name}}" name="{{field.html_name}}" class="span2" type="text" value="{% now "H:i" %}"/>
+                      <span class="add-on"><i class="icon-time"></i></span>
+                    </div>
+                  {% else %}
+                    {{field}}
+                    <!-- @@TODO, uncomment when add notifications functionality
+                    {% if field.label == form.email.label %}
+                      <span class="help-inline">{{field.help_text}}</span>
+                    {% endif %} -->
+                  {% endif %}
+                  {% for error in field.errors %}
+                    <span class="help-block">{{error}}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+
+          {#############################COORDINATOR SIGNOFF##############################}
+          {##############################################################################}
+          {##############################################################################}
+
+
+          <hr>
+          {% if user.is_anonymous %}
+          <div><h4><u>Coordinator Sign-off</u></h4></div>
+          <br>
+          {% endif %}
+
+          {% is_foreignkey form.coordinator_comments %}
+          {% get_label_key form.coordinator_comments.auto_id %}
+          <div class="control-group ils-popover {% if form.coordinator_comments.errors %}error{% endif %}"
+              id="hide-{{ label_key }}"
+              {% if not ANONYMOUS_DISPLAY %}
+              data-original-title="<strong>{{form.coordinator_comments.label}}</strong>"
+              data-content="{{form.coordinator_comments.help_text}}"
+              {% else %}
+              data-original-title="<strong>{{form.coordinator_comments.label}}</strong>"
+              data-content="{{form.coordinator_comments.help_text}}"
+              {% endif %}
+              >
+
+              <label class="control-label" for="{{form.coordinator_comments.html_name}}">{{form.coordinator_comments.label}}</label>
+
+              <div class="controls" >{{form.coordinator_comments}}</div>
+            </div>
+
+          {% for field in form %}
+            {% if field.auto_id in form.local_fields|safe %}
+
+              {% if field.label == form.support_required.label or field.label = form.support_given.label or field.label == form.support_description.label %}
+                {% get_label_key field.auto_id %}
+                <div class="control-group ils-popover {% if field.errors %}error{% endif %}"
+                  id="hide-{{ label_key }}"
+                  {% if isForeignKey %}
+                  data-original-title="<strong>{{field.label}}</strong>"
+                  data-content="{{field.help_text}}"
+                  {% else %}
+                  data-original-title="<strong>{{field.label}}</strong>"
+                  data-content="{{field.help_text}}"
+                  {% endif %}
+                  >
+
+                  {# The following adds an asterisk to required field labels #}
+                  <label class="control-label" for="{{field.html_name}}">{{field.label}}{#{% if field.field.required %}*{% endif %}#}</label>
+
+                  <div class="controls" >
+                    {{field}}
+                    {% for error in field.errors %}
+                      <span class="help-block">{{error}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+
+              {% elif field.label == form.investigator.label %}
+                {% is_foreignkey field %}
+                {% get_label_key field.auto_id %}
+                  <div class="control-group ils-popover {% if field.errors %}error{% endif %}"
+                    id="hide-{{ label_key }}"
+                    {% if not ANONYMOUS_DISPLAY %}
+                    {%comment%}
+                    data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+                    data-content="                  
+                      {% get_help_text help_dictionary label_key %}
+                      {% for inst in myinstances %}
+                        <p>
+                        <b>{{inst.first_name}} {{inst.last_name}}</b><br>
+                        <b>Email:</b> {{inst.email}}<br>
+                        </p>
+                      {% endfor %}
+                    "
+                    {%endcomment%}
+                    data-original-title="<strong>{{field.label}}</strong>"
+                    data-content="{{field.help_text}}"
+                    {% else %}
+                    data-original-title="<strong>{{field.label}}</strong>"
+                    data-content="{{field.help_text}}"
+                    {% endif %}
+                    >
+
+                    <label class="control-label" for="{{field.html_name}}">{{field.label}}</label>
+
+                    <div class="controls" >{{field}}</div>
+                  </div>
+                  
+
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          <div class="control-group form-actions form-inline">
+            <label ><strong>Username</strong></label>
+            <input id="id_{{form.submitted_by.html_name}}" name="{{form.submitted_by.html_name}}" type="text" class="input-medium" value="{{request.user.username}}" 
+            placeholder="Username">
+            <p></p>
+            <label ><strong>Password</strong></label>
+            <input id="id_{{form.auth_password.html_name}}" name="{{form.auth_password.html_name}}" type="password" class="input-medium" placeholder="Password">
+
+            <button type="submit" class="btn btn-primary submit-report my-shader">Submit</button>
+            {%comment%}
+            {% if form.auth_password.errors or form.submitted_by.errors %}
+              <span class="help-inline">Invalid Username &amp; Password</span>
+            {% endif %}
+            {%endcomment%}
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,362 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 10, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "patient-related-circumstance-or-accident", 
+    "lft": 1, 
+    "tree_id": 1, 
+    "order": 1, 
+    "name": "Patient related circumstance or accident"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 3, 
+    "description": "Occurs when the immune system overreacts to a harmless substance called an allergen", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "allergic-reaction", 
+    "lft": 2, 
+    "tree_id": 1, 
+    "order": 2, 
+    "name": "Allergic reaction"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 5, 
+    "description": "An infection occurring in a patient in a hospital or other radiation treatment centre in whom the infection was not present or incubating at the time of admission", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "infection", 
+    "lft": 4, 
+    "tree_id": 1, 
+    "order": 3, 
+    "name": "Infection"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 7, 
+    "description": "Harm that arose as a result of a procedure ancillary to the patients\u2019 radiation therapy course of treatment. i.e. catheter insertion, intravenous contrast etc.", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "interventional-procedure-error", 
+    "lft": 6, 
+    "tree_id": 1, 
+    "order": 4, 
+    "name": "Interventional procedure error"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 9, 
+    "description": "Harm or damage; an act or event that causes someone or something to no longer be fully healthy or in good condition", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "fall-or-other-accident", 
+    "lft": 8, 
+    "tree_id": 1, 
+    "order": 5, 
+    "name": "Fall or other accident"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 2, 
+    "description": "A malfunction in either hardware and or software impacting the accurate delivery of a\r\ntreatment plan or resulting in a patient injury", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "hardwaresoftware", 
+    "lft": 1, 
+    "tree_id": 2, 
+    "order": 6, 
+    "name": "Hardware/Software"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 10, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "dose", 
+    "lft": 1, 
+    "tree_id": 3, 
+    "order": 7, 
+    "name": "Dose"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 3, 
+    "description": "Incorrect execution of the prescribed dose or fractionation", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "wrong-prescription-dose", 
+    "lft": 2, 
+    "tree_id": 3, 
+    "order": 8, 
+    "name": "Wrong prescription dose"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 5, 
+    "description": "The incorrect execution of the treatment plan", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "wrong-plan-dose", 
+    "lft": 4, 
+    "tree_id": 3, 
+    "order": 9, 
+    "name": "Wrong plan dose"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 7, 
+    "description": "The incorrect computation of patients plan dose, dose volume histograms (DVH), manual calculations, etc.", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "calculation-error", 
+    "lft": 6, 
+    "tree_id": 3, 
+    "order": 10, 
+    "name": "Calculation error"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 9, 
+    "description": "The incorrect measurement of machine characteristics at the time of commissioning or servicing affecting output or other parameters necessary for accurate treatment delivery", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "calibration-error", 
+    "lft": 8, 
+    "tree_id": 3, 
+    "order": 11, 
+    "name": "Calibration error"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 18, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "treatment-volume", 
+    "lft": 1, 
+    "tree_id": 4, 
+    "order": 12, 
+    "name": "Treatment volume"
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 3, 
+    "description": "The involvement of an incorrect patient", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "wrong-patient", 
+    "lft": 2, 
+    "tree_id": 4, 
+    "order": 13, 
+    "name": "Wrong patient"
+  }
+},
+{
+  "pk": 14, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 5, 
+    "description": "The involvement of a site other than that identified in the prescription", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "wrong-anatomical-site", 
+    "lft": 4, 
+    "tree_id": 4, 
+    "order": 14, 
+    "name": "Wrong anatomical site"
+  }
+},
+{
+  "pk": 15, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 7, 
+    "description": "The involvement of the contralateral side opposite to that identified in the prescription", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "wrong-side-laterality", 
+    "lft": 6, 
+    "tree_id": 4, 
+    "order": 15, 
+    "name": "Wrong side (laterality)"
+  }
+},
+{
+  "pk": 16, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 9, 
+    "description": "Patient positioning that is contraindicated to the setup used at the time of simulation for example; feet first vs head first", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "wrong-patient-position", 
+    "lft": 8, 
+    "tree_id": 4, 
+    "order": 16, 
+    "name": "Wrong patient position"
+  }
+},
+{
+  "pk": 17, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 11, 
+    "description": "A shift that is incorrect in magnitude and or direction from the shift determined in the plan", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "wrong-shift-setup-point", 
+    "lft": 10, 
+    "tree_id": 4, 
+    "order": 17, 
+    "name": "Wrong shift from setup point"
+  }
+},
+{
+  "pk": 18, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 13, 
+    "description": "Contours, and associated margins that are contraindicated to planning guidelines and or standards of practice", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "wrong-target-or-oar-contours-or-wrong-planning-margins", 
+    "lft": 12, 
+    "tree_id": 4, 
+    "order": 18, 
+    "name": "Wrong target or OAR contours, or wrong planning margins"
+  }
+},
+{
+  "pk": 19, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 15, 
+    "description": "Patient motion that is in excess to the accepted established tolerances", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "patient-movement-during-simulation-or-treatment", 
+    "lft": 14, 
+    "tree_id": 4, 
+    "order": 19, 
+    "name": "Patient movement during simulation or treatment"
+  }
+},
+{
+  "pk": 20, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 17, 
+    "description": "The application of incorrect accessories for treatment (for example incorrect immobilization device, omission of bolus, incorrect shielding or electron cutout)", 
+    "parent": 12, 
+    "level": 1, 
+    "slug": "wrong-treatment-accessories", 
+    "lft": 16, 
+    "tree_id": 4, 
+    "order": 20, 
+    "name": "Wrong treatment accessories"
+  }
+},
+{
+  "pk": 21, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 6, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "scheduling", 
+    "lft": 1, 
+    "tree_id": 5, 
+    "order": 21, 
+    "name": "Scheduling"
+  }
+},
+{
+  "pk": 22, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 3, 
+    "description": "", 
+    "parent": 21, 
+    "level": 1, 
+    "slug": "radiation-treatment-scheduling-error", 
+    "lft": 2, 
+    "tree_id": 5, 
+    "order": 22, 
+    "name": "Radiation treatment scheduling error"
+  }
+},
+{
+  "pk": 23, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 5, 
+    "description": "", 
+    "parent": 21, 
+    "level": 1, 
+    "slug": "combined-modality-treatment-scheduling-error", 
+    "lft": 4, 
+    "tree_id": 5, 
+    "order": 23, 
+    "name": "Combined modality treatment scheduling error"
+  }
+},
+{
+  "pk": 24, 
+  "model": "incidents_nsir.problemtype", 
+  "fields": {
+    "rght": 2, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "other", 
+    "lft": 1, 
+    "tree_id": 6, 
+    "order": 24, 
+    "name": "Other"
+  }
+}
+]

@@ -1,0 +1,299 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "EventType", 
+    "description": "", 
+    "order": null, 
+    "name": "Event Type", 
+    "slug": "event-type"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "TimePeriodDetected", 
+    "description": "", 
+    "order": null, 
+    "name": "Time Period Detected", 
+    "slug": "time-period-detected"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "TimePeriodOccurred", 
+    "description": "", 
+    "order": null, 
+    "name": "Time Period Occurred", 
+    "slug": "time-period-occurred"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "ReportType", 
+    "description": "", 
+    "order": null, 
+    "name": "Type of Report", 
+    "slug": "type-report"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "AcuteMedicalHarm", 
+    "description": "", 
+    "order": null, 
+    "name": "Acute Medical Harm", 
+    "slug": "acute-medical-harm"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "DosimetricImpact", 
+    "description": "", 
+    "order": null, 
+    "name": "Dosimetric Impact", 
+    "slug": "dosimetric-impact"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "LatentMedicalHarm", 
+    "description": "", 
+    "order": null, 
+    "name": "Latent Medical Harm", 
+    "slug": "latent-medical-harm"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "FunctionalWorkArea", 
+    "description": "", 
+    "order": null, 
+    "name": "Functional Work Area", 
+    "slug": "functional-work-area"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "PatientGender", 
+    "description": "", 
+    "order": null, 
+    "name": "Patient Gender", 
+    "slug": "patient-gender"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "Diagnosis", 
+    "description": "", 
+    "order": null, 
+    "name": "Patient Diagnosis", 
+    "slug": "patient-diagnosis"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "ProcessStepOccurred", 
+    "description": "", 
+    "order": null, 
+    "name": "Process Step where Occurred", 
+    "slug": "process-step-where-occurred"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "ProcessStepDetected", 
+    "description": "", 
+    "order": null, 
+    "name": "Process Step where Detected", 
+    "slug": "process-step-where-detected"
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "NumberPatientsAffected", 
+    "description": "", 
+    "order": null, 
+    "name": "Number of Patients Affected", 
+    "slug": "number-patients-affected"
+  }
+},
+{
+  "pk": 14, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "RadiationTreatmentTechnique", 
+    "description": "", 
+    "order": null, 
+    "name": "Radiation Treatment Technique", 
+    "slug": "radiation-treatment-technique"
+  }
+},
+{
+  "pk": 15, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "TreatmentIntent", 
+    "description": "", 
+    "order": null, 
+    "name": "Treatment Intent", 
+    "slug": "treatment-intent"
+  }
+},
+{
+  "pk": 17, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "ProblemType", 
+    "description": "", 
+    "order": null, 
+    "name": "Primary Problem Type", 
+    "slug": "primary-problem-type"
+  }
+},
+{
+  "pk": 18, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "IndividualDetected", 
+    "description": "", 
+    "order": null, 
+    "name": "Individual who Detected the Incident", 
+    "slug": "individual-who-detected-incident"
+  }
+},
+{
+  "pk": 19, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "IndividualInvolved", 
+    "description": "", 
+    "order": null, 
+    "name": "Individual who was Involved in the Incident", 
+    "slug": "individual-who-was-involved-incident"
+  }
+},
+{
+  "pk": 20, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "SecondaryProblemType", 
+    "description": "", 
+    "order": null, 
+    "name": "Secondary Problem Type", 
+    "slug": "secondary-problem-type"
+  }
+},
+{
+  "pk": 21, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "ContributingFactor", 
+    "description": "", 
+    "order": null, 
+    "name": "Contributing Factor", 
+    "slug": "contributing-factor"
+  }
+},
+{
+  "pk": 22, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "BodyRegionTreated", 
+    "description": "", 
+    "order": null, 
+    "name": "Body Region Treated", 
+    "slug": "body-region-treated"
+  }
+},
+{
+  "pk": 23, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "AmelioratingAction", 
+    "description": "", 
+    "order": null, 
+    "name": "Ameliorating Action", 
+    "slug": "ameliorating-action"
+  }
+},
+{
+  "pk": 24, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "SafetyBarrierFailed", 
+    "description": "", 
+    "order": null, 
+    "name": "Safety Barrier which Failed", 
+    "slug": "safety-barrier-which-failed"
+  }
+},
+{
+  "pk": 25, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "SafetyBarrierPrevented", 
+    "description": "", 
+    "order": null, 
+    "name": "Safety Barrier which Caught Incident", 
+    "slug": "safety-barrier-which-caught-incident"
+  }
+},
+{
+  "pk": 26, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "ActionReduceRisk", 
+    "description": "", 
+    "order": null, 
+    "name": "Action to Reduce Risk", 
+    "slug": "action-reduce-risk"
+  }
+},
+{
+  "pk": 27, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "PredefinedIncident", 
+    "description": "", 
+    "order": null, 
+    "name": "Predefined Incident Type", 
+    "slug": "predefined-incident"
+  }
+},
+{
+  "pk": 28, 
+  "model": "incidents_nsir.statfkmodelchoice", 
+  "fields": {
+    "model_name": "LocalSeverityLevel", 
+    "description": "", 
+    "order": null, 
+    "name": "Acute Incident Severity (QC)", 
+    "slug": "acute-incident-severity-muhc"
+  }
+}
+]

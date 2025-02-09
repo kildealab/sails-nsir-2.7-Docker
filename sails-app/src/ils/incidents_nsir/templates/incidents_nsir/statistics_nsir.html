@@ -1,0 +1,141 @@
+{% extends BASE_TEMPLATE %}
+{%comment%}
+  Webpage to display NSIR-RT compatible data visualization.
+{%endcomment%}
+{% load staticfiles %}
+{% load mptt_tags %}
+{% load custom_tags %}
+
+{% block title %}Statistics{% endblock title %}
+
+{% block page_title %}<h3>Statistics</h3>{% endblock page_title %}
+
+{% block extra_css %}
+    {%comment%}
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+    {%endcomment%}
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables_new/css/jquery.dataTables.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'chosen/chosen.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/statistics.css' %}"/>
+{% endblock extra_css %}
+
+{% block extra_js %}
+    {%comment%}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+    <script src="https://rawgit.com/masih/draggable-legend-box/master/draggable-legend-box.js"></script>
+    <script src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    {%endcomment%}
+    <script src="{% static 'highcharts/js/highcharts.js' %}"></script>
+    <script src="{% static 'highcharts/js/exporting.js' %}"></script>
+    <script src="{% static 'highcharts/js/offline-exporting.js' %}"></script>
+    <script src="{% static 'highcharts/js/draggable-legend-box.js' %}"></script>
+    <script src="{% static 'datatables_new/js/jquery.dataTables.min.js' %}"></script>
+
+    <script src="{% static 'chosen/chosen.jquery.js' %}"></script>
+
+    <script src="{% static 'incidents_nsir/js/statistics.js' %}"></script>
+
+    <script type="text/javascript">
+        // var url_host = "{{request.get_host}}";
+        {% if user.is_anonymous %}
+        var url_path = "{% url 'incidents_nsir:incident-summary' 0 %}";
+        {% else %}
+        var url_path = "{% url 'incidents_nsir:incident' 0 %}";
+        {% endif %}
+    </script>
+{% endblock %}
+
+{% block content %}
+{%comment%}
+<div id="statistics-form-panel" class="row-fluid">
+    <div class="span6 mycolumn">
+        Testing span3
+    </div>
+    <div class="span6 mycolumn">
+        Testing span9
+    </div>
+</div>
+<br><br>
+{%endcomment%}
+<div id="row-form" class="row">
+  <div id="statistics-form-panel" class="span11">
+    <form autocomplete="off" id="statistics-form" class="form-horizontal" method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        {% is_foreignkey field %}
+        {% get_label_key field.auto_id %}
+        <div class="control-group {#ils-popover#}{% if field.errors %}error{% endif %}" id="hide-{{ label_key }}"
+            {%comment%}
+            {% if isForeignKey %}
+            data-original-title="<strong>{{field.label}}</strong><br>{{field.help_text}}"
+            data-content="                  
+              {% get_help_text help_dictionary label_key %}
+              {% for inst in myinstances %}
+                <p>
+                <b>{{inst.first_name}} {{inst.last_name}}</b><br>
+                <b>Email:</b> {{inst.email}}<br>
+                </p>
+              {% endfor %}
+            "
+            {% else %}
+            data-original-title="<strong>{{field.label}}</strong>"
+            data-content="{{field.help_text}}"
+            {% endif %}
+            {%endcomment%}
+        >
+
+            <label class="control-label" for="id_{{field.html_name}}">
+                <strong>{{field.label}}</strong>
+            </label>
+
+            <div class="controls" >
+                {{ field }}
+                {% for error in field.errors %}
+                    <span class="help-block">{{error}}</span>
+                {% endfor %}
+            </div>
+        </div>
+      {% endfor %}
+      <div id="reload_fk_choices_view" style="display:none">{%url 'incidents_nsir:reload_fk_choices' %}</div>
+      <div id="reload_user_choices_view" style="display:none">{%url 'incidents_nsir:reload_user_choices' %}</div>
+{#           <input type="submit" value="Submit" /> #}
+      <button type="button" class="btn btn-primary btn-small generate-plot my-shader">Produce Plot</button>
+      <button type="button" class="btn btn-primary btn-small clear-form my-shader">Clear Selections</button>
+    </form>
+  </div>
+</div>
+<div id="row-__id__" class="row" style="display:none">
+    <input type="text" id="inputTitle-__id__" class="inputTitle" style="visibility: hidden; z-index:10; position: relative; left: 42%; top: 65px;" />
+    <div class="span11 chart-control-panel">
+        <div id="plot-container-__id__" class="chart-panel"></div>
+        <div class="close-header">
+            <button type="button" id="display-labels-__id__" class="labels-display-button btn btn-primary btn-small my-shader" style="display:none">Toggle Labels Display</button>
+            <button type="button" id="display-legend-__id__" class="legend-display-button btn btn-primary btn-small my-shader">Toggle Legend Display</button>
+            <button type="button" id="float-legend-__id__" class="legend-button btn btn-primary btn-small my-shader">Toggle Legend Float</button>
+            {%comment%}
+            <button type="button" id="single-color-__id__" class="color-button btn btn-primary btn-small my-shader">Single Color</button>
+            {%endcomment%}
+            <button type="button" id="change-title-__id__" class="title-button btn btn-primary btn-small my-shader">Change Title</button>
+            <button type="button" class="close-button square-close-button btn btn-primary btn-small">&times Remove</button>
+            {%comment%}
+            <div class="close-button circle-close-button">
+                <div class="inner-close-button"><a class="x-button-text" {#style="display:none"#}>&times</a></div>
+            </div>
+            {%endcomment%}
+        </div>
+        <div id="table-div-__id__" class="table-panel" style="display:none"></div>
+    </div>
+</div>
+{%comment%}
+<div id="row-__id__" class="row" style="display:none">
+    <div id="plot-container-__id__" class="span12 chart-panel"></div>
+</div>
+{%endcomment%}
+{%comment%}
+<div class="row">
+    <div id="plot-container" class="span12 chart-panel"></div>
+</div>
+{%endcomment%}
+{% endblock content %} 

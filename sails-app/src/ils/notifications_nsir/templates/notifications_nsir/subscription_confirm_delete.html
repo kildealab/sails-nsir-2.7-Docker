@@ -1,0 +1,30 @@
+{% extends BASE_TEMPLATE %}
+
+{% block title %}Unsubscribe{% endblock title %}
+
+{% block page_title %}<h3>Unsubscribe</h3>{% endblock page_title %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block extra_js %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="span5">
+        <form action="" method="post">{% csrf_token %}
+            <p>Are you sure you want to unsubscribe from Incident #{{object.incident.incident_id}}?</p>
+            <span class="pull-right">
+                {% if next == "incident" %}
+                <input type="hidden" name="next" value="incident"/>
+                {% endif %}
+                <input type="submit" class="btn btn-small" name="cancel" value="Cancel" />
+                <input type="submit" class="btn btn-danger " value="Confirm" />
+            </span>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,92 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "00:00-03:59", 
+    "slug": "0000-0359"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "04:00-07:59", 
+    "slug": "0400-0759"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "08:00-9:59", 
+    "slug": "0800-959"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 4, 
+    "name": "10:00-11:59", 
+    "slug": "1000-1159"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 5, 
+    "name": "12:00-13:59", 
+    "slug": "1200-1359"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 6, 
+    "name": "14:00-15:59", 
+    "slug": "1400-1559"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 7, 
+    "name": "16:00-19:59", 
+    "slug": "1600-1959"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 8, 
+    "name": "20:00-23:59", 
+    "slug": "2000-2359"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.timeperiodoccurred", 
+  "fields": {
+    "description": "", 
+    "order": 9, 
+    "name": "Unknown", 
+    "slug": "unknown"
+  }
+}
+]

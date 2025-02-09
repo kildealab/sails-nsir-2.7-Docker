@@ -1,0 +1,83 @@
+{% extends BASE_TEMPLATE %}
+{%comment%}
+  Webpage used for searching for an incident in the DB, by its unique ID.
+{%endcomment%}
+{% load staticfiles %}
+{% load custom_tags %}
+
+{% block title %}Search for an Incident{% endblock title %}
+{% block page_title %}<h3>Search for an Incident</h3>{% endblock page_title%}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables_new/css/jquery.dataTables.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/search.css' %}"/>
+{% endblock extra_css %}
+
+{% block extra_js %}
+  <script src="{% static 'datatables_new/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'highcharts/js/highcharts.js' %}"></script>
+  <script src="{% static 'mark/jquery.mark.min.js' %}"></script>
+  <script>
+    var json_data = [];
+    json_data.push({{chart_0_context|safe}});
+    json_data.push({{chart_1_context|safe}});
+    json_data.push({{chart_2_context|safe}});
+
+    var url_host = "{{request.get_host}}";
+    var url_path = "{% url 'incidents_nsir:incident' 0 %}";
+  </script>
+  <script src="{% static 'incidents_nsir/js/search.js' %}"></script>
+{% endblock extra_js %}
+
+{% block content %}
+{#var json_data = {{chart_0_context|safe}};#}
+<div class="row">
+  <div class="span12">
+    <div class="row">
+      <div class="span10">
+        <p>
+          Please enter the incident ID number{% if not user.is_anonymous %}, patient ID number,{%endif%} or keyword associated with the incident(s) you would like to follow-up on.
+        </p>
+        <form id="search-form" method="POST" autocomplete="off">
+          {%csrf_token%}
+          <div class="input-append dropdown">
+            {#<input class="span3" id="appendedInputButton" type="number" placeholder="Unique Incident ID" name="search_query">#}
+            <input class="span3 dropdown-toggle" id="appendedInputButton" type="text" placeholder="Unique ID or keyword" name="search_query" data-toggle="dropdown">
+            <ul class="dropdown-menu">
+              <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" name="filter_inc_id" id="filter-inc-id" checked="checked"/>&nbsp;Incident ID</a></li>
+              {% if not user.is_anonymous %}
+              <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" name="filter_pt_id" id="filter-pt-id" checked="checked"/>&nbsp;Patient ID</a></li>
+              {% endif %}
+              <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" name="filter_text" id="filter-text" checked="checked"/>&nbsp;Keyword</a></li>
+            </ul>
+            <button class="btn btn-primary my-shader" type="submit"><i class="icon-search"></i> Search</button>
+          </div>
+        </form>
+      </div>
+    </div> 
+    <div id="ajax-response"></div>
+  </div>
+</div>
+<br><br><br>
+<div clas="row">
+      <div class="navbar navbar-inner block-header">
+          <h4 class="brand">Statistics</h4>
+  </div>
+</div>
+<div class="row chart-row">
+  <div class="span4 chart-panel" id="plot-container-0">
+  </div>
+  <div class="span4 chart-panel" id="plot-container-1">
+  </div>
+  <div class="span4 chart-panel" id="plot-container-2">
+  </div>
+</div>
+<div class="row chart-row">
+  <div class="span4 chart-panel" id="customLegend-0">
+  </div>
+  <div class="span4 chart-panel" id="customLegend-1">
+  </div>
+  <div class="span4 chart-panel" id="customLegend-2">
+  </div>
+</div>
+{%endblock content%}

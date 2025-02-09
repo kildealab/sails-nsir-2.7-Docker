@@ -1,0 +1,52 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.acutemedicalharm", 
+  "fields": {
+    "description": "Patient is asymptomatic and no treatment is required", 
+    "order": 1, 
+    "name": "None", 
+    "slug": "none"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.acutemedicalharm", 
+  "fields": {
+    "description": "Symptoms if present are mild; no or minimal intervention (observation, investigation, minor treatment) is required; harm or loss of function is minimal, or intermediate but short term", 
+    "order": 2, 
+    "name": "Mild", 
+    "slug": "mild"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.acutemedicalharm", 
+  "fields": {
+    "description": "Patient is symptomatic requiring intervention (additional treatment or operative procedure) or a prolonged hospital stay; long term or permanent harm or loss of function", 
+    "order": 3, 
+    "name": "Moderate", 
+    "slug": "moderate"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.acutemedicalharm", 
+  "fields": {
+    "description": "Patient is symptomatic requiring life-saving intervention or a major surgical/medical intervention; shortened life expectancy, or major long term or permanent harm or loss of function", 
+    "order": 4, 
+    "name": "Severe", 
+    "slug": "severe"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.acutemedicalharm", 
+  "fields": {
+    "description": "On the balance of probabilities, death was caused or brought forward in the short term by the incident", 
+    "order": 5, 
+    "name": "Death", 
+    "slug": "death"
+  }
+}
+]

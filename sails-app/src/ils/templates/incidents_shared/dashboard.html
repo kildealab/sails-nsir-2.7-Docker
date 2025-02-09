@@ -1,0 +1,258 @@
+{% extends BASE_TEMPLATE %}
+{%comment%}
+    Template for a dashboard page, which displays some information common to all users (e.g. summary information and plots), and some personalized information (e.g. list of investigations and subscription notifications).
+{%endcomment%}
+{% load staticfiles %}
+{% load listable %}
+
+{% block title %}Incident Dashboard{% endblock title %}
+
+{% block page_title %}<h3>Dashboard</h3>{% endblock page_title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/dashboard.css' %}"/>
+    {% listable_css %}
+{% endblock extra_css %}
+
+{% block extra_js %}
+    <script type="text/javascript" >
+        var json_data = [];
+        json_data.push({{chart_0_context|safe}});
+        json_data.push({{chart_1_context|safe}});
+        json_data.push({{chart_2_context|safe}});
+    </script>
+
+    <script src="{% static 'highcharts/js/highcharts.js' %}"></script>
+
+    {% listable_js %}
+    {% block taxonomy_js %}{% endblock taxonomy_js %}
+{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_anonymous %}
+<div class="row">
+    <div class="span12">
+        <p>Please <a href="{% url 'django.contrib.auth.views.login' %}?next={{request.path}}">Login</a> Before Continuing</p>
+    </div>
+</div>
+
+{% else %}
+<div class="row">
+
+    {# Summary tab display #}
+    <div class="span6">
+        <div class="block">
+            <div class="navbar navbar-inner block-header">
+                <h4 class="brand">Summary</h4>
+            </div>
+            <div>
+                <!--<dl class="dl-horizontal">-->
+                    {% for dt, dd in summary_items %}
+                        <dt>{{dt|safe}}</dt>
+                        <dd>{{dd|safe}}</dd>
+                    {% endfor %}
+                <!--</dl>-->
+            </div>
+        </div>
+    </div>
+
+    {# Profile tab display (allow update of notifications) #}
+    <div class="span6">
+        <div class="block">
+            <div class="navbar navbar-inner block-header">
+                <h4 class="brand">Your Profile Settings</h4>
+            </div>
+            <div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        <!--<div class="controls">-->
+                            <label class="checkbox" for="investigation_notification">
+                                <input name="investigations" type="checkbox" {% if user.investigation_notifications%}checked="checked"{% endif %}/>
+                                Receive Investigation Assignment Notifcations
+                            </label>
+                        <!--</div>-->
+                    </div>
+                    {%comment%}
+                    <div class="control-group">
+                        <!--<div class="controls">-->
+                            <label class="checkbox" for="investigation_notification">
+                                <input name="actions" type="checkbox" {% if user.action_notifications%}checked="checked"{% endif %}/>
+                                Receive Action Assignment Notifcations
+                            </label>
+                        <!--</div>-->
+                    </div>
+                    {%endcomment%}
+                    <button class="btn btn-primary pull-left my-shader" type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{%if user_is_oncologist%}
+<div class="row">
+
+    {# Table of incomplete investigations for current user #}
+    <div class="span12">
+        <div class="block">
+            <div class="navbar navbar-inner block-header">
+                <h4 class="brand">Incomplete Incidents Involving Your Patients</h4>
+            </div>
+
+            {%if oncologist_incidents.count == 1%}
+            <p>There is currently {{oncologist_incidents.count}} incomplete incident involving a patient of yours. Click the ID number to view the investigation.</p>
+            {%else%}
+            <p>There are currently {{oncologist_incidents.count}} incomplete incidents involving your patients. Click an ID number to view the corresponding investigation.</p>
+            {%endif%}
+
+            <table id="oncologist-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th width="10%">Incident ID</th>
+                        <th width="10%">Patient ID</th>
+                        <th width="17%">Date Incident Submitted</th>
+                        <th width="10%">Event Type</th>
+                        <th width="15%">Investigator</th>
+                        <th width="33%">Descriptor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for inc in oncologist_incidents %}
+                    <tr class="">
+                        <td>
+                            <a href="{% url 'incidents_nsir:incident' inc.incident_id %}" >{{inc.incident_id}}</a>
+                        </td>
+                        <td> {{inc.patient_id}} </td>
+                        <td> {{inc.submitted}} </td>
+                        <td> {{inc.event_type}} </td>
+                        <td> {{inc.investigator}} </td>
+                        <td> {{inc.descriptor}} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{%endif%}
+
+<div class="row">
+
+    {# Table of incomplete investigations for current user #}
+    <div class="span12">
+        <div class="block">
+            <div class="navbar navbar-inner block-header">
+                <h4 class="brand">Your Incomplete Investigations</h4>
+            </div>
+
+            {%if user_incomplete_investigations.count == 1%}
+            <p>You currently have {{user_incomplete_investigations.count}} incomplete investigation. Click the ID number to view the investigation.</p>
+            {%else%}
+            <p>You currently have {{user_incomplete_investigations.count}} incomplete investigations. Click an ID number to view the corresponding investigation.</p>
+            {%endif%}
+
+            <table id="incident-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th width="10%">Incident ID</th>
+                        <th width="15%">Incident Detected Date</th>
+                        <th width="20%">Event Type</th>
+                        <th width="15%">Assigned To You</th>
+                        <th width="35%">Descriptor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for inc in user_incomplete_investigations %}
+                    <tr class="">
+                        <td>
+                            <a href="{% url 'incidents_nsir:incident' inc.incident_id %}" >{{inc.incident_id}}</a>
+                        </td>
+                        <td> {{inc.date_incident_detected}} </td>
+                        <td> {{inc.event_type}} </td>
+                        <td> {{inc.investigation_assigned_date}} </td>
+                        <td> {{inc.descriptor}} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    {# Table of incomplete investigations for current user #}
+    <div class="span12">
+        <div class="block">
+            <div class="navbar navbar-inner block-header">
+                <h4 class="brand">Your Incomplete Actions</h4>
+            </div>
+
+            {%if user_actions.count == 1%}
+            <p>There is currently {{user_actions.count}} incomplete action for which your are responsible. Click the Action ID to view the actions tied to the corresponding investigation.</p>
+            {%else%}
+            <p>There are currently {{user_actions.count}} incomplete actions for which your are responsible. Click an Action ID to view the corresponding action which is tied to a particular invesitgation.</p>
+            {%endif%}
+
+            <table id="action-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th width="10%">Incident ID</th>
+                        <th width="10%">Action ID</th>
+                        <th width="20%">Assigned Date</th>
+                        <th width="20%">Assigned By</th>
+                        <th width="40%">Descriptor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for act in user_actions %}
+                    <tr class="">
+                        <td> {{act.incident.incident_id}} </td>
+                        <td>
+                            <a href="{% url 'incidents_nsir:incident' act.incident.incident_id %}#actions-{{act.action_id}}" >{{act.action_id}}</a>
+                        </td>
+                        <td> {{act.date_assigned}} </td>
+                        <td> {{act.assigned_by}} </td>
+                        <td> {{act.description_proposed}} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <div class="row">
+            <div class="span12">
+                <div class="navbar navbar-inner block-header">
+                    <h4 class="brand">Statistics</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row chart-row">
+          <div class="span4 chart-panel" id="plot-container-0">
+          </div>
+          <div class="span4 chart-panel" id="plot-container-1">
+          </div>
+          <div class="span4 chart-panel" id="plot-container-2">
+          </div>
+        </div>
+        <div class="row chart-row">
+          <div class="span4 chart-panel" id="customLegend-0">
+          </div>
+          <div class="span4 chart-panel" id="customLegend-1">
+          </div>
+          <div class="span4 chart-panel" id="customLegend-2">
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock content %}

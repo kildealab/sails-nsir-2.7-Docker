@@ -1,0 +1,35 @@
+[
+{
+  "pk": 2, 
+  "model": "incidents_nsir.statcompletionfilter", 
+  "fields": {
+    "filter_name": "all", 
+    "description": "Complete & Incomplete", 
+    "order": 1, 
+    "name": "All Valid Incidents", 
+    "slug": "all-valid-incidents"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.statcompletionfilter", 
+  "fields": {
+    "filter_name": "complete", 
+    "description": "", 
+    "order": 2, 
+    "name": "Complete Incidents", 
+    "slug": "complete-incidents"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.statcompletionfilter", 
+  "fields": {
+    "filter_name": "incomplete", 
+    "description": "", 
+    "order": 3, 
+    "name": "Incomplete Incidents", 
+    "slug": "incomplete-incidents"
+  }
+}
+]

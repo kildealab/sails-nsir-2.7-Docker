@@ -1,0 +1,62 @@
+[
+{
+  "pk": 1, 
+  "model": "accounts.role", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "dosimetrist", 
+    "slug": "dosimetrist"
+  }
+},
+{
+  "pk": 2, 
+  "model": "accounts.role", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "physicist", 
+    "slug": "physicist"
+  }
+},
+{
+  "pk": 3, 
+  "model": "accounts.role", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "physician", 
+    "slug": "physician"
+  }
+},
+{
+  "pk": 4, 
+  "model": "accounts.role", 
+  "fields": {
+    "description": "", 
+    "order": 4, 
+    "name": "therapist", 
+    "slug": "therapist"
+  }
+},
+{
+  "pk": 5, 
+  "model": "accounts.role", 
+  "fields": {
+    "description": "", 
+    "order": 5, 
+    "name": "admin", 
+    "slug": "admin"
+  }
+},
+{
+  "pk": 6, 
+  "model": "accounts.role", 
+  "fields": {
+    "description": "", 
+    "order": 6, 
+    "name": "nurse", 
+    "slug": "nurse"
+  }
+}
+]

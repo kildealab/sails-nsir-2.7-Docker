@@ -1,0 +1,16 @@
+{% extends "admin/base.html" %}
+{#Included explicitly here to change the title to SaILS#}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ title }} | {% trans 'SaILS site admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'home' %}" title="Back to main site">SaILS</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin.css' %}">
+{% endblock %}

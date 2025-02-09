@@ -1,0 +1,15 @@
+{% firstof not_responsible.first_name not_responsible.username %},
+
+Someone else has been assigned to the following action for incident #{{action.incident.pk}} and you are no longer responsible for it.
+
+{% if action.responsible.can_investigate %}Incident Page 	: {{url}}{% endif %}
+Assigned By 	: {{action.assigned_by}}
+Action Type 	: {{action.action_type}}
+Description 	: {{action.description}}
+
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

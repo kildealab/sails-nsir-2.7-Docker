@@ -1,0 +1,100 @@
+{% extends BASE_TEMPLATE %}
+{%comment%}
+  Webpage used to change the event type of an incident following an initial report
+{%endcomment%}
+{% load staticfiles %}
+{% load custom_tags %}
+
+{% block title %}Change Event Type: Incident #{{ incident.incident_id}}{% endblock title %}
+{% block page_title %}<h3>Change Event Type: Incident #{{ incident.incident_id}}</h3>{% endblock page_title%}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'chosen/chosen.css'%}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/change_event_type.css'%}"/>
+{% endblock extra_css %}
+
+{% block extra_js %}
+  <script src="{% static 'chosen/chosen.jquery.js' %}"></script>
+  <script src="{% static 'incidents_nsir/js/change_event_type.js' %}"></script>
+  <script type="text/javascript">
+    var thisInc = {{ incident.incident_id }};
+  </script>
+{% endblock extra_js %}
+
+{%block content%}
+<div>
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+        <div class="span7" id="instructions">
+          <p>
+            Please change the Event Type and associated fields as required. 
+          </p>
+          <p>
+            Click the blue Update button to save changes.
+          </p>
+          <p>
+            Note that if the Event Type is changed, some additional fields may now be mandatory on the Investigation Form.
+          </p>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="form-div">
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+        <div class="span7">
+          <form autocomplete="off" id="change-event-type-form" class="form-horizontal" method="post">
+            <input type="hidden" name="form_name" value="change_event_type_form" />
+            <input type="hidden" name="next" value="incident"/>
+            {% csrf_token %}
+            {# Note the use of custom template tags here to format tooltips as desired #}
+            {% for field in form %}
+              {% is_foreignkey field %}
+              {% get_label_key field.auto_id %}
+              <div class="control-group ils-popover {% if field.errors %}error{% endif %}"
+                id="hide-{{ label_key }}"
+                {% if field.label == form.event_type.label %}
+                data-original-title="<strong>{{field.label}}</strong>"
+                {#data-content="{{field.help_text}}"#}
+                data-content="
+                {% get_help_text help_dictionary label_key %}
+                {% for inst in myinstances %}
+                  <b>{{inst.name|linebreaks}}</b>
+                  {{inst.description|linebreaks}}
+                {% endfor %}
+                "
+                {% elif field.label == form.oncologist.label %}
+                data-original-title="<strong>{{form.oncologist.label}}</strong><br>{{form.oncologist.help_text}}"
+                data-content="                  
+                    Please note, an email will be sent to notify the physician if different than before.
+                "
+                {% else %}
+                data-original-title="<strong>{{field.label}}</strong>"
+                data-content="{{field.help_text}}"
+                {% endif %}
+                >
+
+                {# The following adds an asterisk to required field labels #}
+                <label class="control-label" for="{{field.html_name}}">{{field.label}}{#{% if field.field.required %}*{% endif %}#}</label>
+
+                <div class="controls" >
+                  {{field}}
+                  {% for error in field.errors %}
+                    <span class="help-block">{{error}}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {%endfor%}
+            <button type="submit" class="btn btn-primary update-event-type my-shader" style="float: right;">Update</button>
+            <button type="button" class="btn btn-primary cancel-change cancel-shader" style="float: left;" onclick="location.href='{%url 'incidents_nsir:incident' incident_id=incident.incident_id %}#impact'">Cancel Change</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock content%}

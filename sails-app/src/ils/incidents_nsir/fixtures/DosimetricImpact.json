@@ -1,0 +1,42 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.dosimetricimpact", 
+  "fields": {
+    "description": "The incident did not involve a dosimetric delivery error", 
+    "order": 1, 
+    "name": "None", 
+    "slug": "none"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.dosimetricimpact", 
+  "fields": {
+    "description": "\u22645% tumour underdose or OAR overdose, relative to the intended doses to these structures over the course of treatment", 
+    "order": 2, 
+    "name": "Minor", 
+    "slug": "minor"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.dosimetricimpact", 
+  "fields": {
+    "description": ">5% and \u226425% tumour underdose or OAR overdose, relative to the intended doses to these structures over the course of treatment", 
+    "order": 3, 
+    "name": "Moderate", 
+    "slug": "moderate"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.dosimetricimpact", 
+  "fields": {
+    "description": ">25% tumour underdose or OAR overdose, relative to the intended doses to these structures over the course of treatment", 
+    "order": 4, 
+    "name": "Severe", 
+    "slug": "severe"
+  }
+}
+]

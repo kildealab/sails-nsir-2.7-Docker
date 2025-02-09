@@ -1,0 +1,362 @@
+#image-preview {
+    height:250px;
+    border-style: dashed;
+    border-width: thin;
+    border-color: #333;
+    line-height: 250px;
+    text-align: center;
+}
+
+#upload-thumbnail {
+    max-height: 98%;
+    max-width: 100%;
+    vertical-align: middle;
+    padding-bottom: 2%;
+}
+
+#temp-form {
+    margin-top: 10%;
+    margin-left: -3%;
+}
+
+input[type='file'] {
+  color: transparent !important;
+}
+
+#image-header {
+    font-size: 17px;
+/*    text-align: center;
+*/    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.uploaded-images {
+    margin-bottom: 10px;
+}
+
+.row-fluid .image-block {
+/*    border-style: solid;
+    border-width: thin;
+    border-color: #333;
+*/    min-height: 300px;
+    font-size: 12px;
+}
+
+.image-icon {
+/*    border-style: dotted;
+    border-width: thin;
+    border-color: #333;*/
+    text-align: center;
+    height: 200px;
+    line-height: 200px;
+    width: 100%;
+    margin: 5px;
+}
+
+.new-image img{
+   border-style: solid;
+   border-width: medium;
+   border-color: #38b44a; 
+}
+
+.image-icon img {
+/*    border-style: dotted;
+    border-width: thin;
+    border-color: #333;*/
+    max-height: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.image-block p {
+    margin-bottom: 1px;
+    margin-left: 3px;
+}
+
+#investigation-summary, #incident-description-div {
+    font-size: 17px;
+}
+
+.complete_status {
+    margin-bottom: 10px;
+}
+
+.complete_date_missing_fields {
+    font-style: italic;
+}
+
+.signature_div {
+    margin-top: 10px;
+}
+
+.multi_select_width{
+    width: 100%;
+}
+
+.inv_color_invalid {
+    background-color: #8A2BE2;
+}
+
+.complete-text {
+    color: #33cc47;
+}
+
+.invalid {
+    color: #8A2BE2;
+}
+
+.inv_color_complete {
+    background-color: #33cc47;
+}
+
+.inv_color_incomplete {
+    background-color: #FFA500;
+}
+
+.red_flags {
+    color: #DC241F;
+}
+
+.green_discussion {
+    color: #38b44a;
+}
+
+.green_check {
+    color: #38b44a;
+}
+
+.mytable th {
+    text-align: center;
+}
+
+.mytable td {
+    text-align: center;
+}
+
+.form-buttons{
+    margin-bottom:0px; /* bootstrap default is 20px */
+}
+
+a.action-anchor{
+    display:block;
+    position:relative;
+    top:-40px;
+    visibility:hidden;
+}
+
+.emr-shader{
+    /*background-image: linear-gradient(to bottom, #337AB7, #337AB7);
+    background-image: linear-gradient(to bottom, #337AB7, #337AB7);*/
+    background-image: none;
+    background-color: #4CAF50;
+    font-weight: bold;
+}
+
+.emr-shader:hover, .emr-shader:active, .emr-shader:focus {
+    background-color: #006304;
+}
+
+.invalid-shader, .invalid-shader:focus {
+    background-image: none;
+    background-color: #8A2BE2;
+    font-weight: bold;
+}
+
+.invalid-shader:hover, .invalid-shader:active {
+    background-color: #3E0096;
+}
+
+.template-shader, .template-shader:focus {
+    background-image: none;
+    background-color: #00a3cc;
+    font-weight: bold;
+}
+
+.template-shader:hover, .template-shader:active {
+    background-color: #005266;
+}
+
+.image-shader{
+    /*background-image: linear-gradient(to bottom, #337AB7, #337AB7);
+    background-image: linear-gradient(to bottom, #337AB7, #337AB7);*/
+    background-image: none;
+    background-color: #E4B426;
+    font-weight: bold;
+}
+
+.image-shader:hover, .image-shader:active, .image-shader:focus {
+    background-color: #B68F1F;
+}
+
+.filled, .filled .passive, .filled a {
+    color: #337AB7;
+    border-color: #337AB7;
+}
+
+.unfill-fill, .unfill-fill .passive, .unfill-fill a {
+    color: #0000ff;
+    border-color: #0000ff;
+}
+
+.fill-unfill, .fill-unfill .passive, .fill-unfill a {
+    color: #990033;
+    border-color: #990033;
+}
+
+.fill-fill, .fill-fill .passive, .fill-fill a {
+    color: #ff3399;
+    border-color: #ff3399;
+}
+
+.template-field, .template-field .passive, .template-field a {
+    color: #00a3cc;
+    border-color: #00a3cc;
+}
+
+.local-mandatory-field, .local-mandatory-field .passive, .local-mandatory-field a {
+    color: #FF0000;
+    border-color: #FF0000;
+}
+
+.floating-legend {
+    float: none;
+/*    width: 99%;
+*//*    min-width: 600px;
+*/    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0px;
+    font-size: 17px;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: thin solid #333;
+    border-left: thin solid #333;
+    border-right: thin solid #333;
+    min-height: 40px;
+/*    padding-top: 10px;
+*//*    padding-left: 10px;
+*/}
+
+.legend-item {
+    border-style: solid;
+    border-width: thin;
+    border-color: #333;
+    width: 33%;
+    margin-left: 0px;
+    height: 100%;
+/*    vertical-align: middle;
+*//*    padding-top: 20%;
+*/ /*   min-width: 29%;
+    min-height: 30px;
+    margin-left: 0px;*/
+}
+
+.myrow {
+    margin-left: 0px;
+    height: 38px;
+/*    line-height: 38px;
+*/}
+
+.symbol {
+    float: left;
+    width:20px;
+    height:20px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#confirm-template-button.sticky {
+   position: fixed;
+   top: 50;
+}
+
+.controls input[type="text"] {
+    width: 98%;
+    padding: 0px;
+    padding-left: 2%;
+    border: 1px solid;
+    border-color: #aaa;
+}
+
+textarea {
+    border: 1px solid #aaa;
+}
+
+.controls input[type="number"] {
+    width: 98%;
+    padding: 0px;
+    padding-left: 2%;
+    min-height: 30px;
+    border: 1px solid #aaa;
+}
+
+.controls select {
+/*    width: 98%;
+    padding: 0px;
+    padding-left: 2%;
+    min-height: 30px;*/
+    width: 100%;
+    border: 1px solid #aaa;
+/*    -webkit-appearance: None;
+*/}
+
+.input-append {
+    width: 94%;
+}
+
+.add-on {
+    padding-top: 6px;
+    min-height: 20px;
+    border: 1px solid #aaa;
+}
+
+.input-append .add-on, .input-prepend .add-on {
+    border: 1px solid #aaa;
+}
+
+.input-append .add-on, .input-prepend .add-on {
+    padding-top: 6px;
+}
+
+.popover {
+/*    top: -50px;
+*/    position:absolute;
+/*    min-width: 100%;
+    left: -100px;*/
+}
+
+.chosen-error {
+    color: #df382c;
+}
+
+.control-group.error input[type="text"]{
+    border: 1px solid #df382c !important;
+}
+
+.control-group.error input[type="number"]{
+    border: 1px solid #df382c !important;
+}
+
+.chosen-error .chosen-single {
+    border: 1px solid #df382c !important;
+}
+
+.success .chosen-choices {
+    border: 1px solid #38b44a !important;
+}
+
+.success .chosen-single{
+    border: 1px solid #38b44a !important;
+}
+
+.success input{
+    border: 1px solid #38b44a !important;
+}
+
+.template-slow-hightlight, .template-slow-hightlight .passive, .template-slow-hightlight a {
+    color: #00a3cc;
+}
+
+.template-slow-highlight input{
+    border: 1px solid #00a3cc !important;
+}

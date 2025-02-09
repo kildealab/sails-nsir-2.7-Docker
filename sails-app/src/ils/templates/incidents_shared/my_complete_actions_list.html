@@ -1,0 +1,19 @@
+{% extends 'all_actions_list.html' %}
+{%comment%}
+    List of actions which the current user has completed, displayed in a jQuery datatable which is handled by the listable template tag.
+{%endcomment%}
+{% load staticfiles %}
+{% load listable %}
+
+{% block title %}Actions Completed By You{% endblock title %}
+
+{% block page_title %}<h3>Actions Completed By You</h3>{% endblock page_title %}
+
+{% block listable %}
+    {% listable 'incidents_nsir:my-completed-actions' save_state=True css_table_class='table-striped table-condensed' css_input_class='input-mini' %}
+{% endblock listable %}
+
+
+{% block page_description %}
+    <p>All actions completed by you</p>
+{% endblock page_description %}

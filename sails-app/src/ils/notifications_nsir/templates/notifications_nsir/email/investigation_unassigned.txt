@@ -1,0 +1,23 @@
+{% firstof investigator.first_name investigator.username %},
+
+{% if incident.investigation_assigned_by == investigator %}
+You have unassigned yourself from your role as the investigator of incident #{{incident.incident_id}}.
+{% else %}
+{{incident.investigation_assigned_by}} has just unassigned you from your role as the investigator of incident #{{incident.incident_id}}
+{% endif %}
+
+=== Details for Incident #{{incident.incident_id}} ===
+
+Investigation Page: {{url}}
+Date Submitted:     {{incident.submitted}}
+Date Unassigned:    {{incident.investigation_assigned_date}}
+
+=== Descriptor  ===
+
+{{incident.descriptor}}
+
+=== Unsubscribe ===
+
+Access the following link if you want to unsubscribe from email notifications for this incident:
+
+{{unsubscribe}}

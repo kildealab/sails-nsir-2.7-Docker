@@ -1,0 +1,220 @@
+{%comment%}
+  Base template from which all other templates within SaILS inherit. This includes the nav-bar placed at the top of the page, and divs for page content. The buttons
+  along the nav-bar are defined in base_nsir.html
+{%endcomment%}
+
+{% load staticfiles %}
+<!DOCTYPE html> <!-- html5 -->
+<html lang="en">
+  <head>
+    <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
+    <meta charset="utf-8">
+    <title>SaILS :: {% block title %}Home{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {#<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>#}
+    {# CSS files #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap_light.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-responsive.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/override.css' %}"/>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    {% block extra_css %}{% endblock extra_css %}
+
+    {# JS files #}
+    <script src="{% static 'js/json2.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/underscore.min.js' %}"></script>
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.are-you-sure.js' %}"></script>
+    <script src="{% static 'js/project.js' %}"></script>
+    <script>
+      var SiteConfig = {
+        forceScriptName: "{{ FORCE_SCRIPT_NAME }}"
+      };
+    </script>
+    {% block extra_js %}{% endblock extra_js %}
+  </head>
+
+  <body  {% block body_attr %}{% endblock body_attr %}>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          {% if user.is_authenticated %}
+          <a class="brand" href="{% url 'incidents_nsir:dashboard' %}">SaILS</a>
+          {% else %}
+          <a class="brand" href="{% url 'incidents_nsir:search' %}">SaILS</a>
+          {% endif %}
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                {% if not user.must_change_password %}
+
+                  {% block search %}{% endblock search %}
+
+                  {% block report %}{% endblock report %}
+
+                  {#{% block news %}{% endblock news %}#}
+                  
+                  {% if user.is_authenticated %}
+
+                    {% block dashboard %}{% endblock dashboard %}
+
+                    {% block incidents %}{% endblock incidents %}
+
+                    {% block actions %}{% endblock actions %}
+
+                  {% endif %}
+
+                  {% block statistics %}{% endblock statistics %}
+
+                  {% if user.is_authenticated %}
+
+                    {%comment%}
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                         <i class="icon-bolt"></i> Actions <b class="caret"></b>
+                      </a>
+                      {% block actions %}{% endblock actions %}
+                    </li>
+
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                         <i class="icon-share-sign"></i> Sharing <b class="caret"></b>
+                      </a>
+                      {% block sharing %}{% endblock sharing %}
+                    </li>
+                    {%endcomment%}
+
+                  {% endif %}
+                {% endif %}
+
+                {%comment%}
+                {% if not request.user.is_anonymous %}
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                       <i class="icon-align-left"></i> Statistics <b class="caret"></b>
+                    </a>
+                    {% block statistics %}{% endblock statistics %}
+                  </li>
+                {% endif %}
+                {%endcomment%}
+
+              </ul>
+
+              {% if not request.user.is_anonymous %}
+                <ul class="nav pull-right">
+                  <li class="dropdown">
+                  <input id="username" type="hidden" value="{{request.user.username}}"/>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="icon-cogs"></i> {{request.user}} <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" style="list-style:none;">
+                      {% if request.user.is_superuser %}
+                        <li><a href="{% url 'admin:index' %}"><i class="icon-tasks"></i> Admin</a></li>
+                      {% endif %}
+                        <li class="divider"></li>
+                        <li>
+                          <a href="{% url 'password_change' %}"><i class="icon-lock"></i> Change Password</a>
+                        </li>
+                        <li>
+                          <a href="{% url 'django.contrib.auth.views.logout' %}"><i class="icon-signout"></i> Logout</a>
+                        </li>
+                    </ul>
+                  </li>
+                </ul>
+              {% else %}
+                <ul class="nav pull-right">
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon-signin"></i> Sign In <strong class="caret"></strong></a>
+                    <div id="login-wrapper" class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                      <form id="nav-login-form" method="POST" action="{% url 'django.contrib.auth.views.login' %}?{{request.META.QUERY_STRING}}" autocapitalize="off" >
+                        {% csrf_token %}                        
+                        {% if 'next=' not in request.META.QUERY_STRING %}
+                        	{% block nav_login_redirect %}{% endblock nav_login_redirect %}
+                        {% endif %}
+                        <div class="control-group">
+                          <label class="control-label"for="username">Username</label>
+                          <div class="controls">
+                            <input id="id_username" name="username" style="margin-bottom: 5px;" type="text" size="30" placeholder="Username"/>
+                          </div>
+                        </div>
+                        <div class="control-group">
+                          <label class="control-label"for="password">Password</label>
+                            <div class="controls">
+                              <input id="id_password" name="password" style="margin-bottom: 5px;" type="password" size="30" placeholder="Password"/>
+                            </div>
+                        </div>
+                        <input class="btn btn-primary my-shader" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="Sign In" />
+                      </form>
+                    </div>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="{% url 'password_reset' %}"><i class="icon-lock"></i> Forgot Your Password?</a>
+                  </li>
+                </ul>
+              {% endif %}
+            </div>
+        </div>
+      </div>
+      {% for message in messages %}
+          {%comment%}
+          <div class="alert fade in sized-div {% if message.tags %} alert-{{ message.tags }}{% endif %}">
+            <a class="close" href="#" data-dismiss="alert">&times;</a>
+            {{ message }}
+          </div>
+          {%endcomment%}
+          <div id='floating-status-message' class='floating-message-div alert {%if message.tags%} alert-{{message.tags}} {%endif%}' style='width:96%'>
+            <a class='close' href='#' data-dismiss='alert'>&times;</a>
+            <strong>{{message}}</strong>
+          </div>
+        {% endfor %}
+    </div>
+    {% if request.is_IE %}
+    <div class="ie_alert-error">
+      <h3><center>
+        MANY FEATURES OF SAILS ARE INCOMPATIBLE WITH INTERNET EXPLORER. PLEASE USE GOOGLE CHROME WHEN ACCESSING THE SITE.
+      </center></h3>
+    </div>
+    {% endif %}
+
+    <div class="container">
+
+      <div class="ajax_messages" style="height: 40px;">
+      </div>
+
+      {% block page_title %}{% endblock page_title %}
+
+      {% block content %}
+        <p>Base ILS Template</p>
+      {% endblock content %}
+
+      <div class="ajax_messages" style="height: 40px;">
+      </div>
+
+      {% block footer %}
+        <div class="row-fluid">
+          <div class="legal span12 text-center">
+            <hr/>
+              SaILS+ v{{VERSION}} | &copy; 2015 McGill University Health Centre and The Ottawa Hospital Cancer Center | <a title="Report an error or bug" href="{{BUG_REPORT_URL}}"><i class="icon-bug"></i> Report a Bug</a>
+          </div>
+        </div>
+      {% endblock footer %}
+    </div> <!-- /container -->
+
+  </body>
+</html>

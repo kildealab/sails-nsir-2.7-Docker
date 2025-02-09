@@ -1,0 +1,32 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.eventtype", 
+  "fields": {
+    "description": "A reportable circumstance is a hazard that did not involve a patient but has the potential to reach patients if not corrected", 
+    "order": 1, 
+    "name": "Reportable circumstance", 
+    "slug": "reportable-circumstance"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.eventtype", 
+  "fields": {
+    "description": "A near miss is an incident that involved 1 or more patients but was detected before affecting the patient(s)", 
+    "order": 2, 
+    "name": "Near miss", 
+    "slug": "near-miss"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.eventtype", 
+  "fields": {
+    "description": "An actual incident is an incident which has reached the patient(s)", 
+    "order": 3, 
+    "name": "Actual incident", 
+    "slug": "actual-incident"
+  }
+}
+]

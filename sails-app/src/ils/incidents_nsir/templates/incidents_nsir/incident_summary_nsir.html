@@ -1,0 +1,397 @@
+{% extends BASE_TEMPLATE %}
+{%comment%}
+  Webpage to display incident/investigation summary information to any user (do not have 
+  to be logged in).
+{%endcomment%}
+{% load staticfiles %}
+{% load custom_tags %}
+
+{% block title %}Incident #{{ incident.incident_id}} Summary{% endblock title %}
+{% block page_title %}<h3>Incident #{{ incident.incident_id}} Summary</h3>{% endblock page_title%}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/summary.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables_stuff/css/jquery.dataTables.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'datatables_stuff/css/jquery.dataTables.bootstrap.css' %}"/>
+{% endblock extra_css %}
+
+{% block extra_js %}
+  <script src="{% static 'jsplumb/jquery.jsPlumb-1.4.1-all-min.js' %}"></script>
+  <script src="{% static 'incidents_nsir/js/summary.js' %}"></script>
+  <script src="{% static 'datatables_stuff/js/jquery.dataTables.min.js' %}"></script>
+{% endblock extra_js %}
+
+{% block content %}
+<div class="row">
+  <div class="span12">
+
+
+
+
+
+    <div class="row">
+        <div class="span12">
+          <div class="block">
+              <div class="navbar navbar-inner block-header">
+                  <h4 class="brand">Workflow & Tracking</h4>
+              </div>
+              <div id="flow_container">
+
+                <div id="item_incident" class="item {{incident_class}}" style="margin-top:120px;"><span class="item_text">Incident</span></div>
+
+                <div id="item_report" class="item {{report_class}}" style="margin-top:120px; margin-left:180px;"><span class="item_text">Prepare Incident Report</span></div>
+
+                {% if incident.submitted_by.role.pk == 4%}
+                <div id="item_coordinator" class="item {{coordinator_class}}" style="margin-left:270px;"><span class="item_text">Technical Coordinator Sign-off</span></div>
+                {% endif %}
+
+                <div id="item_investigator" class="item {{investigator_class}}" style="margin-top:120px; margin-left:360px;"><span class="item_text">Assign Investigator</span></div>
+
+                <div id="item_submit" class="item {{submit_class}}" style="margin-top:120px; margin-left:540px;"><span class="item_text">Submit Incident Report</span></div>
+
+                <div id="item_investigation" class="item {{investigation_class}}" style="margin-top:120px; margin-left:720px;"><span class="item_text">Investigation</span></div>
+
+                <div id="item_share" class="item" style="margin-left:900px;"><span class="item_text">Sharing</span></div>
+                <div id="item_discussion" class="item {{discussion_class}}" style="margin-top:120px; margin-left:960px;"><span class="item_text">Discussion at Risk Management Meeting</span></div>
+                <div id="item_action" class="item {{action_class}}" style="margin-top:240px; margin-left:900px;"><span class="item_text">Taskable Actions</span></div>
+
+                {# Legend #}
+
+                {%comment%}
+                <div id="legend_incomplete" class="legend_item color_incomplete" style="margin-top:273px;"></div>
+                <div id="legend_incomplete_text" class="legend_item_text" style="margin-top:271px; margin-left:23px"><span class="legend_item_key">Incomplete</span></div>
+                {%endcomment%}
+
+                <div id="legend_progress" class="legend_item color_progress" style="margin-top:273px; margin-left:123px"></div>
+                <div id="legend_progress_text" class="legend_item_text" style="margin-top:271px; margin-left:146px"><span class="legend_item_key">In Progress</span></div>
+
+                <div id="legend_complete" class="legend_item color_complete" style="margin-top:273px; margin-left:246px"></div>
+                <div id="legend_complete_text" class="legend_item_text" style="margin-top:271px; margin-left:269px"><span class="legend_item_key">Complete</span></div>
+
+
+                {%comment%}
+                <div id="legend_progress" class="legend_item color_progress" style="margin-top:294px;"></div>
+                <div id="legend_progress_text" class="legend_item_text" style="margin-top:292px; margin-left:23px"><span class="legend_item_key">In Progress</span></div>
+
+                <div id="legend_complete" class="legend_item color_complete" style="margin-top:315px;"></div>
+                <div id="legend_complete_text" class="legend_item_text" style="margin-top:313px; margin-left:23px"><span class="legend_item_key">Complete</span></div>
+                {%endcomment%}
+              </div>
+          </div>
+        </div>
+    </div>
+
+    {%comment%}
+    <div class="row">
+        <div class="span12">
+          <div class="block">
+              <div class="navbar navbar-inner block-header">
+                  <h4 class="brand">Workflow & Tracking</h4>
+              </div>
+              {# Using PNG images of workflow, with different highlighting schemes to indicate which steps have been completed. These images are stored in the NSIR static folder 'img' #}
+              <div id="flow-container">
+
+                {# investigator, comp, acts, acts_comp, flag, discussed, shared #}
+                {# code: i, c, x, a, f, d, s #}
+                {% if comp and acts_comp and discussed and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_.png' %}">
+                {% elif comp and acts_comp and discussed %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cxd.png' %}">
+                {% elif comp and acts_comp and flag and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cxfs.png' %}">
+                {% elif comp and acts_comp and flag %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cxf.png' %}">
+                {% elif comp and acts and discussed and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cads.png' %}">
+                {% elif comp and acts and discussed %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cad.png' %}">
+                {% elif comp and acts and flag and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cafs.png' %}">
+                {% elif comp and acts and flag %}
+                  <img src="{% static 'incidents_nsir/img/workflow_caf.png' %}">
+                {% elif comp and discussed and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cds.png' %}">
+                {% elif comp and discussed %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cd.png' %}">
+                {% elif comp and flag and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cfs.png' %}">
+                {% elif comp and flag %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cf.png' %}">
+                {% elif comp and acts %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ca.png' %}">
+                {% elif comp and acts_comp %}
+                  <img src="{% static 'incidents_nsir/img/workflow_cx.png' %}">
+                {% elif comp %}
+                  <img src="{% static 'incidents_nsir/img/workflow_c.png' %}">
+                {% elif investigator and acts_comp and discussed and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ixds.png' %}">
+                {% elif investigator and acts_comp and discussed %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ixd.png' %}">
+                {% elif investigator and acts_comp and flag and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ixfs.png' %}">
+                {% elif investigator and acts_comp and flag %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ixf.png' %}">
+                {% elif investigator and acts and discussed and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_iads.png' %}">
+                {% elif investigator and acts and discussed %}
+                  <img src="{% static 'incidents_nsir/img/workflow_iad.png' %}">
+                {% elif investigator and acts and flag and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_iafs.png' %}">
+                {% elif investigator and acts and flag %}
+                  <img src="{% static 'incidents_nsir/img/workflow_iaf.png' %}">
+                {% elif investigator and discussed and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ds.png' %}">
+                {% elif investigator and discussed %}
+                  <img src="{% static 'incidents_nsir/img/workflow_id.png' %}">
+                {% elif investigator and flag and shared %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ifs.png' %}">
+                {% elif investigator and flag %}
+                  <img src="{% static 'incidents_nsir/img/workflow_if.png' %}">
+                {% elif investigator and acts %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ia.png' %}">
+                {% elif investigator and acts_comp %}
+                  <img src="{% static 'incidents_nsir/img/workflow_ix.png' %}">
+                {% elif investigator %}
+                  <img src="{% static 'incidents_nsir/img/workflow_i.png' %}">
+                {% else %}
+                  <img src="{% static 'incidents_nsir/img/workflow.png' %}">
+                {% endif %}
+              </div>
+          </div>
+        </div>
+    </div>
+    {%endcomment%}
+
+    <div class="row">
+      <div class="span6">
+          <div class="block">
+              <div class="navbar navbar-inner block-header">
+                  <h4 class="brand">Report Summary</h4>
+              </div>
+              <div id="description">
+                <b>Description:</b> <br>{{incident.incident_description}}
+              </div>
+              <br>
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td><b>Event type:<b></td>
+                    <td>{{incident.event_type}}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Functional work area:<b></td>
+                    <td>{{incident.functional_work_area}}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Descriptor:<b></td>
+                    <td>{{incident.descriptor}}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Date event was detected:<b></td>
+                    <td>{{incident.date_incident_detected}}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Date submitted to SaILS:<b></td>
+                    <td>{{incident.submitted}}</td>
+                  </tr>
+                  <tr><td></td><td></tr>
+                </tbody>
+              </table>
+          </div>
+      </div>
+
+      <div class="span6">
+          <div class="block">
+              <div class="navbar navbar-inner block-header">
+                  <h4 class="brand">Investigation Summary</h4>
+              </div>
+              <div id="narrative">
+                {%if not incident.valid%}
+                <b>Reason for Closure:</b> <br>{{incident.invalid_reason}}
+                {%elif incident.investigation_narrative%}
+                <b>Investigation Narrative:</b> <br>{{incident.investigation_narrative}}
+                {%endif%}
+              </div>
+              <br>
+              <table class="table table-striped">
+                <tbody>
+                  {% if incident.investigator %}
+                    <tr>
+                      <td><b>Investigator:<b></td>
+                      <td>{{incident.investigator}}</td>
+                    </tr>
+                  {% endif %}
+                  {% if incident.investigation_assigned_date %}
+                    <tr>
+                      <td><b>Date investigator was assigned:<b></td>
+                      <td>{{incident.investigation_assigned_date}}</td>
+                    </tr>
+                  {% endif %}
+                  {% if incident.problem_type %}
+                    <tr>
+                      <td><b>Primary problem type:<b></td>
+                      <td>{{incident.problem_type}}</td>
+                    </tr>
+                  {% endif %}
+                  {% if incident.investigation_completed_date %}
+                    <tr>
+                      <td><b>Date investigation was completed:<b></td>
+                      <td>{{incident.investigation_completed_date}}</td>
+                    </tr>
+                  {% endif %}
+                  {% if ameliorating_acts %}
+                    <tr>
+                      <td><b>Ameliorating actions:<b></td>
+                      <td>
+                        {% with ameliorating_acts as myactions %}
+                          {%for myaction in myactions%}
+                            {{myaction}}<br>
+                          {%endfor%}
+                        {% endwith %}
+                      </td>
+                    </tr>
+                  {% endif %}
+                  {% if risk_acts %}
+                    <tr>
+                      <td><b>Actions to Reduce Risk:<b></td>
+                      <td>
+                        {% with risk_acts as myactions %}
+                          {%for myaction in myactions%}
+                            {{myaction}}<br>
+                          {%endfor%}
+                        {% endwith %}
+                      </td>
+                    </tr>
+                  {% endif %}
+                  {#<tr><td></td><td></tr>#}
+                </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+
+    {%if actions_count > 0%}
+    <div class="row">
+
+        {# Table of incomplete investigations for current user #}
+        <div class="span12">
+            <div class="block">
+                <div class="navbar navbar-inner block-header">
+                    <h4 class="brand">Taskable Actions</h4>
+                </div>
+
+                {%if actions_complete_count > 0%}
+                <table id="action-complete-table" class="table table-striped">
+                    <thead>
+                        <tr><th colspan='5' class="color_font_complete" style='text-align:center'><h4>Complete Actions</h4></th></tr>
+                        <tr>
+                            <th width="8%">Action ID</th>
+                            <th width="16%">Completed By</th>
+                            <th width="20%">Date Completed</th>
+                            <th width="27%">Proposed Action</th>
+                            <th width="27%">Action Taken</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for act in actions_complete_list %}
+                        <tr class="">
+                            <td> {{act.action_id}} </td>
+                            <td> {{act.completed_by}} </td>
+                            <td> {{act.date_completed}} </td>
+                            <td> {{act.description_proposed}} </td>
+                            <td> {{act.description_performed}} </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {%endif%}
+
+                {%if actions_incomplete_count > 0%}
+                <table id="action-incomplete-table" class="table table-striped">
+                    <thead>
+                        <tr><th colspan='5' class="color_font_progress" style='text-align:center'><h4>Incomplete Actions</h4></th></tr>
+                        <tr>
+                            <th width="8%">Action ID</th>
+                            <th width="16%">Responsible</th>
+                            <th width="16%">Assigned By</th>
+                            <th width="20%">Date Assigned</th>
+                            <th width="40%">Proposed Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for act in actions_incomplete_list %}
+                        <tr class="">
+                            <td> {{act.action_id}} </td>
+                            <td> {{act.responsible}} </td>
+                            <td> {{act.assigned_by}} </td>
+                            <td> {{act.date_assigned}} </td>
+                            <td> {{act.description_proposed}} </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {%endif%}
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+    <div class="row">
+      <div class="span12">
+          <div class="block">
+              <div class="navbar navbar-inner block-header">
+                  <h4 class="brand">Staff Support</h4>
+              </div>
+              <div>
+                  If any employee who was associated with this incident feels the need for psychosocial support, they should contact their immediate supervisor. Resources are available upon request.
+              </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{%comment%}
+<div class="row">
+    <div class="span12">
+      <div class="block">
+          <div class="navbar navbar-inner block-header">
+              <h4 class="brand">Workflow & Tracking</h4>
+          </div>
+          <div id="flow_container">
+
+            <div id="item_incident" class="item {{submitted_class}}"><span class="item_text">Incident</span></div>
+            <div id="item_paper" class="item {{submitted_class}}" style="margin-top:120px; margin-left:90px;"><span class="item_text">Paper Report</span></div>
+
+            <div id="item_sub_coord" class="item {{submitted_class}}" style="margin-left:180px;"><span class="item_text">Submit Report to Coordinator</span></div>
+            <div id="item_add_coord" class="item {{submitted_class}}" style="margin-top:120px; margin-left:270px;"><span class="item_text">Coordinator Add Comments</span></div>
+
+            <div id="item_sub_chief" class="item {{submitted_class}}" style="margin-left:360px;"><span class="item_text">Submit Report to Chief Therapist</span></div>
+            <div id="item_transcribe" class="item {{submitted_class}}" style="margin-top:120px; margin-left:450px;"><span class="item_text">Transcribe Report to SaILS</span></div>
+
+            <div id="item_assign" class="item {{investigator_class}}" style="margin-left:540px;"><span class="item_text">Assign Investigator</span></div>
+            <div id="item_investigate" class="item {{investigation_class}}" style="margin-top:120px; margin-left:630px;"><span class="item_text">Investigation</span></div>
+
+            <div id="item_share" class="item" style="margin-left:810px;"><span class="item_text">Sharing</span></div>
+            <div id="item_discussion" class="item {{discussion_class}}" style="margin-top:120px; margin-left:870px;"><span class="item_text">Discussion at Risk Management Meeting</span></div>
+            <div id="item_action" class="item {{action_class}}" style="margin-top:240px; margin-left:810px;"><span class="item_text">Taskable Actions</span></div>
+
+            {# Legend #}
+
+
+            <div id="legend_progress" class="legend_item color_progress" style="margin-top:273px; margin-left:123px"></div>
+            <div id="legend_progress_text" class="legend_item_text" style="margin-top:271px; margin-left:146px"><span class="legend_item_key">In Progress</span></div>
+
+            <div id="legend_complete" class="legend_item color_complete" style="margin-top:273px; margin-left:246px"></div>
+            <div id="legend_complete_text" class="legend_item_text" style="margin-top:271px; margin-left:269px"><span class="legend_item_key">Complete</span></div>
+
+
+          </div>
+      </div>
+    </div>
+</div>
+{%endcomment%}
+{%endblock content%}

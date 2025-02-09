@@ -1,0 +1,347 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 12, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "hardwaresoftware-most-effective", 
+    "lft": 1, 
+    "tree_id": 1, 
+    "order": 1, 
+    "name": "Hardware/Software (Most effective)"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 3, 
+    "description": "Hardware or software implemented as a corrective solution to the identified hazard", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "new-devices", 
+    "lft": 2, 
+    "tree_id": 1, 
+    "order": 2, 
+    "name": "New device(s)"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 5, 
+    "description": "A device used to prevent an undesired state. An interlock is used to prevent equipment and or software from performing an unwanted function by stopping the action when tripped", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "new-interlocks", 
+    "lft": 4, 
+    "tree_id": 1, 
+    "order": 3, 
+    "name": "New interlock(s)"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 7, 
+    "description": "A behavior-shaping constraint which prevents the user from creating an error state (i.e. a software that will not accept a number entry when asking for patient name)", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "new-forcing-functions", 
+    "lft": 6, 
+    "tree_id": 1, 
+    "order": 4, 
+    "name": "New forcing function(s)"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 9, 
+    "description": "Substituting software functions for tasks previously completed manually", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "automation-or-computerization", 
+    "lft": 8, 
+    "tree_id": 1, 
+    "order": 5, 
+    "name": "Automation or computerization"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 11, 
+    "description": "A review of processes with considerations of human factors engineering and implementing those changes accordingly (i.e. expectation bias and unintentional blindness)", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "human-factors-redesign", 
+    "lft": 10, 
+    "tree_id": 1, 
+    "order": 6, 
+    "name": "Human factors redesign"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 24, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "process-moderately-effective", 
+    "lft": 1, 
+    "tree_id": 2, 
+    "order": 7, 
+    "name": "Process (Moderately effective)"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 3, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "leadership-action-culture-change", 
+    "lft": 2, 
+    "tree_id": 2, 
+    "order": 8, 
+    "name": "Leadership action - Culture change"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 5, 
+    "description": "The creation of guidelines, protocols and procedures for processes within the organization", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "process-standardization", 
+    "lft": 4, 
+    "tree_id": 2, 
+    "order": 9, 
+    "name": "Process standardization"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 7, 
+    "description": "Employing lean methodology to review processes and identify waste and unnecessary steps in a process", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "process-simplification", 
+    "lft": 6, 
+    "tree_id": 2, 
+    "order": 10, 
+    "name": "Process simplification"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 9, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "reminders-or-checklists", 
+    "lft": 8, 
+    "tree_id": 2, 
+    "order": 11, 
+    "name": "Reminder(s) or checklist(s)"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 11, 
+    "description": "The process confirmation of the next process step accomplished either through second check or a pause", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "time-outs-verbalization-or-call-backs", 
+    "lft": 10, 
+    "tree_id": 2, 
+    "order": 12, 
+    "name": "Time out(s), verbalization or call-back(s)"
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 13, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "staff-reminders", 
+    "lft": 12, 
+    "tree_id": 2, 
+    "order": 13, 
+    "name": "Staff reminder(s)"
+  }
+},
+{
+  "pk": 14, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 15, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "warning-labels", 
+    "lft": 14, 
+    "tree_id": 2, 
+    "order": 14, 
+    "name": "Warning label(s)"
+  }
+},
+{
+  "pk": 15, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 17, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "reduce-distractions", 
+    "lft": 16, 
+    "tree_id": 2, 
+    "order": 15, 
+    "name": "Reduce distraction(s)"
+  }
+},
+{
+  "pk": 16, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 19, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "eliminate-look-alikes", 
+    "lft": 18, 
+    "tree_id": 2, 
+    "order": 16, 
+    "name": "Eliminate look alike(s)"
+  }
+},
+{
+  "pk": 17, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 21, 
+    "description": "Create backups and fail-safes within a process to increase the resilience of the system to hazards", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "incorporate-redundancy", 
+    "lft": 20, 
+    "tree_id": 2, 
+    "order": 17, 
+    "name": "Incorporate redundancy"
+  }
+},
+{
+  "pk": 18, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 23, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "increase-staffing-levels-or-decrease-workload", 
+    "lft": 22, 
+    "tree_id": 2, 
+    "order": 18, 
+    "name": "Increase staffing levels or decrease workload"
+  }
+},
+{
+  "pk": 19, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 8, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "educationtraining-least-effective", 
+    "lft": 1, 
+    "tree_id": 3, 
+    "order": 19, 
+    "name": "Education/Training (Least effective)"
+  }
+},
+{
+  "pk": 20, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 3, 
+    "description": "", 
+    "parent": 19, 
+    "level": 1, 
+    "slug": "improved-compliance-existing-policies-or-procedures", 
+    "lft": 2, 
+    "tree_id": 3, 
+    "order": 20, 
+    "name": "Improved compliance with existing policies or procedures"
+  }
+},
+{
+  "pk": 21, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 5, 
+    "description": "", 
+    "parent": 19, 
+    "level": 1, 
+    "slug": "new-policies-or-procedures", 
+    "lft": 4, 
+    "tree_id": 3, 
+    "order": 21, 
+    "name": "New policies or procedures"
+  }
+},
+{
+  "pk": 22, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 7, 
+    "description": "", 
+    "parent": 19, 
+    "level": 1, 
+    "slug": "additional-education-or-training", 
+    "lft": 6, 
+    "tree_id": 3, 
+    "order": 22, 
+    "name": "Additional education or training"
+  }
+},
+{
+  "pk": 23, 
+  "model": "incidents_nsir.actionreducerisk", 
+  "fields": {
+    "rght": 2, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "other", 
+    "lft": 1, 
+    "tree_id": 4, 
+    "order": 23, 
+    "name": "Other"
+  }
+}
+]

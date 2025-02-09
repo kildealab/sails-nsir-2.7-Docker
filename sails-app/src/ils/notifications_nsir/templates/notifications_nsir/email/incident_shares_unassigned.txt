@@ -1,0 +1,14 @@
+{% firstof not_responsible.first_name not_responsible.username %},
+
+Someone else has been assigned to the following sharing action for incident #{{share.incident.pk}} and you are no longer responsible for it.
+
+{% if share.responsible.can_investigate %}Incident Page       	: {{url}}{% endif %}
+Assigned By   		: {{share.assigned_by}}
+Sharing Audience   	: {{share.sharing_audience}}
+
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

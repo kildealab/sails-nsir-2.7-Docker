@@ -1,0 +1,152 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "External beam photon radiotherapy - Simple", 
+    "slug": "external-beam-photon-radiotherapy-simple"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "External beam photon radiotherapy - 3D conformal", 
+    "slug": "external-beam-photon-radiotherapy-3d-conformal"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "External beam photon radiotherapy - IMRT", 
+    "slug": "external-beam-photon-radiotherapy-imrt"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 4, 
+    "name": "External beam photon radiotherapy - Modulated arc therapy", 
+    "slug": "external-beam-photon-radiotherapy-modulated-arc-therapy"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 5, 
+    "name": "External beam photon radiotherapy - SBRT or SRS", 
+    "slug": "external-beam-photon-radiotherapy-sbrt-or-srs"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 6, 
+    "name": "External beam photon radiotherapy - Orthovoltage", 
+    "slug": "external-beam-photon-radiotherapy-orthovoltage"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 7, 
+    "name": "External beam electron radiotherapy", 
+    "slug": "external-beam-electron-radiotherapy"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 8, 
+    "name": "Brachytherapy \u2013 Intraluminal, intravascular, surface", 
+    "slug": "brachytherapy-intraluminal-intravascular-surface"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 9, 
+    "name": "Brachytherapy - Interstitial", 
+    "slug": "brachytherapy-interstitial"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 10, 
+    "name": "Brachytherapy \u2013 LDR", 
+    "slug": "brachytherapy-ldr"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 11, 
+    "name": "Brachytherapy \u2013 PDR", 
+    "slug": "brachytherapy-pdr"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 12, 
+    "name": "Brachytherapy \u2013 HDR", 
+    "slug": "brachytherapy-hdr"
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 13, 
+    "name": "Brachytherapy - Temporary implant", 
+    "slug": "brachytherapy-temporary-implant"
+  }
+},
+{
+  "pk": 14, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 14, 
+    "name": "Brachytherapy - Permanent implant", 
+    "slug": "brachytherapy-permanent-implant"
+  }
+},
+{
+  "pk": 15, 
+  "model": "incidents_nsir.radiationtreatmenttechnique", 
+  "fields": {
+    "description": "", 
+    "order": 15, 
+    "name": "Other", 
+    "slug": "other"
+  }
+}
+]

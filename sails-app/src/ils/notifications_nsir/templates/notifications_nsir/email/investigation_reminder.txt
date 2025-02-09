@@ -1,0 +1,8 @@
+{% firstof incident.investigator.first_name incident.investigator.username %},
+
+This is a reminder to complete the investigation for Incident #{{incident.incident_id}}, which was assigned to you on {{incident.investigation_assigned_date}}. Please visit the following URL to complete the investigation:
+{{url}}
+
+=== Incident Descriptor  ===
+
+{{incident.descriptor}}

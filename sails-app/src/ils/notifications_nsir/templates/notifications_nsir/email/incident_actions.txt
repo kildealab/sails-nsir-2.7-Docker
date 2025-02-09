@@ -1,0 +1,23 @@
+You are subscribed to receive update notifications for incident #{{incident.pk}}.
+
+Learning actions for this incident were updated. Details below:
+
+=== Incomplete Actions ===
+{% for action in incomplete %}
+Action Type : {{action.action_type}}
+responsible : {{action.responsible}}
+Description : {{action.description}}
+{% endfor %}
+
+=== Complete Actions ===
+{% for action in complete %}
+Action Type : {{action.action_type}}
+Responsible : {{action.responsible}}
+Description : {{action.description}}
+{% endfor %}
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

@@ -1,0 +1,197 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 12, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "patient-related", 
+    "lft": 1, 
+    "tree_id": 1, 
+    "order": 1, 
+    "name": "Patient related"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 3, 
+    "description": "The implementation of a medical intervention to correct for the effects of the incident", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "medical-management-patient-injury", 
+    "lft": 2, 
+    "tree_id": 1, 
+    "order": 2, 
+    "name": "Medical management of patient injury"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 5, 
+    "description": "A change to the dosimetric plan to accommodate the effects of the incident", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "radiation-treatment-plan-revision", 
+    "lft": 4, 
+    "tree_id": 1, 
+    "order": 3, 
+    "name": "Radiation treatment plan revision"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 7, 
+    "description": "A change to the radiation prescription to accommodate the effects of the incident", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "radiation-prescription-dose-revision", 
+    "lft": 6, 
+    "tree_id": 1, 
+    "order": 4, 
+    "name": "Radiation prescription dose revision"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 9, 
+    "description": "A change to the planned volume to accommodate the effects of the incident", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "radiation-treatment-volume-revision", 
+    "lft": 8, 
+    "tree_id": 1, 
+    "order": 5, 
+    "name": "Radiation treatment volume revision"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 11, 
+    "description": "An indication as to whether or not the patient/resident, the patient\u2019s/resident\u2019s family or a substitute decision-maker was informed of the incident, its outcome(s) and the next steps.", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "patient-disclosure", 
+    "lft": 10, 
+    "tree_id": 1, 
+    "order": 6, 
+    "name": "Patient disclosure"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 12, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "organization-related", 
+    "lft": 1, 
+    "tree_id": 2, 
+    "order": 7, 
+    "name": "Organization related"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 3, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "media-or-public-relations-management", 
+    "lft": 2, 
+    "tree_id": 2, 
+    "order": 8, 
+    "name": "Media or public relations management"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 5, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "complaint-management", 
+    "lft": 4, 
+    "tree_id": 2, 
+    "order": 9, 
+    "name": "Complaint management"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 7, 
+    "description": "An offer of practical and emotional support, such as spiritual care services, counseling, social work etc. as needed", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "staff-debriefing-or-counselling", 
+    "lft": 6, 
+    "tree_id": 2, 
+    "order": 10, 
+    "name": "Staff debriefing or counselling"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 9, 
+    "description": "", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "education-or-training", 
+    "lft": 8, 
+    "tree_id": 2, 
+    "order": 11, 
+    "name": "Education or training"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 11, 
+    "description": "Process, and structural changes that are directed toward the prevention of system failure and the improvement of safety and quality", 
+    "parent": 7, 
+    "level": 1, 
+    "slug": "culture-change", 
+    "lft": 10, 
+    "tree_id": 2, 
+    "order": 12, 
+    "name": "Culture change"
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.amelioratingaction", 
+  "fields": {
+    "rght": 2, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "other", 
+    "lft": 1, 
+    "tree_id": 3, 
+    "order": 13, 
+    "name": "Other"
+  }
+}
+]

@@ -1,0 +1,46 @@
+[
+{
+  "pk": 3, 
+  "model": "incidents_nsir.statdatetype", 
+  "fields": {
+    "description": "Date the incident was submitted", 
+    "order": 1, 
+    "field_name": "submitted", 
+    "name": "Date Incident Submitted", 
+    "slug": "date-incident-submitted"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.statdatetype", 
+  "fields": {
+    "description": "Date the incident was detected", 
+    "order": 2, 
+    "field_name": "date_incident_detected", 
+    "name": "Date Incident Detected", 
+    "slug": "date-incident-detected"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.statdatetype", 
+  "fields": {
+    "description": "Date the incident occurred", 
+    "order": 3, 
+    "field_name": "date_incident_occurred", 
+    "name": "Date Incident Occurred", 
+    "slug": "date-incident-occurred"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.statdatetype", 
+  "fields": {
+    "description": "Date the investigation was completed", 
+    "order": 4, 
+    "field_name": "investigation_completed_date", 
+    "name": "Date Investigation Completed", 
+    "slug": "date-investigation-completed"
+  }
+}
+]

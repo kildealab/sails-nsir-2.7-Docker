@@ -1,0 +1,527 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 30, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "program-management-or-planning", 
+    "lft": 1, 
+    "tree_id": 1, 
+    "order": 1, 
+    "name": "Program management or planning"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 3, 
+    "description": "Lack of staffing resources to meet expected workload demand", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "human-resources-inadequate", 
+    "lft": 2, 
+    "tree_id": 1, 
+    "order": 2, 
+    "name": "Human resources inadequate"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 5, 
+    "description": "The amount of supply, support or aid available under the control of the organization", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "capital-resources-inadequate", 
+    "lft": 4, 
+    "tree_id": 1, 
+    "order": 3, 
+    "name": "Capital resources inadequate"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 13, 
+    "description": "", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "policies-procedures-or-regulations-inadequate", 
+    "lft": 6, 
+    "tree_id": 1, 
+    "order": 4, 
+    "name": "Policies, procedures or regulations inadequate"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 8, 
+    "description": "", 
+    "parent": 4, 
+    "level": 2, 
+    "slug": "not-followed", 
+    "lft": 7, 
+    "tree_id": 1, 
+    "order": 5, 
+    "name": "Not followed"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 10, 
+    "description": "", 
+    "parent": 4, 
+    "level": 2, 
+    "slug": "non-existent", 
+    "lft": 9, 
+    "tree_id": 1, 
+    "order": 6, 
+    "name": "Non-existent"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 12, 
+    "description": "", 
+    "parent": 4, 
+    "level": 2, 
+    "slug": "conflicted", 
+    "lft": 11, 
+    "tree_id": 1, 
+    "order": 7, 
+    "name": "Conflicted"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 15, 
+    "description": "", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "education-or-training-inadequate", 
+    "lft": 14, 
+    "tree_id": 1, 
+    "order": 8, 
+    "name": "Education or training inadequate"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 25, 
+    "description": "", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "communication-inadequate", 
+    "lft": 16, 
+    "tree_id": 1, 
+    "order": 9, 
+    "name": "Communication inadequate"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 18, 
+    "description": "", 
+    "parent": 9, 
+    "level": 2, 
+    "slug": "documentation-poor-incomplete-unclear-or-missing", 
+    "lft": 17, 
+    "tree_id": 1, 
+    "order": 10, 
+    "name": "Documentation poor, incomplete, unclear or missing"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 20, 
+    "description": "", 
+    "parent": 9, 
+    "level": 2, 
+    "slug": "medical-record-poor-incomplete-unclear-or-missing", 
+    "lft": 19, 
+    "tree_id": 1, 
+    "order": 11, 
+    "name": "Medical record poor, incomplete, unclear or missing"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 22, 
+    "description": "", 
+    "parent": 9, 
+    "level": 2, 
+    "slug": "communication-not-timely", 
+    "lft": 21, 
+    "tree_id": 1, 
+    "order": 12, 
+    "name": "Communication not timely"
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 24, 
+    "description": "", 
+    "parent": 9, 
+    "level": 2, 
+    "slug": "communication-inappropriate-or-misdirected", 
+    "lft": 23, 
+    "tree_id": 1, 
+    "order": 13, 
+    "name": "Communication inappropriate or misdirected"
+  }
+},
+{
+  "pk": 14, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 27, 
+    "description": "", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "physical-environment-inadequate", 
+    "lft": 26, 
+    "tree_id": 1, 
+    "order": 14, 
+    "name": "Physical environment inadequate"
+  }
+},
+{
+  "pk": 15, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 29, 
+    "description": "", 
+    "parent": 1, 
+    "level": 1, 
+    "slug": "external-factors-beyond-programmatic-control", 
+    "lft": 28, 
+    "tree_id": 1, 
+    "order": 15, 
+    "name": "External factors beyond programmatic control"
+  }
+},
+{
+  "pk": 16, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 12, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "clinical-infrastructure", 
+    "lft": 1, 
+    "tree_id": 2, 
+    "order": 16, 
+    "name": "Clinical infrastructure"
+  }
+},
+{
+  "pk": 17, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 3, 
+    "description": "Limited access to equipment and supplies of suitable quality and quantity", 
+    "parent": 16, 
+    "level": 1, 
+    "slug": "materials-tools-or-equipment-inadequate-or-insufficient", 
+    "lft": 2, 
+    "tree_id": 2, 
+    "order": 17, 
+    "name": "Materials, tools or equipment inadequate or insufficient"
+  }
+},
+{
+  "pk": 18, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 5, 
+    "description": "Mathematical miscalculation of an amount related to the proper prescribing, administering and monitoring of treatment delivery", 
+    "parent": 16, 
+    "level": 1, 
+    "slug": "commissioning-or-acceptance-testing-inadequate", 
+    "lft": 4, 
+    "tree_id": 2, 
+    "order": 18, 
+    "name": "Commissioning or acceptance testing inadequate"
+  }
+},
+{
+  "pk": 19, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 9, 
+    "description": "The specific use, design or malfunction of equipment", 
+    "parent": 16, 
+    "level": 1, 
+    "slug": "equipment-design-or-construction-inadequate", 
+    "lft": 6, 
+    "tree_id": 2, 
+    "order": 19, 
+    "name": "Equipment design or construction inadequate"
+  }
+},
+{
+  "pk": 20, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 8, 
+    "description": "The specific use or design of a computerized system", 
+    "parent": 19, 
+    "level": 2, 
+    "slug": "software-operational-error", 
+    "lft": 7, 
+    "tree_id": 2, 
+    "order": 20, 
+    "name": "Software operational error"
+  }
+},
+{
+  "pk": 21, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 11, 
+    "description": "Maintenance of equipment is not conducted according to manufacturers\u2019 specification", 
+    "parent": 16, 
+    "level": 1, 
+    "slug": "equipment-maintenance-inadequate", 
+    "lft": 10, 
+    "tree_id": 2, 
+    "order": 21, 
+    "name": "Equipment maintenance inadequate"
+  }
+},
+{
+  "pk": 22, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 26, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "clinical-process", 
+    "lft": 1, 
+    "tree_id": 3, 
+    "order": 22, 
+    "name": "Clinical Process"
+  }
+},
+{
+  "pk": 23, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 7, 
+    "description": "", 
+    "parent": 22, 
+    "level": 1, 
+    "slug": "failure-detect-developing-problem", 
+    "lft": 2, 
+    "tree_id": 3, 
+    "order": 23, 
+    "name": "Failure to detect a developing problem"
+  }
+},
+{
+  "pk": 24, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 4, 
+    "description": "Disturbances or diversions of attention that distract from the task(s) at hand, including excessive noise.", 
+    "parent": 23, 
+    "level": 2, 
+    "slug": "loss-attention", 
+    "lft": 3, 
+    "tree_id": 3, 
+    "order": 24, 
+    "name": "Loss of attention"
+  }
+},
+{
+  "pk": 25, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 6, 
+    "description": "The individuals tendency to believe, one\u2019s expectations for an outcome, and to, discard observations that appear conflict with those expectations", 
+    "parent": 23, 
+    "level": 2, 
+    "slug": "expectation-bias", 
+    "lft": 5, 
+    "tree_id": 3, 
+    "order": 25, 
+    "name": "Expectation bias"
+  }
+},
+{
+  "pk": 26, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 9, 
+    "description": "Failure to follow or select the defined standard operating procedure or protocol within the system", 
+    "parent": 22, 
+    "level": 1, 
+    "slug": "failure-select-correct-rule", 
+    "lft": 8, 
+    "tree_id": 3, 
+    "order": 26, 
+    "name": "Failure to select the correct rule"
+  }
+},
+{
+  "pk": 27, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 17, 
+    "description": "", 
+    "parent": 22, 
+    "level": 1, 
+    "slug": "failure-develop-effective-plan", 
+    "lft": 10, 
+    "tree_id": 3, 
+    "order": 27, 
+    "name": "Failure to develop an effective plan"
+  }
+},
+{
+  "pk": 28, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 12, 
+    "description": "The individual(s) inability to adapt to change or as a result of change fatigue", 
+    "parent": 27, 
+    "level": 2, 
+    "slug": "inadequate-change-management", 
+    "lft": 11, 
+    "tree_id": 3, 
+    "order": 28, 
+    "name": "Inadequate change management"
+  }
+},
+{
+  "pk": 29, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 14, 
+    "description": "The individual(s) inability to identify potential risks associated with a task or procedure", 
+    "parent": 27, 
+    "level": 2, 
+    "slug": "inadequate-needs-or-risk-assessment", 
+    "lft": 13, 
+    "tree_id": 3, 
+    "order": 29, 
+    "name": "Inadequate needs or risk assessment"
+  }
+},
+{
+  "pk": 30, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 16, 
+    "description": "The individual(s) inability to identify and or mitigate potential risks associated with a task or procedure", 
+    "parent": 27, 
+    "level": 2, 
+    "slug": "failure-recognize-hazard", 
+    "lft": 15, 
+    "tree_id": 3, 
+    "order": 30, 
+    "name": "Failure to recognize a hazard"
+  }
+},
+{
+  "pk": 31, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 21, 
+    "description": "", 
+    "parent": 22, 
+    "level": 1, 
+    "slug": "failure-execute-planned-action", 
+    "lft": 18, 
+    "tree_id": 3, 
+    "order": 31, 
+    "name": "Failure to execute a planned action"
+  }
+},
+{
+  "pk": 32, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 20, 
+    "description": "The individual(s) simply forgot and did not carry out the necessary action(s), which contributed to the incident", 
+    "parent": 31, 
+    "level": 2, 
+    "slug": "plan-forgotten-progress", 
+    "lft": 19, 
+    "tree_id": 3, 
+    "order": 32, 
+    "name": "Plan forgotten in progress"
+  }
+},
+{
+  "pk": 33, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 23, 
+    "description": "", 
+    "parent": 22, 
+    "level": 1, 
+    "slug": "patient-related-circumstances", 
+    "lft": 22, 
+    "tree_id": 3, 
+    "order": 33, 
+    "name": "Patient related circumstances"
+  }
+},
+{
+  "pk": 34, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 25, 
+    "description": "", 
+    "parent": 22, 
+    "level": 1, 
+    "slug": "human-behavior-involving-staff", 
+    "lft": 24, 
+    "tree_id": 3, 
+    "order": 34, 
+    "name": "Human behavior involving staff"
+  }
+},
+{
+  "pk": 35, 
+  "model": "incidents_nsir.contributingfactor", 
+  "fields": {
+    "rght": 2, 
+    "description": "", 
+    "parent": null, 
+    "level": 0, 
+    "slug": "other", 
+    "lft": 1, 
+    "tree_id": 4, 
+    "order": 35, 
+    "name": "Other"
+  }
+}
+]

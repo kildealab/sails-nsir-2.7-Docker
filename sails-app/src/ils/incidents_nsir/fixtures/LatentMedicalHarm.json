@@ -1,0 +1,32 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.latentmedicalharm", 
+  "fields": {
+    "description": "On the balance of probabilities, the incident is likely to be associated with the development of significant late medical harm", 
+    "order": 1, 
+    "name": "Yes", 
+    "slug": "yes"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.latentmedicalharm", 
+  "fields": {
+    "description": "On the balance of probabilities, the incident is unlikely to be associated with the development of significant late medical harm", 
+    "order": 2, 
+    "name": "No", 
+    "slug": "no"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.latentmedicalharm", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "Unknown", 
+    "slug": "unknown"
+  }
+}
+]

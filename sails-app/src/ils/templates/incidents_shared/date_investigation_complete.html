@@ -1,0 +1,13 @@
+{# Called within incidents_nsir/views.py: BaseIncidentsList #}
+{# Display correct date of completion or closure dependent on valid status. #}
+{# Note displaying datetimes through this template will display time in correct zone. #}
+{%load staticfiles%}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/investigation.css' %}"/>
+</head>
+
+{% if incident.valid %}
+    <span>{{incident.investigation_completed_date}}</span>
+{% else %}
+    <span>{{incident.valid_status_date}}</span>
+{% endif %}

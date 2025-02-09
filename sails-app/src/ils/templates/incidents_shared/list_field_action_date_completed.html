@@ -1,0 +1,14 @@
+{# Called within incidents_nsir/views.py: BaseIncidentsList #}
+{# Display correct date of submission. #}
+{# Note displaying datetimes through this template will display time in correct zone. #}
+{%load staticfiles%}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/investigation.css' %}"/>
+</head>
+
+<span>
+    {%if action.complete%}
+    {{action.date_completed}}
+    {%else%}
+    {%endif%}
+</span>

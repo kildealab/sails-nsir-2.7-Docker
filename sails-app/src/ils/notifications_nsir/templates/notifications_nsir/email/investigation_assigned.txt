@@ -1,0 +1,23 @@
+{% firstof incident.investigator.first_name incident.investigator.username %},
+
+{% if incident.investigation_assigned_by == incident.investigator %}
+You have assigned yourself as the investigator of incident #{{incident.incident_id}}. Fundamental details of this incident are listed below. For more details, please log into SaILS and visit the following URL to view the investigation page associated with this incident:
+{% else %}
+{{incident.investigation_assigned_by}} has just assigned you as the investigator of incident #{{incident.incident_id}}. Fundamental details of this incident are listed below. For more details, please log into SaILS and visit the following URL to view the investigation page associated with this incident:
+{% endif %}
+{{url}}
+
+=== Details for Incident #{{incident.incident_id}} ===
+
+Date You Were Assigned: {{incident.investigation_assigned_date}}
+Date Submitted: {{incident.submitted}}
+
+=== Descriptor  ===
+
+{{incident.descriptor}}
+
+=== Unsubscribe ===
+
+Access the following link if you want to unsubscribe from email notifications for this incident:
+
+{{unsubscribe}}

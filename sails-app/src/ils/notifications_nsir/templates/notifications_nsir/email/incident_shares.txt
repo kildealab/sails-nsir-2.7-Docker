@@ -1,0 +1,25 @@
+You are subscribed to receive update notifications for incident #{{incident.pk}}.
+
+Sharing actions for this incident were updated. Details below:
+
+=== Incomplete Shares ===
+{% for share in incomplete %}
+
+Sharing Audience : {{share.sharing_audience}}
+Responsible 	 : {{share.responsible}}
+
+{% endfor %}
+
+=== Complete Shares ===
+{% for share in complete %}
+
+Sharing Audience : {{share.sharing_audience}}
+Responsible 	 : {{share.responsible}}
+
+{% endfor %}
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

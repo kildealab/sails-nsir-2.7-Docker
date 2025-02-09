@@ -1,0 +1,182 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "Radiation therapist", 
+    "slug": "radiation-therapist"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 4, 
+    "name": "Treatment planner or dosimetrist", 
+    "slug": "treatment-planner-or-dosimetrist"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 5, 
+    "name": "Medical physicist", 
+    "slug": "medical-physicist"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 6, 
+    "name": "Radiation oncologist", 
+    "slug": "radiation-oncologist"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 7, 
+    "name": "Technical maintenance staff", 
+    "slug": "technical-maintenance-staff"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 8, 
+    "name": "Nursing staff", 
+    "slug": "nursing-staff"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 9, 
+    "name": "Physician assistant", 
+    "slug": "physician-assistant"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 10, 
+    "name": "Resident or fellow", 
+    "slug": "resident-or-fellow"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 11, 
+    "name": "Student or other trainee", 
+    "slug": "student-or-other-trainee"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 12, 
+    "name": "Administrator", 
+    "slug": "administrator"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 13, 
+    "name": "Patient", 
+    "slug": "patient"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 14, 
+    "name": "Family member", 
+    "slug": "family-member"
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 17, 
+    "name": "Other", 
+    "slug": "other"
+  }
+},
+{
+  "pk": 14, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 18, 
+    "name": "Unknown", 
+    "slug": "unknown"
+  }
+},
+{
+  "pk": 15, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "Technical coordinator", 
+    "slug": "technical-coordinator"
+  }
+},
+{
+  "pk": 16, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 15, 
+    "name": "Nutritionist", 
+    "slug": "nutritionist"
+  }
+},
+{
+  "pk": 17, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 16, 
+    "name": "Social worker", 
+    "slug": "social-worker"
+  }
+},
+{
+  "pk": 18, 
+  "model": "incidents_nsir.individualinvolved", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "Booking", 
+    "slug": "booking"
+  }
+}
+]

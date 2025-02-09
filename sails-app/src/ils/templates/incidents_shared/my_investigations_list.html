@@ -1,0 +1,19 @@
+{% extends 'all_incidents_list.html' %}
+{%comment%}
+    List of incidents in the DB for which the currently logged-in user is the investigator, displayed in a jQuery datatable which is handled by the listable template tag.
+{%endcomment%}
+{% load staticfiles %}
+{% load listable %}
+
+{% block title %}Your Investigations{% endblock title %}
+
+{% block page_title %}<h3>Your Investigations</h3>{% endblock page_title %}
+
+{% block listable %}
+    {% listable 'incidents_nsir:my-investigations' save_state=True css_table_class='table-striped table-condensed' css_input_class='input-mini' %}
+{% endblock listable %}
+
+
+{% block page_description %}
+    <p>All investigations assigned to you</p>
+{% endblock page_description %}

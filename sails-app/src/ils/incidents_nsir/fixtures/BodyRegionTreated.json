@@ -1,0 +1,92 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "Brain", 
+    "slug": "brain"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "Spine", 
+    "slug": "spine"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "Head and neck", 
+    "slug": "head-and-neck"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 4, 
+    "name": "Thorax", 
+    "slug": "thorax"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 5, 
+    "name": "Abdomen", 
+    "slug": "abdomen"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 6, 
+    "name": "Pelvis", 
+    "slug": "pelvis"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 7, 
+    "name": "Upper extremity", 
+    "slug": "upper-extremity"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 8, 
+    "name": "Lower extremity", 
+    "slug": "lower-extremity"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.bodyregiontreated", 
+  "fields": {
+    "description": "", 
+    "order": 9, 
+    "name": "Skin", 
+    "slug": "skin"
+  }
+}
+]

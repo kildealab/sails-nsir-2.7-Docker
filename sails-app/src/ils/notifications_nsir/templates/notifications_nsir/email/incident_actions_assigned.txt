@@ -1,0 +1,15 @@
+{% firstof action.responsible.first_name action.responsible.username %},
+
+You were just assigned the following action for incident #{{action.incident.pk}}.
+
+{% if action.responsible.can_investigate %}Incident Page   : {{url}}{% endif %}
+Assigned By : {{action.assigned_by}}
+Action Type : {{action.action_type}}
+Description : {{action.description}}
+
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

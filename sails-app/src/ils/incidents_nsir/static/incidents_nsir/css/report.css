@@ -1,0 +1,81 @@
+.popover {
+    position:absolute;
+}
+
+.controls input[type="text"] {
+    width: 77%;
+    padding: 0px;
+    padding-left: 2%;
+    border: 1px solid #aaa;
+}
+
+textarea {
+    border: 1px solid #aaa;
+}
+
+.controls input[type="number"] {
+    width: 77%;
+    padding: 0px;
+    padding-left: 2%;
+    min-height: 30px;
+    border: 1px solid #aaa;
+}
+
+.input-append {
+    width: 95%;
+    padding-left: 0px;
+}
+
+.add-on {
+    padding-top: 6px;
+    min-height: 20px;
+    border: 1px solid #aaa;
+}
+
+.input-append .add-on, .input-prepend .add-on {
+    border: 1px solid #aaa;
+}
+
+.input-append .add-on, .input-prepend .add-on {
+    padding-top: 6px;
+}
+
+.chosen-error {
+    color: #df382c;
+}
+
+.control-group.error input[type="text"]{
+    border: 1px solid #df382c !important;
+}
+
+.control-group.error input[type="number"]{
+    border: 1px solid #df382c !important;
+}
+
+.chosen-error .chosen-single {
+    border: 1px solid #df382c !important;
+}
+
+.chosen-error .chosen-choices {
+    border: 1px solid #df382c !important;
+}
+
+.success input{
+    border: 1px solid #38b44a !important;
+}
+
+.success .chosen-single{
+    border: 1px solid #38b44a !important;
+}
+
+.success .chosen-choices{
+    border: 1px solid #38b44a !important;
+}
+
+.input-block-level {
+    width: 80%;
+}
+
+.chosen-container .chosen-results {
+    max-height: 200px;
+}

@@ -1,0 +1,12 @@
+{# Called within incidents_nsir/views.py: BaseIncidentsList #}
+{# Display correct Valid icon depending on valid status #}
+{%load staticfiles%}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'incidents_nsir/css/investigation.css' %}"/>
+</head>
+
+{% if incident.valid %}
+    <span class="status_text pull-left label inv_color_complete" style="margin-left: 10px;">Complete</span>
+{% else %}
+    <span class="status_text pull-left label inv_color_invalid" style="margin-left: 10px;">Invalid</span>
+{% endif %}

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{%comment%}
+  Base NSIR template from which all other NSIR templates within SaILS inherit. This template fills in the blocks from base.html for the various nav-bar buttons.
+{%endcomment%}
+{% load staticfiles %}
+
+{% block report %}
+  <li><a href="{% url 'incidents_nsir:report' %}"><i class="icon-bullhorn"></i> Report An Incident</a></li>
+{% endblock report %}
+
+{% block dashboard %}
+  <li><a href="{% url 'incidents_nsir:dashboard' %}" title="View Incident Dashboard"><i class="icon-dashboard"></i> Dashboard</a></li>
+{% endblock dashboard %}
+
+{% block news %}
+  <li><a href="{% url 'incidents_nsir:news' %}" title="View News Items"><i class="icon-inbox"></i> News</a></li>
+{% endblock news %}
+
+{% block search %}
+  
+  <li><a href="{% url 'incidents_nsir:search' %}" title="Search for an incident"><i class="icon-search"></i> Search</a></li>
+
+  {%comment%}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+       <i class="icon-search"></i> Search <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <div class="input-append">
+          <input class="span2" id="appendedInputButton" type="text" placeholder="Unique Incident ID">
+          <button class="btn" type="submit">Search <i class="icon-search"></i></button>
+        </div>
+      </li>
+    </ul>
+  </li>
+  {%endcomment%}
+{% endblock search %}
+
+{% block incidents %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <i class="icon-exclamation-sign"></i> Incidents <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li class="nav-header">Incidents</li>
+      {#<li><a href="{% url 'incidents_nsir:triage-incidents' %}" title="Triage recently reported incidents"><i class="icon-archive"></i> Awaiting Triage</a></li>#}
+      <li><a href="{% url 'incidents_nsir:incomplete-incidents' %}" title="View incomplete incidents"><i class="icon-folder-open"></i> Incomplete</a></li>
+      {#<li><a href="{% url 'incidents_nsir:flagged-incidents' %}" title="View incomplete and flagged incidents"><i class="icon-flag"></i> Incomplete & Flagged</a></li>#}
+      <li><a href="{% url 'incidents_nsir:complete-incidents' %}" title="View all completed incidents"><i class="icon-folder-close"></i> Complete</a></li>
+      <li><a href="{% url 'incidents_nsir:all-flagged-incidents' %}" title="View all flagged incidents"><i class="icon-flag"></i> Flagged</a></li>
+      {#<li><a href="{% url 'incidents_nsir:actual-incidents' %}" title="View all valid actual incidents"><i class="icon-warning-sign"></i> Actual</a></li>#}
+      <li><a href="{% url 'incidents_nsir:invalid-incidents' %}" title="View all invalid incidents"><i class="icon-ban-circle"></i> Invalid</a></li>
+      <li><a href="{% url 'incidents_nsir:all-incidents' %}" title="View all incidents"><i class="icon-globe"></i> All Incidents</a></li>
+
+      <li class="divider"></li>
+      <li class="nav-header">Your Incidents</li>
+      {%if user.is_oncologist%}
+      <li><a href="{% url 'incidents_nsir:my-patients' %}" title="View all incidents involving your patients"><i class="icon-stethoscope"></i> Involving Your Patients</a></li>
+      {%endif%}
+      <li><a href="{% url 'incidents_nsir:my-incidents' %}" title="View all incidents you have submitted"><i class="icon-user"></i> Submitted By You</a></li>
+      <li><a href="{% url 'incidents_nsir:my-investigations' %}" title="View all incident investigations you have been assigned "><i class="icon-zoom-in"></i> Your Investigations</a></li>
+    </ul>
+  </li>
+{% endblock incidents %}
+
+{% block actions %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <i class="icon-wrench"></i> Actions <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li class="nav-header">Actions</li>
+      <li><a href="{% url 'incidents_nsir:incomplete-actions' %}" title="View incomplete learning actions"><i class="icon-folder-open"></i> Incomplete</a></li>
+      <li><a href="{% url 'incidents_nsir:complete-actions' %}" title="View all completed actions"><i class="icon-folder-close"></i> Complete</a></li>
+      <li><a href="{% url 'incidents_nsir:all-actions' %}" title="View all actions"><i class="icon-globe"></i> All Actions</a></li>
+      <li class="divider"></li>
+      <li class="nav-header">Your Actions</li>
+      <li><a href="{% url 'incidents_nsir:my-assigned-by-actions' %}" title="View all incomplete actions you have been assigned "><i class="icon-share-alt"></i> Assigned By You</a></li>
+      <li><a href="{% url 'incidents_nsir:my-responsible-actions' %}" title="View all complete actions you have been assigned "><i class="icon-reply"></i> Assigned To You</a></li>
+      <li><a href="{% url 'incidents_nsir:my-completed-actions' %}" title="View all complete actions you have been assigned "><i class="icon-ok-sign"></i> Completed By You</a></li>
+    </ul>
+  </li>
+{% endblock actions %}
+
+{% block sharing %}
+  <ul class="dropdown-menu">
+    <li class="nav-header">Sharing</li>
+    <li><a href="{% url 'incidents_nsir:incomplete-sharing' %}" title="View incomplete sharing"><i class="icon-folder-open-alt"></i> Incomplete</a></li>
+    <li><a href="{% url 'incidents_nsir:complete-sharing' %}" title="View all completed sharing"><i class="icon-folder-close-alt"></i> Complete</a></li>
+    <li><a href="{% url 'incidents_nsir:all-sharing' %}" title="View all sharing"><i class="icon-globe"></i> All Sharing</a></li>
+
+    <li class="divider"></li>
+    <li class="nav-header">My Sharing</li>
+    <li><a href="{% url 'incidents_nsir:my-incomplete-sharing' %}" title="View all incomplete sharing you have been assigned "><i class="icon-zoom-in"></i> Incomplete</a></li>
+    <li><a href="{% url 'incidents_nsir:my-complete-sharing' %}" title="View all complete sharing you have been assigned "><i class="icon-zoom-in"></i> Complete</a></li>
+    <li><a href="{% url 'incidents_nsir:my-sharing' %}" title="View all incident investigations you have been assigned "><i class="icon-zoom-in"></i> All</a></li>
+  </ul>
+{% endblock sharing %}
+
+{% block statistics %}
+  <li><a href="{% url 'incidents_nsir:statistics' %}"><i class="icon-bar-chart"></i> Statistics</a></li>
+{% endblock statistics %}
+
+{%comment%}
+{% block statistics %}
+  <ul class="dropdown-menu">
+    <li><a href="{% url 'incidents_nsir:statistics' %}" title="View overall statistics"><i class="icon-bar-chart"></i> Overall</a></li>
+    {% if perms.incidents %}
+    <li><a href="{% url 'incidents_nsir:incomplete-statistics' %}" title="View statistics on incomplete incidents"><i class="icon-folder-open-alt"></i> Incomplete</a></li>
+    {% endif %}
+  </ul>
+{% endblock statistics %}
+{%endcomment%}
+
+{% block nav_login_redirect %}
+  <input type="hidden" name="next" value="{% url 'incidents_nsir:dashboard' %}"/>
+{% endblock nav_login_redirect %}

@@ -1,0 +1,28 @@
+{% extends BASE_TEMPLATE %}
+
+{% block title %}No Subscription found{% endblock title %}
+
+{% block page_title %}<h3>No Subscription found</h3>{% endblock page_title %}
+
+{% block extra_css %}
+{% endblock extra_css %}
+
+{% block extra_js %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="span5">
+        {#<form action="" method="post">{% csrf_token %}#}
+        {% if exists %}
+            <p>You are not currently subscribed to Incident #{{incident_id}}</p>
+            <a href="{% url 'notifications_nsir:subscribe' incident_id=incident_id %}?next=incident" title="Subscribe to this incident"> Click here to Subscribe</a>
+        {% else %}
+            <p>There is no incident with ID #{{incident_id}}</p>
+        {% endif%}
+        {#</form>#}
+    </div>
+</div>
+
+{% endblock content %}

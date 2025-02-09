@@ -1,0 +1,73 @@
+version: '3'
+services:
+    mariadb:
+        image: mariadb:10.11
+        restart: always
+        env_file: ./mariadb/.env
+        expose:
+            - 3306
+        volumes:
+            - ${DATA_FOLDER}/mariadb_data/:/var/lib/mysql
+        healthcheck:
+            test: mysqladmin ping -u $$MARIADB_USER -p$$MARIADB_PASSWORD --protocol tcp
+            interval: 5s
+            timeout: 4s
+            retries: 10
+
+    redis:
+        image: redis
+        restart: always
+        expose:
+            - 6379
+        volumes:
+            - ${DATA_FOLDER}/redis_data/:/data/
+        entrypoint: redis-server --appendonly yes
+        depends_on:
+            mariadb:
+                condition: "service_healthy"
+
+
+    sails:
+        build: 
+            context: ./sails-app/src/
+            dockerfile: Dockerfile.sails
+        env_file: ./sails-app/.env
+        # ports:  
+        #     - 8080:8000
+        expose:
+            - 8000
+        volumes:
+            - ${DATA_FOLDER}/sails_nsir_data/:/app/data
+        depends_on:
+            mariadb:
+                condition: "service_healthy"
+            redis:
+                condition: "service_started"
+
+    php:
+        build:
+          dockerfile: Dockerfile.php
+          context: ./php
+        expose:
+            - 9000
+        volumes:
+          - ${DATA_FOLDER}/sails_nsir_data/:/www/sails_nsir/
+
+    nginx:
+        build: 
+            context: ./nginx
+            dockerfile: Dockerfile.nginx
+        ports:  
+            - 8080:80
+        volumes:
+            - ${DATA_FOLDER}/sails_nsir_data/:/www/sails_nsir/
+        depends_on:
+            - sails
+            
+volumes:
+    mariadb_data:
+        external: true
+    redis_data:
+        external: true
+    sails_nsir_data:
+        external: true

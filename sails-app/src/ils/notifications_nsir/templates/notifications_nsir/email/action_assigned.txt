@@ -1,0 +1,19 @@
+{% firstof action.responsible.first_name action.responsible.username %},
+
+{% if action.assigned_by == action.responsible %}
+You have assigned yourself as responsible for implemention action #{{action.action_id}} for incident #{{incident.incident_id}}. For more details, please log into SaILS and visit the following URL to view the investigation page and actions associated with this incident:
+{% else %}
+{{action.assigned_by}} has just assigned you as responsible for implementing action #{{action.action_d}} of incident #{{incident.incident_id}}. For the details of this action , please log into SaILS and visit the following URL to view the investigation page and actions associated with this incident:
+{% endif %}
+{{url}}#actions
+
+=== Details for Incident #{{incident.incident_id}} - Action #{{action.action_id}} ===
+
+Date You Were Assigned: {{action.date_assigned}}
+Assigned By: {{action.assigned_by}}
+
+=== Unsubscribe ===
+
+Access the following link if you want to unsubscribe from email notifications for this incident:
+
+{{unsubscribe}}

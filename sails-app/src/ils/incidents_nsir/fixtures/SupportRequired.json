@@ -1,0 +1,22 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.supportrequired", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "Yes", 
+    "slug": "yes"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.supportrequired", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "No", 
+    "slug": "no"
+  }
+}
+]

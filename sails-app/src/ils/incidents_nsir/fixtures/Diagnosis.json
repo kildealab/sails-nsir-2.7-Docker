@@ -1,0 +1,122 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 1, 
+    "name": "Breast cancer", 
+    "slug": "breast-cancer"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 2, 
+    "name": "Central nervous system tumors", 
+    "slug": "central-nervous-system-tumors"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 3, 
+    "name": "Gastrointestinal cancer", 
+    "slug": "gastrointestinal-cancer"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 4, 
+    "name": "Genitourinary cancer", 
+    "slug": "genitourinary-cancer"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 5, 
+    "name": "Gynecological cancer", 
+    "slug": "gynecological-cancer"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 6, 
+    "name": "Head and neck cancer", 
+    "slug": "head-and-neck-cancer"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 7, 
+    "name": "Lymphoma or leukemia", 
+    "slug": "lymphoma-or-leukemia"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 8, 
+    "name": "Melanoma and Non-melanoma skin cancer", 
+    "slug": "melanomanon-melanoma-skin-cancer"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 9, 
+    "name": "Sarcoma", 
+    "slug": "sarcoma"
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 10, 
+    "name": "Thoracic malignancy", 
+    "slug": "thoracic-malignancy"
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 11, 
+    "name": "Benign", 
+    "slug": "benign"
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.diagnosis", 
+  "fields": {
+    "description": "", 
+    "order": 12, 
+    "name": "Other", 
+    "slug": "other"
+  }
+}
+]

@@ -1,0 +1,26 @@
+You are subscribed to receive update notifications for incident #{{incident.incident_id}}.
+
+The investigation for incident #{{incident.incident_id}} has been closed, as the incident
+has been flagged as invalid for trending. The closed investigation may be viewed at the
+following URL:
+{{url}}
+
+=== Details for Incident #{{incident.incident_id}} ===
+
+Incident Detected Date: {{incident.date_incident_detected}}
+
+Submitted By: {{incident.submitted_by}}
+Date Submitted: {{incident.submitted}}
+Investigator: {{incident.investigator}}
+Date Investigation Closed: {{incident.valid_status_date}}
+Investigation Closed By: {{incident.valid_status_by}}
+
+=== Reasoning for Closure  ===
+
+{{incident.invalid_reason}}
+
+=== Unsubscribe ===
+
+Use the following link to unsubscribe from this incident:
+
+{{unsubscribe}}

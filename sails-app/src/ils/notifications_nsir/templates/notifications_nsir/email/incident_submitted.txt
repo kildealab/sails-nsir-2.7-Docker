@@ -1,0 +1,17 @@
+{% firstof user.first_name user.username %},
+
+Thank you for submitting incident #{{incident.incident_id}}. Details of this incident are listed below.{% if subscribe %} You will be updated with details as this incident is investigated.{% endif %}
+
+=== Details for Incident #{{incident.incident_id}} ===
+
+Incident Page       : {{url}}
+Date Submitted      : {{incident.submitted}}
+
+=== Description  ===
+
+{{incident.incident_description}}
+
+=== Follow-Up ===
+
+The site is available at : {{SITE_URL}}
+

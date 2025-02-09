@@ -1,0 +1,14 @@
+{{manager.first_name}},
+
+An incident report was submitted to SaILS by {{incident.submitted_by}}, that was reported by {{incident.reported_by}} and submitted by {{incident.submitted_by}}. The investigation for this incident is available at:
+{{url}}
+
+=== Details for Incident #{{incident.incident_id}} ===
+
+Date Incident was Detected: {{incident.date_incident_detected}}
+Date Submitted: {{incident.submitted}}
+Investigator: {{incident.investigator}}
+
+=== Descriptor  ===
+
+{{incident.descriptor}}

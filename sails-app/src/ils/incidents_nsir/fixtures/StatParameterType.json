@@ -1,0 +1,24 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.statparametertype", 
+  "fields": {
+    "type_name": "key_field", 
+    "description": "", 
+    "order": null, 
+    "name": "NSIR-RT Field", 
+    "slug": "nsir-rt-field"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.statparametertype", 
+  "fields": {
+    "type_name": "user_field", 
+    "description": "E.g. Investigator or Oncologist", 
+    "order": null, 
+    "name": "User Field", 
+    "slug": "user-field"
+  }
+}
+]

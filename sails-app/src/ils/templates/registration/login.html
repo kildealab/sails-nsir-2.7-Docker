@@ -1,0 +1,76 @@
+{% extends "incidents_nsir/base_nsir.html" %}
+
+{% load i18n %}
+{% block title %}{% trans "Log In" %}{% endblock %}
+
+{% block page_title %}<h3>{% trans "Login to SaILS" %}</h3>{% endblock %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="span8">
+            {% if user.is_authenticated %}
+                <div class="alert alert-info">
+                    <strong>{% trans "Note" %}</strong>:
+                    {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}
+                </div>
+            {% else %}
+                {% comment %}
+                <p>
+                    <a href="{% url auth_password_reset %}">{% trans "Forgot password?" %}</a>
+                </p>
+                {% endcomment %}
+            {% endif %}
+
+            <form method="POST" action="{% url 'django.contrib.auth.views.login' %}?{{request.META.QUERY_STRING}}" autocapitalize="off" class="form-horizontal">
+                {% if form.non_field_errors %}
+                    <div class="control-group error">
+                        <div class="controls" >
+                            {% for error in form.non_field_errors %}
+                            <span class="help-block">{{error}}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                <fieldset>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="control-group ils-popover {% if field.errors %}error{% endif %}">
+                            <label class="control-label" for="{{field.html_name}}">{{field.label}}:</label>
+                            <div class="controls" >
+                                {{field}}
+                                {% for error in field.errors %}
+                                    <span class="help-block">{{error}}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if 'next=' not in request.META.QUERY_STRING %}
+                    <input type="hidden" name="next" value="{% url 'incidents_nsir:dashboard' %}"/>
+                    {% endif %}
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary my-shader">{% trans "Log in" %}</button>
+                    </div>
+                </fieldset>
+            </form>
+
+
+            {% if not user.is_authenticated %}
+                <p>{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p>
+            {% endif %}
+
+        </div>
+        <div class="span4">
+            {% include "registration/_login_sidebar.html" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function(){
+       $("#id_username").focus();
+     });
+</script>
+{% endblock %}

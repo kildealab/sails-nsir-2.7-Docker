@@ -1,0 +1,26 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.statuserchoice", 
+  "fields": {
+    "description": "", 
+    "slug": "investigator", 
+    "incident_field_name": "investigator", 
+    "account_field_name": "is_investigator", 
+    "order": null, 
+    "name": "Investigator"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.statuserchoice", 
+  "fields": {
+    "description": "", 
+    "slug": "oncologist", 
+    "incident_field_name": "oncologist", 
+    "account_field_name": "is_oncologist", 
+    "order": null, 
+    "name": "Oncologist"
+  }
+}
+]

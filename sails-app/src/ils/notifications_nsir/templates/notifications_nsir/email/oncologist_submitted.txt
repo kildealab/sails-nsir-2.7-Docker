@@ -1,0 +1,29 @@
+Dr. {{ incident.oncologist.first_name }} {{ incident.oncologist.last_name }},
+
+{% if incident.event_type.pk == 2 %}
+ A near-miss incident report has been submitted to the database, for which you are the associated physician. Fundamental details of this event are listed below. Additional details and the investigation associated with this event are available at:
+{{url}}
+
+=== Details for Event #{{incident.incident_id}} ===
+{% elif incident.event_type.pk == 3 %}
+An incident report has been submitted to the database, for which you are the associated physician. Fundamental details of this incident are listed below. Additional details and the investigation associated with this incident are available at:
+{{url}}
+
+=== Details for Incident #{{incident.incident_id}} ===
+{% endif %}
+Date Submitted: {{incident.submitted}}
+Investigator: {{incident.investigator}}
+
+=== Descriptor  ===
+
+{{incident.descriptor}}
+
+=== Unsubscribe ===
+
+{% if incident.event_type.pk == 2 %}
+Access the following link if you want to unsubscribe from email notifications for this event:
+{% elif incident.event_type.pk == 3 %}
+Access the following link if you want to unsubscribe from email notifications for this incident:
+{% endif %}
+
+{{unsubscribe}}

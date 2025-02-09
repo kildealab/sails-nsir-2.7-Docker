@@ -1,0 +1,92 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Circumstance or event that has capacity to cause error", 
+    "order": 1, 
+    "name": "A - Reportable circumstance", 
+    "slug": "a"
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Error occurred but it did not reach the patient", 
+    "order": 2, 
+    "name": "B - Near miss", 
+    "slug": "b"
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Error reached patient but no harm", 
+    "order": 3, 
+    "name": "C - None", 
+    "slug": "c"
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Error reached patient requiring monitoring or intervention to preclude harm", 
+    "order": 4, 
+    "name": "D - Minor - required monitoring", 
+    "slug": "d"
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Error reached patient, temporary harm + intervention required", 
+    "order": 5, 
+    "name": "E - Minor - intervention required", 
+    "slug": "e"
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Temporary harm + intervention + prolonged hospitalization", 
+    "order": 6, 
+    "name": "F - Moderate - prolonged hospitalization", 
+    "slug": "f-moderate-prolonged-hospitalization"
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Permanent patient harm", 
+    "order": 7, 
+    "name": "G - Moderate - permanent harm", 
+    "slug": "g"
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Actions to sustain life of patient", 
+    "order": 8, 
+    "name": "H - Severe", 
+    "slug": "h"
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.localseveritylevel", 
+  "fields": {
+    "description": "Death of patient", 
+    "order": 9, 
+    "name": "I - Death", 
+    "slug": "i"
+  }
+}
+]

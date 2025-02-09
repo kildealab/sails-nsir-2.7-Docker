@@ -1,0 +1,175 @@
+[
+{
+  "pk": 1, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "problem_type", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 2, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "acute_medical_harm", 
+    "event_type": [
+      3
+    ]
+  }
+},
+{
+  "pk": 3, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "dosimetric_impact", 
+    "event_type": [
+      3
+    ]
+  }
+},
+{
+  "pk": 4, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "latent_medical_harm", 
+    "event_type": [
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 5, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "individual_detected", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 6, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "individual_involved", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 7, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "process_step_occurred", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 8, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "process_step_detected", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 9, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "secondary_problem_type", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 10, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "contributing_factors", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 11, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "ameliorating_actions", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 12, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "safety_barriers_failed", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 13, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "safety_barriers_prevented", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 14, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "actions_reduce_risk", 
+    "event_type": [
+      1, 
+      2, 
+      3
+    ]
+  }
+},
+{
+  "pk": 15, 
+  "model": "incidents_nsir.allowedtemplatefield", 
+  "fields": {
+    "field_name": "local_severity_level", 
+    "event_type": [
+      3
+    ]
+  }
+}
+]
