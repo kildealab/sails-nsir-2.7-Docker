@@ -1,4 +1,4 @@
-set DATA_FOLDER="C:\Users\***\Documents\data"
+set DATA_FOLDER="C:\Users\***\Documents\dockerstorage\SaILS-27\"
 md %DATA_FOLDER%\mariadb_data
 md %DATA_FOLDER%\redis_data
 md %DATA_FOLDER%\sails_nsir_data\logs

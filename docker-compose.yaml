@@ -1,11 +1,8 @@
-version: '3'
 services:
-    mariadb:
+    mariadb_sails27:
         image: mariadb:10.11
-        restart: always
+        restart: unless-stopped
         env_file: ./mariadb/.env
-        expose:
-            - 3306
         volumes:
             - ${DATA_FOLDER}/mariadb_data/:/var/lib/mysql
         healthcheck:
@@ -14,56 +11,50 @@ services:
             timeout: 4s
             retries: 10
 
-    redis:
+    redis_sails27:
         image: redis
-        restart: always
-        expose:
-            - 6379
+        restart: unless-stopped
         volumes:
             - ${DATA_FOLDER}/redis_data/:/data/
         entrypoint: redis-server --appendonly yes
         depends_on:
-            mariadb:
+            mariadb_sails27:
                 condition: "service_healthy"
 
-
-    sails:
+    sails27:
         build: 
             context: ./sails-app/src/
-            dockerfile: Dockerfile.sails
+            dockerfile: Dockerfile
         env_file: ./sails-app/.env
-        # ports:  
-        #     - 8080:8000
-        expose:
-            - 8000
+        restart: unless-stopped
         volumes:
             - ${DATA_FOLDER}/sails_nsir_data/:/app/data
         depends_on:
-            mariadb:
+            mariadb_sails27:
                 condition: "service_healthy"
-            redis:
+            redis_sails27:
                 condition: "service_started"
 
-    php:
+    php_sails27:
         build:
-          dockerfile: Dockerfile.php
+          dockerfile: Dockerfile
           context: ./php
-        expose:
-            - 9000
+        restart: unless-stopped
         volumes:
           - ${DATA_FOLDER}/sails_nsir_data/:/www/sails_nsir/
 
-    nginx:
+    nginx_sails27:
         build: 
             context: ./nginx
-            dockerfile: Dockerfile.nginx
-        ports:  
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        ports:
             - 8080:80
         volumes:
             - ${DATA_FOLDER}/sails_nsir_data/:/www/sails_nsir/
         depends_on:
-            - sails
-            
+            - sails27
+
 volumes:
     mariadb_data:
         external: true

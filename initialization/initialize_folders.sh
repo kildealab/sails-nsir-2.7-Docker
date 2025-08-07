@@ -1,7 +1,7 @@
 #!/bin/bash
-# the value af DATA_FOLDER should be in sync with the .yaml file for mariadb and opalquestionnairesdb services
+# the value af DATA_FOLDER should be in sync with the .yaml file for mariadb and sails-app services
 
-DATA_FOLDER=/mnt/Data/dockerstorage/SaILS-2/
+DATA_FOLDER=/mnt/Data/dockerstorage/SaILS-27/
 mkdir -p $DATA_FOLDER/mariadb_data
 mkdir -p $DATA_FOLDER/redis_data
 mkdir -p $DATA_FOLDER/sails_nsir_data/logs

@@ -187,27 +187,6 @@ RESTRICTED_MEDIA_URL = 'media/incidentimages/'
 MAX_IMAGE_SIZE = 5
 
 #-----------------------------------------------------------------------------------------
-# Database configuration
-# For DATABASES settings, see template_secret_settings.py
-#-----------------------------------------------------------------------------------------
-# Database routing required for multiple database setup
-# DATABASE_ROUTERS = ['accounts.routers.accountsRouter','incidents_nsir.routers.tax1Router','incidents_tohcc.routers.tax2Router','notifications_nsir.routers.notifications_nsirRouter']
-
-#-----------------------------------------------------------------------------------------
-# Databases used
-#-----------------------------------------------------------------------------------------
-DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.mysql',
-       'NAME': 'SaILS_DB',
-       'USER': 'sailsdb',
-       'PASSWORD': 'VYSUOhD9DD7a9B9Ef944',
-       'HOST': 'mariadb',
-       'PORT': '3306',
-    },
-}
-
-#-----------------------------------------------------------------------------------------
 # Fixtures
 #-----------------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS

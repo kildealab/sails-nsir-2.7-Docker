@@ -41,6 +41,7 @@ to store static and media files (4) by the webserver (nginx) to store access log
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── media\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── static\
    3. Edit the .env_template file with DOCKER_STORAGE=path of the data folder, and rename it to .env
+_Note: You may want to keep the original .env_template files as is for Git update compatibility_
 
 _Note: You can use the script initialization/initialize_folders.sh (linux) or initialize_folders.bat 
 (Windows) to automatically perform this step. Edit the script with DATA_FOLDER=data folder path_
@@ -52,10 +53,7 @@ _Note: You can use the script initialization/initialize_folders.sh (linux) or in
 _Note: You may want to keep the originals .env_template files as is for Git update compatibility_
 
 5. Edit the sails-app/.env_template file.
-- DJANGO_SUPERUSER is a user with all privileges to manage the opalquestionnairesDB-app database.
-- DJANGO_SECRET_KEY can be anything, but we suggest a complex string of at least 32 characters.
-- Add the server ip address to ALLOWED_HOSTS.
-- DATABASE_PASSWORD should be the same as MARIADB_PASSWORD set in the previous step.
+- DJANGO_SUPERUSER is a user with all privileges to manage the sails-app database.
 - Rename to .env
 _Note: You may want to keep the original .env_template files as is for Git update compatibility_
 - 
