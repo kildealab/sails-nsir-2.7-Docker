@@ -41,28 +41,29 @@ to store static and media files (4) by the webserver (nginx) to store access log
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── media\
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── static\
    3. Edit the .env_template file with DOCKER_STORAGE=path of the data folder, and rename it to .env
-_Note: You may want to keep the original .env_template files as is for Git update compatibility_
 
-_Note: You can use the script initialization/initialize_folders.sh (linux) or initialize_folders.bat 
-(Windows) to automatically perform this step. Edit the script with DATA_FOLDER=data folder path_
+      _Note: You may want to keep the original .env_template files as is for Git update compatibility_
 
-4. Edit the mariadb/.env_template
+   _Note: You can use the script initialization/initialize_folders.sh (linux) or initialize_folders.bat 
+   (Windows) to automatically perform this step. Edit the script with DATA_FOLDER=data folder path_
+
+3. Edit the mariadb/.env_template
 - By default, the MARIADB_DATABASE is SaILS_DB and MARIADB_USER=sailsdb.
 - MARIADB_PASSWORD and MARIADB_ROOT_PASSWORD should be strong passwords.
 - Rename .env \
 _Note: You may want to keep the originals .env_template files as is for Git update compatibility_
 
-5. Edit the sails-app/.env_template file.
+4. Edit the sails-app/.env_template file.
 - DJANGO_SUPERUSER is a user with all privileges to manage the sails-app database.
 - Rename to .env
 _Note: You may want to keep the original .env_template files as is for Git update compatibility_
-- 
-4. SaILS configuration.
+
+5. SaILS configuration.
 - Follow the instructions provided in the *SaILS_Installation_Instructions (for Docker).pdf* file included in the source code (in the root directory of the project)
 * Please contact us if you have trouble getting the software installed
 * Note: The instructions are straightforward, but basic familiarity with Bash and Python will be required to install and configure the software to your needs!
 
-5. Build the docker images:
+6. Build the docker images:
 - In a terminal window, navigate to the cloned repository folder.
 - Issue the command: 
 ```
