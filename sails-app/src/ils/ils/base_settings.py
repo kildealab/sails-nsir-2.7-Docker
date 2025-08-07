@@ -234,11 +234,12 @@ AUTH_USER_MODEL = 'accounts.ILSUser'
 # Celery
 #-----------------------------------------------------------------------------------------
 CELERY_REDIS_HOST = 'redis'
-BROKER_URL = 'redis://redis:6379'
-CELERY_RESULT_BACKEND = 'redis://redis:6379'
+BROKER_URL = 'redis://redis_sails27:6379'
+CELERY_RESULT_BACKEND = 'redis://redis_sails27:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
 
 def get_env_setting(setting):
     """ Get the environment setting or return exception """

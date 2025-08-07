@@ -58,7 +58,7 @@ _Note: You may want to keep the originals .env_template files as is for Git upda
 _Note: You may want to keep the original .env_template files as is for Git update compatibility_
 - 
 4. SaILS configuration.
-- Follow the instructions provided in the *SaILS_Installation_Instructions.pdf* file included in the source code (in the root directory of the project)
+- Follow the instructions provided in the *SaILS_Installation_Instructions (for Docker).pdf* file included in the source code (in the root directory of the project)
 * Please contact us if you have trouble getting the software installed
 * Note: The instructions are straightforward, but basic familiarity with Bash and Python will be required to install and configure the software to your needs!
 

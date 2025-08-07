@@ -8,6 +8,29 @@ include files: secret_dev_settings.py and secret_prod_settings.py Enter the sens
 data/passwords accordingly and note that the corresponding file will not be included in
 the  git commit history.
 """
+
+#-----------------------------------------------------------------------------------------
+# Database configuration
+# For DATABASES settings, see template_secret_settings.py
+#-----------------------------------------------------------------------------------------
+# Database routing required for multiple database setup
+# DATABASE_ROUTERS = ['accounts.routers.accountsRouter','incidents_nsir.routers.tax1Router','incidents_tohcc.routers.tax2Router','notifications_nsir.routers.notifications_nsirRouter']
+
+#-----------------------------------------------------------------------------------------
+# Databases used
+#-----------------------------------------------------------------------------------------
+DATABASES = {
+    'default': {
+       'ENGINE': 'django.db.backends.mysql',
+       'NAME': 'SaILS_DB',
+       'USER': 'sailsdb',
+       'PASSWORD': '',
+       'HOST': 'mariadb_sails27',
+       'PORT': '3306',
+    },
+}
+
+
 #-----------------------------------------------------------------------------------------
 # Email settings
 #-----------------------------------------------------------------------------------------
@@ -26,26 +49,6 @@ SECRET_KEY = 'mysecretkeyq3940fjajfsadkf93'
 
 ANONYMOUS_DISPLAY = False # Set to True if want to hide names (demo purposes)
 
-#-----------------------------------------------------------------------------------------
-# Database configuration
-# For DATABASES settings, see template_secret_settings.py
-#-----------------------------------------------------------------------------------------
-# Database routing required for multiple database setup
-# DATABASE_ROUTERS = ['accounts.routers.accountsRouter','incidents_nsir.routers.tax1Router','incidents_tohcc.routers.tax2Router','notifications_nsir.routers.notifications_nsirRouter']
-
-#-----------------------------------------------------------------------------------------
-# Databases used
-#-----------------------------------------------------------------------------------------
-DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.mysql',
-       'NAME': 'SaILS_DB',
-       'USER': 'sailsdb',
-       'PASSWORD': 'VYSUOhD9DD7a9B9Ef944',
-       'HOST': 'mariadb_sails27',
-       'PORT': '3306',
-    },
-}
 
 #-----------------------------------------------------------------------------------------
 # Usernames of SaILS users who should be notified for all anonymous incident reports
